@@ -6,7 +6,6 @@ public class TowerManagement : MonoBehaviour
 {
     private GameObject tower;
 
-    public bool test;
     public bool CanPlace{
         get { return tower == null; }
     }
