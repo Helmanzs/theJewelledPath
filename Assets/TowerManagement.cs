@@ -9,6 +9,8 @@ public class TowerManagement : MonoBehaviour
     public bool CanPlace{
         get { return tower == null; }
     }
+
+    //insert tower on tower spot
     public void InsertTower(GameObject t){
         tower = Instantiate(t, this.transform.position, Quaternion.identity) as GameObject;
         tower.transform.SetParent(this.transform);
