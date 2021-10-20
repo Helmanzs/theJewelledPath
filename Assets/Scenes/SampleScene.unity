@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 371457681}
   - component: {fileID: 371457680}
   - component: {fileID: 371457679}
+  - component: {fileID: 371457684}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -234,8 +235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2068b020807dc0f43b2242ab6a6c70b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerSpot: {fileID: 4053981537692930539, guid: 6e0565cb6945d8f469c4bb687ac36280, type: 3}
+  buildingSpot: {fileID: 4053981537692930539, guid: 6e0565cb6945d8f469c4bb687ac36280, type: 3}
   tower: {fileID: 4234653677702848008, guid: 686dd5ced71ab3e43be64c26e4879a3d, type: 3}
+  gridSize: 32
 --- !u!65 &371457680
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -306,12 +308,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371457678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: 0, z: 50}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalPosition: {x: 32, y: 0, z: 32}
+  m_LocalScale: {x: 64, y: 1, z: 64}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &371457684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371457678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce033990ee8c92b4ba956c5577ab9e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCamera: {fileID: 963194227}
 --- !u!1 &404947405
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +663,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.25943032, y: -0.6594311, z: 0.26096725, w: 0.65554756}
-  m_LocalPosition: {x: 123.2, y: 58.4, z: 49.8}
+  m_LocalPosition: {x: 87, y: 43, z: 33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 645862530}
