@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Building : MonoBehaviour
 {
-    public GameObject previewModel;
+    public GameObject previewTower;
 }

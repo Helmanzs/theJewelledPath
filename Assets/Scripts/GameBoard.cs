@@ -16,6 +16,8 @@ public class GameBoard : MonoBehaviour
     private bool placingBuilding = false;
     private GameObject previewedBuilding = null;
 
+    private GameObject lastSpot = null;
+
 
     private void Awake()
     {
@@ -94,11 +96,18 @@ public class GameBoard : MonoBehaviour
             GameObject emptySpot = this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot();
             if (emptySpot.GetComponent<BuildingManagement>().CanPlaceBuilding)
             {
-                Color tempColor = previewedBuilding.GetComponent<Renderer>().material.color;
-                tempColor.a = 0.5f;
-                previewedBuilding.GetComponent<Renderer>().material.color = tempColor;
+                if (emptySpot != lastSpot)
+                {
+                    emptySpot.GetComponent<BuildingManagement>().InsertBuilding(previewedBuilding.GetComponent<Building>().previewTower);
+                    emptySpot.GetComponent<BuildingManagement>().IsPreviewed = true;
+                    if (lastSpot != null)
+                    {
+                        lastSpot.GetComponent<BuildingManagement>().DeleteBuilding();
+                        lastSpot.GetComponent<BuildingManagement>().IsPreviewed = false;
 
-                emptySpot.GetComponent<BuildingManagement>().InsertBuilding(previewedBuilding);
+                    }
+                    lastSpot = emptySpot;
+                }
             }
         }
 
@@ -109,13 +118,21 @@ public class GameBoard : MonoBehaviour
         if (this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot() != null)
         {
             GameObject emptySpot = this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot();
-            if (emptySpot.GetComponent<BuildingManagement>().CanPlaceBuilding)
+            if (emptySpot.GetComponent<BuildingManagement>().IsPreviewed)
             {
-                emptySpot.GetComponent<BuildingManagement>().InsertBuilding(previewedBuilding);
-                emptySpot.transform.tag = "BuildingSpot";
-                placingBuilding = false;
-                previewedBuilding = null;
+                emptySpot.GetComponent<BuildingManagement>().IsPreviewed = false;
+                emptySpot.GetComponent<BuildingManagement>().DeleteBuilding();
+
+                if (emptySpot.GetComponent<BuildingManagement>().CanPlaceBuilding)
+                {
+                    emptySpot.GetComponent<BuildingManagement>().InsertBuilding(previewedBuilding);
+                    emptySpot.transform.tag = "BuildingSpot";
+                    placingBuilding = false;
+                    previewedBuilding = null;
+                    lastSpot = null;
+                }
             }
+
         }
     }
 }

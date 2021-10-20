@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuildingManagement : MonoBehaviour
 {
     private GameObject building;
+    public bool IsPreviewed = false;
 
     public bool CanPlaceBuilding
     {
@@ -17,5 +18,11 @@ public class BuildingManagement : MonoBehaviour
         building = Instantiate(b, this.transform.position, Quaternion.identity) as GameObject;
         building.transform.SetParent(this.transform);
         building.transform.position = new Vector3(this.transform.position.x, 2, this.transform.position.z);
+    }
+
+    public void DeleteBuilding()
+    {
+        Destroy(building);
+        building = null;
     }
 }
