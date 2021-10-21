@@ -5,10 +5,12 @@ using UnityEngine;
 public class GameBoard : MonoBehaviour
 {
     public GameObject buildingSpot;
+    public GameObject pathBuildingSpot;
     public GameObject tower;
-    public int gridSize = 32;
+    public Material pathMaterial;
     //-------------------------------------
-    private int[,] grid;
+    private int gridSize = 32;
+    private GameObject[,] grid;
     List<GameObject> buildingSpots = new List<GameObject>();
     private float gameTileWidth = 0;
     private float gameTileHeight = 0;
@@ -19,10 +21,10 @@ public class GameBoard : MonoBehaviour
     private GameObject lastSpot = null;
 
 
-    private void Awake()
+    void Awake()
     {
         //init grid
-        grid = new int[gridSize, gridSize];
+        grid = new GameObject[gridSize, gridSize];
 
         //set groud dimensions
         this.transform.localScale = new Vector3(2 * gridSize, 1, 2 * gridSize);
@@ -38,19 +40,11 @@ public class GameBoard : MonoBehaviour
 
     void Start()
     {
+        //create path blocks
+        CreateTestPath();
 
         //generate building spots on grid
-        GameObject spot;
-
-        for (int i = 0; i < grid.GetLength(0); i++)
-        {
-            for (int j = 0; j < grid.GetLength(1); j++)
-            {
-                spot = Instantiate(buildingSpot, new Vector3(i * gameTileWidth + gameTileWidth / 2, 0, j * gameTileHeight + gameTileHeight / 2), Quaternion.identity);
-                spot.transform.localScale = new Vector3(gameTileWidth / 10, 0.01f, gameTileHeight / 10);
-                buildingSpots.Add(spot);
-            }
-        }
+        GenerateGrid();
     }
 
 
@@ -150,6 +144,56 @@ public class GameBoard : MonoBehaviour
         {
             lastSpot.GetComponent<BuildingManagement>().DeleteBuilding();
             lastSpot.GetComponent<BuildingManagement>().IsPreviewed = false;
+        }
+    }
+
+    private void CreateTestPath()
+    {
+        for (int i = 0; i < grid.GetLength(0); i++)
+        {
+            for (int j = 0; j < grid.GetLength(1); j++)
+            {
+                if (i == 29 && j == 0)
+                {
+                    GameObject endTile = GeneratePathTile(i, j);
+                    endTile.AddComponent<EndTile>();
+                    endTile.GetComponent<EndTile>().endTile = endTile.transform;
+                    grid[i, j] = endTile;
+                }
+                if ((i == 2 && j <= 29) || (i == 29 && j <= 29))
+                {
+                    grid[i, j] = GeneratePathTile(i, j);
+                }
+                if (j == 29 && i >= 2 && i <= 29)
+                {
+                    grid[i, j] = GeneratePathTile(i, j);
+                }
+            }
+        }
+    }
+
+    private GameObject GeneratePathTile(int i, int j)
+    {
+        GameObject pathSpot = Instantiate(pathBuildingSpot, new Vector3(i * gameTileWidth + gameTileWidth / 2, 0.51f, j * gameTileHeight + gameTileHeight / 2), Quaternion.identity);
+        pathSpot.transform.localScale = new Vector3(gameTileWidth / 10, 0.01f, gameTileHeight / 10);
+        pathSpot.GetComponent<Renderer>().material = pathMaterial;
+        return pathSpot;
+    }
+    private void GenerateGrid()
+    {
+        GameObject spot;
+
+        for (int i = 0; i < grid.GetLength(0); i++)
+        {
+            for (int j = 0; j < grid.GetLength(1); j++)
+            {
+                if (grid[i, j] == null)
+                {
+                    spot = Instantiate(buildingSpot, new Vector3(i * gameTileWidth + gameTileWidth / 2, 1, j * gameTileHeight + gameTileHeight / 2), Quaternion.identity);
+                    spot.transform.localScale = new Vector3(gameTileWidth / 10, 0.01f, gameTileHeight / 10);
+                    buildingSpots.Add(spot);
+                }
+            }
         }
     }
 }
