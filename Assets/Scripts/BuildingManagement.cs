@@ -12,7 +12,7 @@ public class BuildingManagement : MonoBehaviour
         get { return building == null; }
     }
 
-    //insert tower on tower spot
+    //insert building on buildingSpot
     public void InsertBuilding(GameObject b)
     {
         building = Instantiate(b, this.transform.position, Quaternion.identity) as GameObject;
@@ -22,6 +22,7 @@ public class BuildingManagement : MonoBehaviour
 
     public void DeleteBuilding()
     {
+        this.tag = "EmptyBuildingSpot";
         Destroy(building);
         building = null;
     }

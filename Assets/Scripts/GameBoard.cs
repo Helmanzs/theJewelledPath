@@ -63,12 +63,11 @@ public class GameBoard : MonoBehaviour
             PreviewBuilding();
             if (Input.GetMouseButtonDown(0))
             {
-                PlaceBuilding();
+                EnterBuildingMode();
             }
             else if (Input.GetMouseButton(1))
             {
-                placingBuilding = false;
-                previewedBuilding = null;
+                ExitBuildingMode();
             }
         }
     }
@@ -80,49 +79,56 @@ public class GameBoard : MonoBehaviour
         //check if tower can be placed on buildingSpot
         if (buildingSpots.FindAll(t => t.GetComponent<BuildingManagement>().CanPlaceBuilding).Count == 0)
         {
-            Debug.Log("No empty tile left.");
             return;
         }
         previewedBuilding = tower;
         placingBuilding = true;
 
-        //TODO: make it on player mouse movement
     }
 
     private void PreviewBuilding()
     {
+        //check if user clicked on spot
         if (this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot() != null)
         {
-            GameObject emptySpot = this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot();
-            if (emptySpot.GetComponent<BuildingManagement>().CanPlaceBuilding)
+            GameObject currentSpot = this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot();
+
+            //check if spot is empty
+            if (currentSpot.GetComponent<BuildingManagement>().CanPlaceBuilding)
             {
-                if (emptySpot != lastSpot)
+                if (currentSpot != lastSpot)
                 {
-                    emptySpot.GetComponent<BuildingManagement>().InsertBuilding(previewedBuilding.GetComponent<Building>().previewTower);
-                    emptySpot.GetComponent<BuildingManagement>().IsPreviewed = true;
+                    //place preview
+                    currentSpot.GetComponent<BuildingManagement>().InsertBuilding(previewedBuilding.GetComponent<Building>().previewTower);
+                    currentSpot.GetComponent<BuildingManagement>().IsPreviewed = true;
+
+                    //delete preview from last spot
                     if (lastSpot != null)
                     {
                         lastSpot.GetComponent<BuildingManagement>().DeleteBuilding();
                         lastSpot.GetComponent<BuildingManagement>().IsPreviewed = false;
 
                     }
-                    lastSpot = emptySpot;
+                    lastSpot = currentSpot;
                 }
             }
         }
 
     }
 
-    public void PlaceBuilding()
+    private void EnterBuildingMode()
     {
         if (this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot() != null)
         {
+            //get empty spot
             GameObject emptySpot = this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot();
             if (emptySpot.GetComponent<BuildingManagement>().IsPreviewed)
             {
+                //delete preview building
                 emptySpot.GetComponent<BuildingManagement>().IsPreviewed = false;
                 emptySpot.GetComponent<BuildingManagement>().DeleteBuilding();
 
+                //place building
                 if (emptySpot.GetComponent<BuildingManagement>().CanPlaceBuilding)
                 {
                     emptySpot.GetComponent<BuildingManagement>().InsertBuilding(previewedBuilding);
@@ -133,6 +139,17 @@ public class GameBoard : MonoBehaviour
                 }
             }
 
+        }
+    }
+
+    private void ExitBuildingMode()
+    {
+        placingBuilding = false;
+        previewedBuilding = null;
+        if (lastSpot != null)
+        {
+            lastSpot.GetComponent<BuildingManagement>().DeleteBuilding();
+            lastSpot.GetComponent<BuildingManagement>().IsPreviewed = false;
         }
     }
 }

@@ -9,7 +9,7 @@ public class BuildPlacementHandler : MonoBehaviour
 
     public GameObject getBuildingSpot()
     {
-
+        //get buildingSpot on mouse click
         RaycastHit hitInfo = new RaycastHit();
         bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
         if (hit)
