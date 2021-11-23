@@ -1,25 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameBoard : MonoBehaviour
 {
     public GameObject buildingSpot;
     public GameObject pathBuildingSpot;
-    public GameObject tower;
     public Material pathMaterial;
+
+    public GameObject basicEnemy;
     //-------------------------------------
     private int gridSize = 32;
     private GameObject[,] grid;
-    List<GameObject> buildingSpots = new List<GameObject>();
+    //static List<GameObject> buildingSpots = new List<GameObject>();
+    List<GameObject> enemies = new List<GameObject>();
     private float gameTileWidth = 0;
     private float gameTileHeight = 0;
 
-    private bool placingBuilding = false;
-    private GameObject previewedBuilding = null;
 
-    private GameObject lastSpot = null;
-
+    //TODO: odebrat collider u enemáků, nastavit delay spawnu
 
     void Awake()
     {
@@ -36,6 +36,8 @@ public class GameBoard : MonoBehaviour
 
         //set ground material tiling
         GetComponent<Renderer>().material.mainTextureScale = new Vector2(grid.GetLength(0), grid.GetLength(1));
+
+
     }
 
     void Start()
@@ -43,107 +45,30 @@ public class GameBoard : MonoBehaviour
         //create path blocks
         CreateTestPath();
 
-        //generate building spots on grid
+        //generate building spots and grid
         GenerateGrid();
+
+        FindObjectOfType<NavMeshSurface>().BuildNavMesh();
+
+        //spawn enemies
+        StartCoroutine(SpawnEnemies(10, basicEnemy));
+
+
     }
 
 
     void Update()
     {
-        //place tower after place tower button has been pressed
-        if (placingBuilding)
-        {
-
-            PreviewBuilding();
-            if (Input.GetMouseButtonDown(0))
-            {
-                EnterBuildingMode();
-            }
-            else if (Input.GetMouseButton(1))
-            {
-                ExitBuildingMode();
-            }
-        }
-    }
-
-
-
-    public void AddTower()
-    {
-        //check if tower can be placed on buildingSpot
-        if (buildingSpots.FindAll(t => t.GetComponent<BuildingManagement>().CanPlaceBuilding).Count == 0)
-        {
-            return;
-        }
-        previewedBuilding = tower;
-        placingBuilding = true;
 
     }
 
-    private void PreviewBuilding()
+    IEnumerator SpawnEnemies(int number, GameObject type)
     {
-        //check if user clicked on spot
-        if (this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot() != null)
+        for (int i = 0; i < number; i++)
         {
-            GameObject currentSpot = this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot();
-
-            //check if spot is empty
-            if (currentSpot.GetComponent<BuildingManagement>().CanPlaceBuilding)
-            {
-                if (currentSpot != lastSpot)
-                {
-                    //place preview
-                    currentSpot.GetComponent<BuildingManagement>().InsertBuilding(previewedBuilding.GetComponent<Building>().previewTower);
-                    currentSpot.GetComponent<BuildingManagement>().IsPreviewed = true;
-
-                    //delete preview from last spot
-                    if (lastSpot != null)
-                    {
-                        lastSpot.GetComponent<BuildingManagement>().DeleteBuilding();
-                        lastSpot.GetComponent<BuildingManagement>().IsPreviewed = false;
-
-                    }
-                    lastSpot = currentSpot;
-                }
-            }
-        }
-
-    }
-
-    private void EnterBuildingMode()
-    {
-        if (this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot() != null)
-        {
-            //get empty spot
-            GameObject emptySpot = this.gameObject.GetComponent<BuildPlacementHandler>().getBuildingSpot();
-            if (emptySpot.GetComponent<BuildingManagement>().IsPreviewed)
-            {
-                //delete preview building
-                emptySpot.GetComponent<BuildingManagement>().IsPreviewed = false;
-                emptySpot.GetComponent<BuildingManagement>().DeleteBuilding();
-
-                //place building
-                if (emptySpot.GetComponent<BuildingManagement>().CanPlaceBuilding)
-                {
-                    emptySpot.GetComponent<BuildingManagement>().InsertBuilding(previewedBuilding);
-                    emptySpot.transform.tag = "BuildingSpot";
-                    placingBuilding = false;
-                    previewedBuilding = null;
-                    lastSpot = null;
-                }
-            }
-
-        }
-    }
-
-    private void ExitBuildingMode()
-    {
-        placingBuilding = false;
-        previewedBuilding = null;
-        if (lastSpot != null)
-        {
-            lastSpot.GetComponent<BuildingManagement>().DeleteBuilding();
-            lastSpot.GetComponent<BuildingManagement>().IsPreviewed = false;
+            GameObject enemy = Instantiate(type, new Vector3(Global.spawnTile.transform.position.x, 1, Global.spawnTile.transform.position.z), Quaternion.identity);
+            enemies.Add(enemy);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -153,11 +78,16 @@ public class GameBoard : MonoBehaviour
         {
             for (int j = 0; j < grid.GetLength(1); j++)
             {
+                if (i == 2 && j == 0)
+                {
+                    GameObject spawnTile = GeneratePathTile(i, j);
+                    Global.spawnTile = spawnTile;
+                    grid[i, j] = spawnTile;
+                }
                 if (i == 29 && j == 0)
                 {
                     GameObject endTile = GeneratePathTile(i, j);
-                    endTile.AddComponent<EndTile>();
-                    endTile.GetComponent<EndTile>().endTile = endTile.transform;
+                    Global.endTile = endTile;
                     grid[i, j] = endTile;
                 }
                 if ((i == 2 && j <= 29) || (i == 29 && j <= 29))
@@ -191,7 +121,8 @@ public class GameBoard : MonoBehaviour
                 {
                     spot = Instantiate(buildingSpot, new Vector3(i * gameTileWidth + gameTileWidth / 2, 1, j * gameTileHeight + gameTileHeight / 2), Quaternion.identity);
                     spot.transform.localScale = new Vector3(gameTileWidth / 10, 0.01f, gameTileHeight / 10);
-                    buildingSpots.Add(spot);
+                    Global.buildingSpots.Add(spot);
+
                 }
             }
         }
