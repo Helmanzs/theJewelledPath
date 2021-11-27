@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1391153426050478017}
   - component: {fileID: -3540439206140050531}
+  - component: {fileID: -2796439782195088414}
   - component: {fileID: 2726053116104346035}
   - component: {fileID: -3059144701847536161}
-  - component: {fileID: 8244546696713869549}
-  m_Layer: 7
-  m_Name: BuildingSpot
-  m_TagString: EmptyBuildingSpot
+  m_Layer: 0
+  m_Name: GemSpot
+  m_TagString: EmptyGemSpot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,6 +42,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4053981537692930539}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &-2796439782195088414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4053981537692930539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb833d7b97512240b215495910fb9d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 0}
 --- !u!23 &2726053116104346035
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -96,15 +109,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 110, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8244546696713869549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4053981537692930539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93de754bc66066b43b760a25a86a3667, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

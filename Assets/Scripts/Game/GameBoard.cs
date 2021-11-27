@@ -9,12 +9,9 @@ public class GameBoard : MonoBehaviour
     public GameObject pathBuildingSpot;
     public Material pathMaterial;
 
-    public GameObject basicEnemy;
     //-------------------------------------
     private int gridSize = 32;
     private GameObject[,] grid;
-    //static List<GameObject> buildingSpots = new List<GameObject>();
-    List<GameObject> enemies = new List<GameObject>();
     private float gameTileWidth = 0;
     private float gameTileHeight = 0;
 
@@ -49,29 +46,7 @@ public class GameBoard : MonoBehaviour
         GenerateGrid();
 
         FindObjectOfType<NavMeshSurface>().BuildNavMesh();
-
-        //spawn enemies
-        StartCoroutine(SpawnEnemies(10, basicEnemy));
-
-
     }
-
-
-    void Update()
-    {
-
-    }
-
-    IEnumerator SpawnEnemies(int number, GameObject type)
-    {
-        for (int i = 0; i < number; i++)
-        {
-            GameObject enemy = Instantiate(type, new Vector3(Global.spawnTile.transform.position.x, 1, Global.spawnTile.transform.position.z), Quaternion.identity);
-            enemies.Add(enemy);
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-
     private void CreateTestPath()
     {
         for (int i = 0; i < grid.GetLength(0); i++)
