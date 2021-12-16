@@ -7,13 +7,16 @@ public class GameBoard : MonoBehaviour
 {
     public GameObject buildingSpot;
     public GameObject pathBuildingSpot;
-    public Material pathMaterial;
+    public GameObject endSpot;
+    public GameObject paths;
+    public GameObject spots;
 
     //-------------------------------------
     private int gridSize = 32;
     private GameObject[,] grid;
     private float gameTileWidth = 0;
     private float gameTileHeight = 0;
+
 
 
     //TODO: odebrat collider u enemáků, nastavit delay spawnu
@@ -39,6 +42,7 @@ public class GameBoard : MonoBehaviour
 
     void Start()
     {
+
         //create path blocks
         CreateTestPath();
 
@@ -46,6 +50,7 @@ public class GameBoard : MonoBehaviour
         GenerateGrid();
 
         FindObjectOfType<NavMeshSurface>().BuildNavMesh();
+
     }
     private void CreateTestPath()
     {
@@ -61,7 +66,7 @@ public class GameBoard : MonoBehaviour
                 }
                 if (i == 29 && j == 0)
                 {
-                    GameObject endTile = GeneratePathTile(i, j);
+                    GameObject endTile = CreateEndTile(i, j);
                     Global.endTile = endTile;
                     grid[i, j] = endTile;
                 }
@@ -81,8 +86,18 @@ public class GameBoard : MonoBehaviour
     {
         GameObject pathSpot = Instantiate(pathBuildingSpot, new Vector3(i * gameTileWidth + gameTileWidth / 2, 0.51f, j * gameTileHeight + gameTileHeight / 2), Quaternion.identity);
         pathSpot.transform.localScale = new Vector3(gameTileWidth / 10, 0.01f, gameTileHeight / 10);
-        pathSpot.GetComponent<Renderer>().material = pathMaterial;
+        pathSpot.transform.SetParent(paths.transform);
+
         return pathSpot;
+    }
+
+    private GameObject CreateEndTile(int i, int j)
+    {
+        GameObject endTile = Instantiate(endSpot, new Vector3(i * gameTileWidth + gameTileWidth / 2, 0.51f, j * gameTileHeight + gameTileHeight / 2), Quaternion.identity);
+        endTile.transform.localScale = new Vector3(gameTileWidth / 10, 0.01f, gameTileHeight / 10);
+        endTile.transform.SetParent(paths.transform);
+
+        return endTile;
     }
     private void GenerateGrid()
     {
@@ -97,6 +112,7 @@ public class GameBoard : MonoBehaviour
                     spot = Instantiate(buildingSpot, new Vector3(i * gameTileWidth + gameTileWidth / 2, 1, j * gameTileHeight + gameTileHeight / 2), Quaternion.identity);
                     spot.transform.localScale = new Vector3(gameTileWidth / 10, 0.01f, gameTileHeight / 10);
                     Global.buildingSpots.Add(spot);
+                    spot.transform.SetParent(spots.transform);
 
                 }
             }

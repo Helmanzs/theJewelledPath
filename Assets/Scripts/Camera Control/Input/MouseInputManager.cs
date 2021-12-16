@@ -13,7 +13,7 @@ public class MouseInputManager : InputManager
     float mousePositionOnRotateStart;
 
     Vector3 dragOrigin;
-    Vector3 dragCurrent;
+    Vector3 move;
     bool isDragging;
 
 
@@ -25,7 +25,6 @@ public class MouseInputManager : InputManager
     private void Update()
     {
         Vector3 mp = Input.mousePosition;
-        //dragOrigin = Input.mousePosition;
 
         bool mouseValid = (mp.y <= screen.y * 1.05f && mp.y >= screen.y * -0.05f) && mp.x <= screen.x * 1.05f && mp.x >= screen.x * -0.05;
 
@@ -34,24 +33,25 @@ public class MouseInputManager : InputManager
             return;
         }
 
-        //movement on edge
-        if (mp.y > screen.y * 0.95)
-        {
-            OnMoveInput?.Invoke(Vector3.forward);
-        }
-        else if (mp.y < screen.y * 0.05f)
-        {
-            OnMoveInput?.Invoke(-Vector3.forward);
-        }
 
-        if (mp.x > screen.x * 0.95)
-        {
-            OnMoveInput?.Invoke(Vector3.right);
-        }
-        else if (mp.x < screen.x * 0.05f)
-        {
-            OnMoveInput?.Invoke(-Vector3.right);
-        }
+        //movement on edge
+        // if (mp.y > screen.y * 0.95)
+        // {
+        //     OnMoveInput?.Invoke(Vector3.forward);
+        // }
+        // else if (mp.y < screen.y * 0.05f)
+        // {
+        //     OnMoveInput?.Invoke(-Vector3.forward);
+        // }
+
+        // if (mp.x > screen.x * 0.95)
+        // {
+        //     OnMoveInput?.Invoke(Vector3.right);
+        // }
+        // else if (mp.x < screen.x * 0.05f)
+        // {
+        //     OnMoveInput?.Invoke(-Vector3.right);
+        // }
 
         //rotate
         if (Input.GetMouseButtonDown(1))
@@ -73,11 +73,11 @@ public class MouseInputManager : InputManager
         //zoom
         if (Input.mouseScrollDelta.y > 0)
         {
-            OnZoomInput?.Invoke(-15f);
+            OnZoomInput?.Invoke(-30f);
         }
         else if (Input.mouseScrollDelta.y < 0)
         {
-            OnZoomInput?.Invoke(15f);
+            OnZoomInput?.Invoke(30f);
         }
     }
 }

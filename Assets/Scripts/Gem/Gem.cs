@@ -7,13 +7,16 @@ public class Gem : MonoBehaviour
     public List<Transform> targets = new List<Transform>();
     public Transform _primaryTarget;
     public float range = 7f;
-    public int damage = 2;
+    public int damage = 10;
     private float attackSpeed = 600;
+    private float nextTimeCall;
+
 
     void Start()
     {
         transform.GetComponent<SphereCollider>().radius = range;
         StartCoroutine(CheckForEnemies());
+        nextTimeCall = Time.time + attackSpeed / 1000;
     }
 
     // Update is called once per frame
@@ -28,7 +31,11 @@ public class Gem : MonoBehaviour
         {
             GetComponent<LineRenderer>().enabled = true;
             GetComponent<DrawLine>().MakeLine(this.transform.position, _primaryTarget.transform.position);
-            StartCoroutine(DealDamage());
+            if (Time.time >= nextTimeCall)
+            {
+                DealDamage();
+                nextTimeCall += attackSpeed / 1000;
+            }
         }
         else
         {
@@ -36,12 +43,11 @@ public class Gem : MonoBehaviour
         }
     }
 
-    IEnumerator DealDamage()
+    private void DealDamage()
     {
-        yield return new WaitForSeconds(attackSpeed / 1000);
         if (_primaryTarget != null)
         {
-            _primaryTarget.SendMessage("ApplyDamage", damage);
+            _primaryTarget.GetComponent<Enemy>().ApplyDamage(5);
         }
     }
 

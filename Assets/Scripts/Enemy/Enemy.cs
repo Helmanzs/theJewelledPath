@@ -7,16 +7,28 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int hp = 50;
     [SerializeField] private int dmg = 20;
-    [SerializeField] private int speed = 10;
+    [SerializeField] private int speed = 1;
 
+    public int Speed
+    {
+        get { return speed; }
+        set
+        {
+            speed = (value < 0) ? 0 : value;
+        }
+    }
+    public int Damage => dmg;
+
+    private void Awake()
+    {
+        GetComponent<NavMeshAgent>().speed = speed;
+    }
     private void Update()
     {
         if (hp <= 0)
         {
             Kill();
         }
-
-        GetComponent<NavMeshAgent>().speed = speed;
     }
     public void ApplyDamage(int damage)
     {

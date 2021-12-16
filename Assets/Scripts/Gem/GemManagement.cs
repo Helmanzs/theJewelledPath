@@ -5,6 +5,8 @@ using UnityEngine;
 public class GemManagement : MonoBehaviour
 {
     public GameObject basicGem;
+    public GameObject waterGem;
+
     private GameObject lastTower;
 
     private bool placingGem = false;
@@ -43,6 +45,12 @@ public class GemManagement : MonoBehaviour
         {
             return;
         }
+
+        if (Global.buildings.FindAll(building => building.GetComponent<Tower>().CanPlaceGem).Count == 0)
+        {
+            return;
+        }
+
         if (GetTower() != null)
         {
             GameObject previewedTower = GetTower();
@@ -53,7 +61,7 @@ public class GemManagement : MonoBehaviour
                 if (previewedTower != lastTower)
                 {
                     //place preview
-                    previewedTower.GetComponent<Tower>().InsertGem(basicGem);
+                    previewedTower.GetComponent<Tower>().InsertGem(waterGem);
                     //previewedTower.GetComponent<Tower>().IsPreviewed = true;
 
                     //delete preview from last spot
@@ -80,7 +88,7 @@ public class GemManagement : MonoBehaviour
         lastTower.GetComponent<Tower>().DeleteGem(lastTower.GetComponent<Tower>().GetPlacedGem);
         //place building
 
-        lastTower.GetComponent<Tower>().InsertGem(basicGem);
+        lastTower.GetComponent<Tower>().InsertGem(waterGem);
         lastTower.transform.tag = "Tower";
         placingGem = false;
         lastTower = null;

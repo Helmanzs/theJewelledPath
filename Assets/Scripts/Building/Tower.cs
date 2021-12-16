@@ -5,6 +5,8 @@ using UnityEngine;
 public class Tower : Building
 {
     private GameObject placedGem;
+
+    private List<GameObject> gems = new List<GameObject>();
     private bool isPreviewed;
 
     public bool CanPlaceGem
@@ -38,5 +40,4 @@ public class Tower : Building
         Destroy(placedGem);
         placedGem = null;
     }
-
 }

@@ -28,11 +28,11 @@ public class KeyboardInputManager : InputManager
         }
 
         //rotate
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.Q))
         {
             OnRotateInput?.Invoke(-1f);
         }
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.E))
         {
             OnRotateInput?.Invoke(1f);
         }
