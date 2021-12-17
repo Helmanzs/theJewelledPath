@@ -22,7 +22,7 @@ public class EndTile : MonoBehaviour
         if (other.CompareTag("DefaultEnemy"))
         {
             Destroy(other.gameObject);
-            Global.lives -= other.GetComponent<Enemy>().Damage;
+            Global.Mana = Global.Mana - 1000;
             
         }
     }

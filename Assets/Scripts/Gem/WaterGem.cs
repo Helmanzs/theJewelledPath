@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterGem : MonoBehaviour
+public class WaterGem : Gem
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Damage = 10;
+        Range = 100;
+        AttackSpeed = 100;
     }
 }

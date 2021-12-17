@@ -14,17 +14,7 @@ public static class Global
     public static int Mana
     {
         get { return mana; }
-        set
-        {
-            if (mana - value <= 0)
-            {
-                mana = 0;
-            }
-            else
-            {
-                mana -= value;
-            }
-        }
+        set { mana += value; }
     }
 
     public static GameObject endTile = null;

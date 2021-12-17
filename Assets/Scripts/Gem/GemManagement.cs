@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GemManagement : MonoBehaviour
 {
-    public GameObject basicGem;
     public GameObject waterGem;
 
     private GameObject lastTower;
@@ -17,21 +16,21 @@ public class GemManagement : MonoBehaviour
         //place gem after place gem button has been pressed
         if (placingGem)
         {
-            PreviewGem();
+            //PreviewGem();
             if (Input.GetMouseButtonDown(0))
             {
-                PlaceGem();
+              //  PlaceGem();
             }
             else if (Input.GetMouseButton(1))
             {
-                ExitBuildingMode();
+                //ExitBuildingMode();
             }
         }
     }
-    public void CreateGem()
+    /*public void CreateGem()
     {
         //check if tower can be placed on some buildingSpot
-        if (Global.buildings.FindAll(tower => tower.GetComponent<Tower>().CanPlaceGem).Count == 0)
+        if (Global.buildings.FindAll(building => building.GetComponent<GemBuilding>()).Count == 0)
         {
             return;
         }
@@ -46,18 +45,11 @@ public class GemManagement : MonoBehaviour
             return;
         }
 
-        if (Global.buildings.FindAll(building => building.GetComponent<Tower>().CanPlaceGem).Count == 0)
-        {
-            return;
-        }
-
         if (GetTower() != null)
         {
             GameObject previewedTower = GetTower();
 
             //check if spot is empty
-            if (previewedTower.GetComponent<Tower>().CanPlaceGem)
-            {
                 if (previewedTower != lastTower)
                 {
                     //place preview
@@ -67,13 +59,12 @@ public class GemManagement : MonoBehaviour
                     //delete preview from last spot
                     if (lastTower != null)
                     {
-                        lastTower.GetComponent<Tower>().DeleteGem(lastTower.GetComponent<Tower>().GetPlacedGem);
+                       // lastTower.GetComponent<Tower>().DeleteGem(lastTower.GetComponent<Tower>().GetPlacedGem);
                         //lastTower.GetComponent<BuildingManager>().IsPreviewed = false;
 
                     }
                     lastTower = previewedTower;
-                }
-            }
+               }
         }
     }
 
@@ -123,5 +114,5 @@ public class GemManagement : MonoBehaviour
             }
         }
         return null;
-    }
+    }*/
 }

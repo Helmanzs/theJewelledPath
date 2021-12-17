@@ -1461,7 +1461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6de5d257b6856745b2d013ef43dfaad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mana: {fileID: 0}
+  mana: {fileID: 1449774440}
 --- !u!1 &1498333942
 GameObject:
   m_ObjectHideFlags: 0
