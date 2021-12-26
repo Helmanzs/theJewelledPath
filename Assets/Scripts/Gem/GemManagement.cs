@@ -1,118 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GemManagement : MonoBehaviour
+public class GemManagement<T> : BuildingManagement<T> where T : Component
 {
-    public GameObject waterGem;
 
-    private GameObject lastTower;
-
-    private bool placingGem = false;
-
-
-    private void Update()
+    public void Update()
     {
-        //place gem after place gem button has been pressed
-        if (placingGem)
+        if (gemBuildingMode)
         {
-            //PreviewGem();
-            if (Input.GetMouseButtonDown(0))
+            PreviewUnit();
+            if (Input.GetMouseButton(0))
             {
-              //  PlaceGem();
+                AddUnit(lastPlace);
+                PreviewedUnit = null;
             }
             else if (Input.GetMouseButton(1))
             {
-                //ExitBuildingMode();
+                if (lastPlace != null)
+                {
+                    DeleteShowcasedGem(lastPlace);
+                }
+
+                PreviewedUnit = null;
             }
         }
     }
-    /*public void CreateGem()
+
+    public void AddGem(Gem gem)
     {
-        //check if tower can be placed on some buildingSpot
+        if (gem == null)
+        {
+            return;
+        }
+
+        PreviewedUnit = GameObject.Instantiate(gem, new Vector3(0, 0, 0), Quaternion.identity);
+        PreviewedUnit.gameObject.SetActive(false);
+        gemBuildingMode = true;
+    }
+
+    protected override void PreviewUnit()
+    {
         if (Global.buildings.FindAll(building => building.GetComponent<GemBuilding>()).Count == 0)
         {
-            return;
-        }
-        placingGem = true;
-    }
-
-    private void PreviewGem()
-    {
-        //check if user clicked on spot
-        if (Global.buildings.Count == 0)
-        {
+            PreviewedUnit = null;
             return;
         }
 
-        if (GetTower() != null)
+        if (selector.GetObject(1 << 8, "EmptyTower") != null)
         {
-            GameObject previewedTower = GetTower();
-
-            //check if spot is empty
-                if (previewedTower != lastTower)
+            T previewedSpot = selector.GetObject(1 << 8, "EmptyTower");
+            Transform spot = previewedSpot as Transform;
+            if (spot != lastPlace)
+            {
+                ShowcaseGem(spot.gameObject);
+                if (lastPlace != null)
                 {
-                    //place preview
-                    previewedTower.GetComponent<Tower>().InsertGem(waterGem);
-                    //previewedTower.GetComponent<Tower>().IsPreviewed = true;
+                    DeleteShowcasedGem(lastPlace);
+                    Debug.Log(lastPlace.transform.parent);
+                }
+                lastPlace = previewedSpot;
+            }
 
-                    //delete preview from last spot
-                    if (lastTower != null)
-                    {
-                       // lastTower.GetComponent<Tower>().DeleteGem(lastTower.GetComponent<Tower>().GetPlacedGem);
-                        //lastTower.GetComponent<BuildingManager>().IsPreviewed = false;
-
-                    }
-                    lastTower = previewedTower;
-               }
         }
     }
 
-    private void PlaceGem()
+
+
+    protected override void AddUnit(T place)
     {
-        if (lastTower == null)
+        place.GetComponent<GemBuilding>().InsertGem(PreviewedUnit as Gem);
+    }
+
+    private void ShowcaseGem(GameObject place)
+    {
+        place.GetComponent<GemBuilding>().ShowcasedGem = PreviewedUnit as Gem;
+        PreviewedUnit.transform.SetParent(place.transform);
+        PreviewedUnit.gameObject.SetActive(true);
+    }
+
+    private void DeleteShowcasedGem(T place)
+    {
+        GemBuilding structure = place as GemBuilding;
+        if (place.GetComponent<GemBuilding>().ShowcasedGem == null)
         {
             return;
         }
-        //delete preview building
-        lastTower.GetComponent<Tower>().IsPreviewed = false;
-        lastTower.GetComponent<Tower>().DeleteGem(lastTower.GetComponent<Tower>().GetPlacedGem);
-        //place building
-
-        lastTower.GetComponent<Tower>().InsertGem(waterGem);
-        lastTower.transform.tag = "Tower";
-        placingGem = false;
-        lastTower = null;
+        place.GetComponent<GemBuilding>().ShowcasedGem = null;
     }
 
-    private void ExitBuildingMode()
+    protected override void DeleteUnit(GameObject place, GameObject unit)
     {
-        placingGem = false;
 
-        if (lastTower != null)
-        {
-            lastTower.GetComponent<Tower>().DeleteGem(lastTower.GetComponent<Tower>().GetPlacedGem);
-            lastTower.GetComponent<Tower>().IsPreviewed = false;
-        }
     }
-
-
-    public GameObject GetTower()
-    {
-        //get tower on mouse click
-        RaycastHit hitInfo = new RaycastHit();
-        bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, float.PositiveInfinity, 1 << 8);
-        if (hit)
-        {
-            if (hitInfo.transform.gameObject.tag == "EmptyTower")
-            {
-                return hitInfo.transform.gameObject;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        return null;
-    }*/
 }

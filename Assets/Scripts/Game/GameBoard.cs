@@ -112,10 +112,19 @@ public class GameBoard : MonoBehaviour
                     spot = Instantiate(buildingSpot, new Vector3(i * gameTileWidth + gameTileWidth / 2, 1, j * gameTileHeight + gameTileHeight / 2), Quaternion.identity);
                     spot.transform.localScale = new Vector3(gameTileWidth / 10, 0.01f, gameTileHeight / 10);
                     Global.buildingSpots.Add(spot);
-                    spot.transform.SetParent(spots.transform);
 
+                    spot.transform.SetParent(spots.transform);
                 }
             }
+        }
+        int count = 0;
+        foreach (GameObject tile in Global.buildingSpots)
+        {
+            if (tile.tag == "EmptyBuildingSpot")
+            {
+                tile.name = $"BuildingSpot-{count}";
+            }
+            count++;
         }
     }
 }

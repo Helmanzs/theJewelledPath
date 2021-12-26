@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -3540439206140050531}
   - component: {fileID: 2726053116104346035}
   - component: {fileID: -3059144701847536161}
-  - component: {fileID: 8244546696713869549}
+  - component: {fileID: -4538953953753990061}
   m_Layer: 7
   m_Name: BuildingSpot
   m_TagString: EmptyBuildingSpot
@@ -96,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 110, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8244546696713869549
+--- !u!114 &-4538953953753990061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,6 +105,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4053981537692930539}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93de754bc66066b43b760a25a86a3667, type: 3}
+  m_Script: {fileID: 11500000, guid: 065ee5972b425984e81542731bf0dc92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

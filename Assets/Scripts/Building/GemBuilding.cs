@@ -3,16 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract public class GemBuilding : Building
+abstract public class GemBuilding : Structure
 {
-    protected List<GameObject> gems = new List<GameObject>();
+    protected List<Gem> gems = new List<Gem>();
     protected List<Transform> targets = new List<Transform>();
+    protected Gem showcasedGem = null;
     protected Transform _primaryTarget = null;
+    protected float elapsedTime = 0;
+    protected float nextTimeCall = 0;
+    protected Dictionary<string, float> weighting = new Dictionary<string, float>();
 
     private float damage = 0;
     private float range = 0;
     private float attackSpeed = 0;
 
+    public Gem ShowcasedGem
+    {
+        get { return showcasedGem; }
+        set { showcasedGem = value; }
+    }
     public float Damage
     {
         get { return damage; }
@@ -32,36 +41,54 @@ abstract public class GemBuilding : Building
             UpdateCollider(range);
         }
     }
+
     public float AttackSpeed
     {
         get { return attackSpeed; }
-        protected set { attackSpeed = value; }
+        protected set
+        {
+            attackSpeed = value;
+            if (1 - attackSpeed / 1000 <= 0)
+            {
+                attackSpeed = 0.1f;
+            }
+        }
     }
-
-    private void Start()
+    private void Awake()
     {
-        UpdateCollider(range);    
+        UpdateCollider(range);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         FindTarget();
+        if (_primaryTarget != null)
+        {
+            DealDamage();
+        }
     }
 
-    protected abstract void InsertGem(GameObject gem);
+
+    public abstract void InsertGem(Gem gem);
     protected abstract void RemoveGem(GameObject gem);
-    protected abstract void DealDamage(GameObject enemy);
+    protected abstract void DealDamage();
     protected abstract void UpdateCollider(float range);
+    protected abstract void UseGemEffect(GameObject target, Gem gem);
 
     protected void FindTarget()
     {
-        if(_primaryTarget == null)
+        if (_primaryTarget == null)
         {
             _primaryTarget = Target;
         }
     }
 
-    public List<GameObject> GetPlacedGems
+    protected void RecalculateWeigthing()
+    {
+
+    }
+
+    public List<Gem> GetPlacedGems
     {
         get { return gems; }
     }
@@ -81,22 +108,18 @@ abstract public class GemBuilding : Building
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void AddTarget(Transform other)
     {
-        if (other.CompareTag("Enemy"))
-        {
-
-            targets.Add(other.transform);
-        }
+        print("kjek");
+        targets.Add(other);
     }
 
-    private void OnTriggerExit(Collider other)
+    public void RemoveTarget(Transform other)
     {
         if (ReferenceEquals(_primaryTarget, other.transform))
         {
             _primaryTarget = null;
         }
-
         targets.Remove(other.transform);
     }
 

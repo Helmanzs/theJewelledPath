@@ -33,26 +33,6 @@ public class MouseInputManager : InputManager
             return;
         }
 
-
-        //movement on edge
-        // if (mp.y > screen.y * 0.95)
-        // {
-        //     OnMoveInput?.Invoke(Vector3.forward);
-        // }
-        // else if (mp.y < screen.y * 0.05f)
-        // {
-        //     OnMoveInput?.Invoke(-Vector3.forward);
-        // }
-
-        // if (mp.x > screen.x * 0.95)
-        // {
-        //     OnMoveInput?.Invoke(Vector3.right);
-        // }
-        // else if (mp.x < screen.x * 0.05f)
-        // {
-        //     OnMoveInput?.Invoke(-Vector3.right);
-        // }
-
         //rotate
         if (Input.GetMouseButtonDown(1))
         {

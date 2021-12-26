@@ -6,8 +6,8 @@ public class WaterGem : Gem
 {
     void Start()
     {
-        Damage = 10;
-        Range = 100;
+        Damage = 50;
+        Range = 10;
         AttackSpeed = 100;
     }
 }

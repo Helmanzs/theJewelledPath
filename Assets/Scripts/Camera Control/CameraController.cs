@@ -77,7 +77,7 @@ public class CameraController : MonoBehaviour
 
     private void UpdateFrameDrag(Vector3 moveVector)
     {
-        throw new NotImplementedException();
+
     }
 
     private void LateUpdate()

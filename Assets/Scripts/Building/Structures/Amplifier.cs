@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Amplifier : GemBuilding
 {
-    protected override void DealDamage(GameObject enemy)
+    public override void InsertGem(Gem gem)
     {
         throw new System.NotImplementedException();
     }
 
-    protected override void InsertGem(GameObject gem)
+    protected override void DealDamage()
     {
         throw new System.NotImplementedException();
     }
@@ -20,6 +20,11 @@ public class Amplifier : GemBuilding
     }
 
     protected override void UpdateCollider(float range)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void UseGemEffect(GameObject target, Gem gem)
     {
         throw new System.NotImplementedException();
     }

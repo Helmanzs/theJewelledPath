@@ -10,7 +10,6 @@ public class WaveManager : MonoBehaviour
     public GameObject waveInfoHolder;
 
     public GameObject waveInfo;
-    List<GameObject> enemies = new List<GameObject>();
     private bool ready = true;
     private float nextTimeCall;
 
@@ -56,9 +55,9 @@ public class WaveManager : MonoBehaviour
             float delay = type.GetComponent<Enemy>().Speed / 100f;
             yield return new WaitForSeconds(delay);
             GameObject enemy = Instantiate(type, new Vector3(Global.spawnTile.transform.position.x, 1, Global.spawnTile.transform.position.z), Quaternion.identity);
-            enemies.Add(enemy);
+            Global.enemies.Add(enemy);
         }
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         ready = true;
 
 

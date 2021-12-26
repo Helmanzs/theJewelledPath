@@ -5,37 +5,47 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int hp = 50;
-    [SerializeField] private int dmg = 20;
-    [SerializeField] private int speed = 1;
+    private float hp = 50;
+    private float dmg = 20;
+    private float speed = 10;
 
-    public int Speed
+    public float Speed
     {
         get { return speed; }
         set
         {
             speed = (value < 0) ? 0 : value;
+            GetComponent<NavMeshAgent>().speed = speed;
         }
     }
-    public int Damage => dmg;
+
+    public float HP
+    {
+        get { return hp; }
+        private set
+        {
+            hp = value;
+            if (hp <= 0)
+            {
+                Kill();
+            }
+        }
+    }
+
+    public float Damage => dmg;
 
     private void Awake()
     {
         GetComponent<NavMeshAgent>().speed = speed;
     }
-    private void Update()
+
+    public void ApplyDamage(float damage)
     {
-        if (hp <= 0)
-        {
-            Kill();
-        }
-    }
-    public void ApplyDamage(int damage)
-    {
-        hp = hp - damage;
+        HP -= damage;
     }
     public void Kill()
     {
+        Global.enemies.Remove(this.gameObject);
         Destroy(transform.gameObject);
     }
 }

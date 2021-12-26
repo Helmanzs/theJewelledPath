@@ -7,11 +7,11 @@ TagManager:
   - EmptyTower
   - BuildingSpot
   - EmptyBuildingSpot
-  - DefaultEnemy
   - PathBuildingSpot
   - EmptyGemSpot
   - Tower
   - EndSpot
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -21,7 +21,7 @@ TagManager:
   - UI
   - PathBuildingLayer
   - BuildingSpot
-  - Tower
+  - GemBuilding
   - 
   - 
   - 

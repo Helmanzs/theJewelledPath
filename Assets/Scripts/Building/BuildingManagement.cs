@@ -1,122 +1,40 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class BuildingManagement : MonoBehaviour
+public abstract class BuildingManagement<T>
 {
-    //buildings
-    public GameObject tower;
 
-    //---------------------------
+    protected Selector<T> selector = null;
 
-    private GameObject previewedBuilding = null;
-    private bool placingBuilding = false;
-    private GameObject lastSpot;
+    private Unit previewedUnit = null;
+    protected bool structureBuildingMode = false;
+    protected bool gemBuildingMode = false;
+    protected T lastPlace = default(T);
 
-    private int layerMask = 1 << 7;
-
-    void Update()
+    protected Unit PreviewedUnit
     {
-        //place tower after place tower button has been pressed
-        if (placingBuilding)
+        get { return previewedUnit; }
+        set
         {
-            PreviewBuilding();
-            if (Input.GetMouseButtonDown(0))
+            previewedUnit = value;
+            if (value == null)
             {
-                PlaceBuilding();
-            }
-            else if (Input.GetMouseButton(1))
-            {
-                ExitBuildingMode();
+                structureBuildingMode = false;
+                gemBuildingMode = false;
+                lastPlace = default(T);
             }
         }
     }
 
-    public void AddTower()
+    public void Awake()
     {
-        //check if tower can be placed on some buildingSpot
-        if (Global.buildingSpots.FindAll(buildingSpot => buildingSpot.GetComponent<BuildingManager>().CanPlaceBuilding).Count == 0)
-        {
-            return;
-        }
-        previewedBuilding = tower;
-        placingBuilding = true;
+        selector = new Selector<T>();
     }
 
-    private void PreviewBuilding()
-    {
-        //check if user clicked on spot
-        if (getBuildingSpot() != null)
-        {
-            GameObject previewedSpot = getBuildingSpot();
+    protected abstract void PreviewUnit();
+    protected abstract void AddUnit(T place);
+    protected abstract void DeleteUnit(GameObject place, GameObject unit);
 
-            //check if spot is empty
-            if (previewedSpot.GetComponent<BuildingManager>().CanPlaceBuilding)
-            {
-                if (previewedSpot != lastSpot)
-                {
-                    //place preview
-                    previewedSpot.GetComponent<BuildingManager>().InsertBuilding(previewedBuilding.GetComponent<Building>().previewBuilding);
-                    previewedSpot.GetComponent<BuildingManager>().IsPreviewed = true;
-
-                    //delete preview from last spot
-                    if (lastSpot != null)
-                    {
-                        lastSpot.GetComponent<BuildingManager>().DeleteBuilding(lastSpot.GetComponent<BuildingManager>().GetPlacedBuilding);
-                        lastSpot.GetComponent<BuildingManager>().IsPreviewed = false;
-
-                    }
-                    lastSpot = previewedSpot;
-                }
-            }
-        }
-    }
-
-    private void PlaceBuilding()
-    {
-        if (lastSpot == null)
-        {
-            return;
-        }
-        //delete preview building
-        lastSpot.GetComponent<BuildingManager>().IsPreviewed = false;
-        lastSpot.GetComponent<BuildingManager>().DeleteBuilding(lastSpot.GetComponent<BuildingManager>().GetPlacedBuilding);
-        //place building
-
-        lastSpot.GetComponent<BuildingManager>().InsertBuilding(previewedBuilding);
-        lastSpot.transform.tag = "BuildingSpot";
-        placingBuilding = false;
-        previewedBuilding = null;
-        lastSpot = null;
-    }
-
-    private void ExitBuildingMode()
-    {
-        placingBuilding = false;
-        previewedBuilding = null;
-        if (lastSpot != null)
-        {
-            lastSpot.GetComponent<BuildingManager>().DeleteBuilding(lastSpot.GetComponent<BuildingManager>().GetPlacedBuilding);
-            lastSpot.GetComponent<BuildingManager>().IsPreviewed = false;
-        }
-    }
-    public GameObject getBuildingSpot()
-    {
-        //get buildingSpot on mouse click
-        RaycastHit hitInfo = new RaycastHit();
-        bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, float.PositiveInfinity, layerMask);
-        if (hit)
-        {
-            if (hitInfo.transform.gameObject.tag == "EmptyBuildingSpot")
-            {
-                return hitInfo.transform.gameObject;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        return null;
-    }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class OrtographicZoomStrategy : IZoomStrategy
 {
-
-
     public OrtographicZoomStrategy(Camera cam, float startingZoom)
     {
         cam.orthographicSize = startingZoom;
