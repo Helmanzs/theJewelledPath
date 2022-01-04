@@ -220,7 +220,6 @@ GameObject:
   - component: {fileID: 5116977755898145423}
   - component: {fileID: 5116977755898145411}
   - component: {fileID: 5116977755898145420}
-  - component: {fileID: 5116977755898145422}
   - component: {fileID: 5116977755898145421}
   m_Layer: 5
   m_Name: SpellButton
@@ -288,21 +287,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5116977755898145422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5116977755898145416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ec4af392c5383428142ea95b7794f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageCooldown: {fileID: 5116977754847867046}
-  textCooldown: {fileID: 5116977754636153495}
-  cooldownTime: 10
 --- !u!114 &5116977755898145421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,16 +330,4 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5116977755898145420}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5116977755898145422}
-        m_TargetAssemblyTypeName: SpellCooldown, Assembly-CSharp
-        m_MethodName: UseSpell
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []

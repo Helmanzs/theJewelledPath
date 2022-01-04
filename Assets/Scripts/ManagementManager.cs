@@ -7,10 +7,6 @@ public class ManagementManager : SceneSingleton<ManagementManager>
     public StructureBuildingManagement<TileChecker> structureBuildingManagement = new StructureBuildingManagement<TileChecker>();
     public GemManagement<Transform> gemManagement = new GemManagement<Transform>();
 
-    private void Start()
-    {
-
-    }
     private void Awake()
     {
         structureBuildingManagement.Awake();
