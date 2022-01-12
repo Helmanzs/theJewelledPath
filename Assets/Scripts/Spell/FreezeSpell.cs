@@ -14,18 +14,18 @@ public class FreezeSpell : SpellCooldown
         PutOnCooldown();
         Global.enemies.ForEach(enemy => StartCoroutine("SlowEnemy", enemy));
     }
-    public IEnumerator SlowEnemy(GameObject enemy)
+    public IEnumerator SlowEnemy(Enemy enemy)
     {
         float tempSpeed = 0;
         if (enemy != null)
         {
-            tempSpeed = enemy.GetComponent<Enemy>().Speed;
-            enemy.GetComponent<Enemy>().Speed -= slowAmount;
+            tempSpeed = enemy.Speed;
+            enemy.Speed -= slowAmount;
         }
         yield return new WaitForSeconds(5f);
         if (enemy != null)
         {
-            enemy.GetComponent<Enemy>().Speed = tempSpeed;
+            enemy.Speed = tempSpeed;
         }
     }
 

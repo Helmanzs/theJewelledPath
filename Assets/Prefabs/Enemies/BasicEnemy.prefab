@@ -108,12 +108,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1749047176522300049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8327b4fb1a99e5459e1c92fa3d16de4, type: 3}
+  m_Script: {fileID: 11500000, guid: d53f91a53ab59744ea4eaef31b951adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 20
-  dmg: 20
-  speed: 10
 --- !u!195 &1316227121825899294
 NavMeshAgent:
   m_ObjectHideFlags: 0

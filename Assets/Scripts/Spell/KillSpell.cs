@@ -13,8 +13,8 @@ public class KillSpell : SpellCooldown
         PutOnCooldown();
         for (int i = Global.enemies.Count - 1; i >= 0; i--)
         {
-            GameObject enemy = Global.enemies[i];
-            enemy.GetComponent<Enemy>().Kill();
+            Enemy enemy = Global.enemies[i];
+            enemy.Kill();
         }
     }
 

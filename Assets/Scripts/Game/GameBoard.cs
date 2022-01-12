@@ -17,10 +17,6 @@ public class GameBoard : MonoBehaviour
     private float gameTileWidth = 0;
     private float gameTileHeight = 0;
 
-
-
-    //TODO: odebrat collider u enemáků, nastavit delay spawnu
-
     void Awake()
     {
         //init grid

@@ -2,5 +2,5 @@ using UnityEngine;
 
 public abstract class Effect : MonoBehaviour
 {
-    public abstract void Use(GameObject target);
+    public abstract void Use(Unit target);
 }

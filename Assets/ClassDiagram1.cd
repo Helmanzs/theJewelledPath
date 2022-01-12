@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ActiveEffect" Collapsed="true">
+    <Position X="23.25" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Effect\ActiveEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Effect" Collapsed="true">
+    <Position X="25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Effect\Effect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IceEffect" Collapsed="true">
+    <Position X="25" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Effect\IceEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PassiveEffect" Collapsed="true">
+    <Position X="26.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Effect\PassiveEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameBoard" Collapsed="true">
+    <Position X="38" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAACASIBACAAgkAAAAAAhAAAAAAAAgAAgAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Game\GameBoard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WaveManager" Collapsed="true">
+    <Position X="32.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAATAAAAAAAAAAAAAAAAAAAAAgACAAAAABAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\WaveManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Global" Collapsed="true">
+    <Position X="34.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAACCAAAAAAAAABAAAAIABAACA=</HashCode>
+      <FileName>Assets\Scripts\Global.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObjectCache" Collapsed="true">
+    <Position X="31" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABEAAAABAAACAAAAAAAQAAAEABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Misc\GameObjectCache.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameSingleton&lt;T&gt;" Collapsed="true">
+    <Position X="19.25" Y="12" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Misc\GameSingleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OakMonoBehaviour" Collapsed="true">
+    <Position X="18.75" Y="9.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Misc\OakMonoBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneSingleton&lt;T&gt;" Collapsed="true">
+    <Position X="19.25" Y="11" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAFAAAAAAAAAAAgAAAAAAAAAAAAAAAAQAAAAgAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Misc\SceneSingleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Singleton&lt;T&gt;" Collapsed="true">
+    <Position X="38" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Misc\Singleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FreezeSpell" Collapsed="true">
+    <Position X="29.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAICAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Spell\FreezeSpell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KillSpell" Collapsed="true">
+    <Position X="27.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Spell\KillSpell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellCooldown" Collapsed="true">
+    <Position X="28.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAIAgiAAACAgAAAAAACAAAAAAIAAAAAAAgAIAAA=</HashCode>
+      <FileName>Assets\Scripts\Spell\SpellCooldown.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ButtonReactions" Collapsed="true">
+    <Position X="31" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\ButtonReactions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CameraController" Collapsed="true">
+    <Position X="32.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACBAFAAAIAQAKJAAAAJAggABBAAABYAAAkAAAAKEA=</HashCode>
+      <FileName>Assets\Scripts\UI\Camera Control\CameraController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputManager" Collapsed="true">
+    <Position X="18.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Camera Control\Input\InputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeyboardInputManager" Collapsed="true">
+    <Position X="17.75" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAABAAgAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Camera Control\Input\KeyboardInputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MouseInputManager" Collapsed="true">
+    <Position X="19.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAACAAAAAgAQAABAAhAAAAAAQABgAAEA=</HashCode>
+      <FileName>Assets\Scripts\UI\Camera Control\Input\MouseInputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OrtographicZoomStrategy" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Camera Control\Zoom\OrtographicZoomStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PerspectiveZoomStrategy" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="34.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAIAAAAAEAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Camera Control\Zoom\PerspectiveZoomStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainMenu" Collapsed="true">
+    <Position X="36.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManaManagement" Collapsed="true">
+    <Position X="38" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Scripts\UI\ManaManagement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildingManagement&lt;T&gt;" Collapsed="true">
+    <Position X="23.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAgAgAAABIAAAAAAACQQAAAAAQAQAAkAAAEI=</HashCode>
+      <FileName>Assets\Scripts\Units\Building\BuildingManagement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GemBuilding" Collapsed="true">
+    <Position X="17.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAASIAhAgiQAIUAAAVCAAAAAgAgMAAoBAAAAAAEg=</HashCode>
+      <FileName>Assets\Scripts\Units\Building\GemBuilding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GemBuildingTrigger" Collapsed="true">
+    <Position X="32.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAIAAQAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Units\Building\GemBuildingTrigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Structure" Collapsed="true">
+    <Position X="16.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Building\Structure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StructureBuildingManagement&lt;T&gt;" Collapsed="true">
+    <Position X="22.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAACAABAAAAAAAAAQQAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Building\StructureBuildingManagement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Amplifier" Collapsed="true">
+    <Position X="14.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAgAAAAEAAARAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Building\Structures\Amplifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pylon" Collapsed="true">
+    <Position X="15.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Building\Structures\Pylon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tower" Collapsed="true">
+    <Position X="16.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAACQCAAAgAAAAEAAARAAAAAAAAAAAAEAAAAAAAEE=</HashCode>
+      <FileName>Assets\Scripts\Units\Building\Structures\Tower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Trap" Collapsed="true">
+    <Position X="18.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAgAAAAEAAARAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Building\Structures\Trap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicEnemy" Collapsed="true">
+    <Position X="20" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Units\Enemy\BasicEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy" Collapsed="true">
+    <Position X="20" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAACAAEAAgAAEAAAAAAABQEAAAQAAAABAQAAAAUA=</HashCode>
+      <FileName>Assets\Scripts\Units\Enemy\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyController" Collapsed="true">
+    <Position X="36.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Enemy\EnemyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawLine" Collapsed="true">
+    <Position X="34.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAIAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Gem\DrawLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gem" Collapsed="true">
+    <Position X="21.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACCACIACgAiAAEAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Gem\Gem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GemManagement&lt;T&gt;" Collapsed="true">
+    <Position X="24.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAgAAAAAABAAAAAAAAAQQAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Gem\GemManagement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WaterGem" Collapsed="true">
+    <Position X="21.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Units\Gem\WaterGem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManagementManager" Collapsed="true">
+    <Position X="20.25" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAEAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Units\ManagementManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Selector&lt;T&gt;" Collapsed="true">
+    <Position X="36.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Selector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EndTile" Collapsed="true">
+    <Position X="26" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Tile\EndTile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PathManagement" Collapsed="true">
+    <Position X="32.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Tile\PathManagement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileChecker" Collapsed="true">
+    <Position X="31" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Tile\TileChecker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unit" Collapsed="true">
+    <Position X="20.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Unit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnitPreview" Collapsed="true">
+    <Position X="23.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAACAAAAAAAAAAEAAAAAAAAACAAAAEAAAAgAA=</HashCode>
+      <FileName>Assets\Scripts\Units\UnitPreview.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="IZoomStrategy" Collapsed="true">
+    <Position X="31" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Camera Control\Zoom\IZoomStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

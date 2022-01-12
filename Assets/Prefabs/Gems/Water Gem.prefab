@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: -518315903388832262}
   m_Layer: 0
   m_Name: Water Gem
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d73f557ca58c374cbdbd8c10b617b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  previewUnit: {fileID: 8128108436108995011, guid: 44f7fa91c24dea344bceb8bf1303fbb3, type: 3}
 --- !u!114 &-8992393856245148793
 MonoBehaviour:
   m_ObjectHideFlags: 0

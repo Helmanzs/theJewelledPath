@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class IceEffect : Effect
+public class IceEffect : ActiveEffect
 {
-    public override void Use(GameObject target)
+    public override void Use(Unit target)
     {
         target.GetComponent<Enemy>().Speed = 0;
     }

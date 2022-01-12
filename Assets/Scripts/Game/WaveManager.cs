@@ -6,16 +6,16 @@ using UnityEngine.AI;
 
 public class WaveManager : MonoBehaviour
 {
-    public GameObject basicEnemy;
-    public GameObject waveInfoHolder;
+    [Header("Enemies")]
+    public BasicEnemy basicEnemy;
 
-    public GameObject waveInfo;
     private bool ready = true;
     private float nextTimeCall;
+    private Transform ENEMIES;
 
-    // Update is called once per frame
     private void Start()
     {
+        ENEMIES = GameObject.Find("ENEMIES").transform;
         nextTimeCall = Time.time + .1f;
     }
 
@@ -27,35 +27,21 @@ public class WaveManager : MonoBehaviour
         }
         if (Time.time >= nextTimeCall)
         {
-            MoveWaves();
             nextTimeCall += .1f;
         }
 
     }
-    void MoveWaves()
-    {
-        /*foreach (Transform waveInfo in waveInfoHolder.transform)
-        {
-            waveInfo.localPosition += new Vector3(0, 5f, 0);
 
-            if (waveInfo.localPosition.y >= (waveInfoHolder.transform.localPosition + new Vector3(0f, 220f, 0f)).y)
-            {
-                Destroy(waveInfo.gameObject);
-            }
-        }*/
-
-        //GameObject wave = Instantiate(waveInfo, -waveInfoHolder.transform.position, Quaternion.identity) as GameObject;
-
-    }
-    IEnumerator SpawnEnemies(int number, GameObject type)
+    IEnumerator SpawnEnemies(int number, Enemy type)
     {
         ready = false;
         for (int i = 0; i < number; i++)
         {
-            float delay = type.GetComponent<Enemy>().Speed / 100f;
-            yield return new WaitForSeconds(delay);
-            GameObject enemy = Instantiate(type, new Vector3(Global.spawnTile.transform.position.x, 1, Global.spawnTile.transform.position.z), Quaternion.identity);
+            Enemy enemy = Instantiate(type, new Vector3(Global.spawnTile.transform.position.x, 1, Global.spawnTile.transform.position.z), Quaternion.identity);
+            float delay = enemy.Speed / 10f;
             Global.enemies.Add(enemy);
+            enemy.transform.SetParent(ENEMIES);
+            yield return new WaitForSeconds(delay);
         }
         yield return new WaitForSeconds(5f);
         ready = true;
