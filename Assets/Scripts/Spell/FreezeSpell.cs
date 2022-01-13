@@ -12,7 +12,7 @@ public class FreezeSpell : SpellCooldown
             return;
         }
         PutOnCooldown();
-        Global.enemies.ForEach(enemy => StartCoroutine("SlowEnemy", enemy));
+        Global.Instance.enemies.ForEach(enemy => StartCoroutine("SlowEnemy", enemy));
     }
     public IEnumerator SlowEnemy(Enemy enemy)
     {

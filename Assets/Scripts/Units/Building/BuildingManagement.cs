@@ -10,9 +10,9 @@ public abstract class BuildingManagement<T>
 
     private Unit unit = null;
     private Unit unitPreview = null;
-    protected bool structureBuildingMode = false;
-    protected bool gemBuildingMode = false;
+    protected bool buildingMode = false;
     protected T lastPlace = default(T);
+
 
     protected Unit Unit
     {
@@ -20,13 +20,6 @@ public abstract class BuildingManagement<T>
         set
         {
             unit = value;
-            if (unit == null)
-            {
-                structureBuildingMode = false;
-                gemBuildingMode = false;
-                lastPlace = default(T);
-                UnitPreview = null;
-            }
         }
     }
 
@@ -37,6 +30,26 @@ public abstract class BuildingManagement<T>
         selector = new Selector<T>();
     }
 
+    public void Update()
+    {
+        if (buildingMode)
+        {
+            PreviewUnit();
+            if (Input.GetMouseButton(0))
+            {
+                AddUnit(lastPlace);
+            }
+            else if (Input.GetMouseButton(1))
+            {
+                if (lastPlace != null)
+                {
+                    DeleteShowcasedUnit();
+                    buildingMode = false;
+                }
+            }
+        }
+    }
+
     protected abstract void PreviewUnit();
     protected abstract void AddUnit(T place);
     protected abstract void DeleteUnit(T place, T unit);
@@ -45,10 +58,10 @@ public abstract class BuildingManagement<T>
 
     protected void DeleteShowcasedUnit()
     {
-
         GameObject.Destroy(UnitPreview.gameObject);
         GameObject.Destroy(Unit.gameObject);
         Unit = null;
+
     }
 
 }

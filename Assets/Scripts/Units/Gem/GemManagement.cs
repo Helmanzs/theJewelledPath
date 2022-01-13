@@ -5,42 +5,24 @@ using UnityEngine.UI;
 
 public class GemManagement<T> : BuildingManagement<T> where T : Component
 {
-    public void Update()
-    {
-        if (gemBuildingMode)
-        {
-            PreviewUnit();
-            if (Input.GetMouseButton(0))
-            {
-                AddUnit(lastPlace);
-            }
-            else if (Input.GetMouseButton(1))
-            {
-                if (lastPlace != null)
-                {
-                    DeleteShowcasedUnit();
-                }
-            }
-        }
-    }
-
     public void AddGem(Gem gem)
     {
-        Unit = GameObject.Instantiate(gem, new Vector3(0, 0, 0), Quaternion.identity);
-        Unit.gameObject.SetActive(false);
-        UnitPreview = GameObject.Instantiate(((Gem)Unit).previewUnit, new Vector3(0, 0, 0), Quaternion.identity);
-        UnitPreview.gameObject.SetActive(false);
-        gemBuildingMode = true;
+        if (Global.Instance.Mana - (int)gem.cost >= 0 && Global.Instance.gemBuildings.Count != 0)
+        {
+            if (Unit != null)
+            {
+                DeleteShowcasedUnit();
+            }
+            Unit = GameObject.Instantiate(gem, new Vector3(0, 0, 0), Quaternion.identity);
+            Unit.gameObject.SetActive(false);
+            UnitPreview = GameObject.Instantiate(((Gem)Unit).previewUnit, new Vector3(0, 0, 0), Quaternion.identity);
+            UnitPreview.gameObject.SetActive(false);
+            buildingMode = true;
+        }
     }
 
     protected override void PreviewUnit()
     {
-        if (Global.buildings.FindAll(building => building.GetComponent<GemBuilding>()).Count == 0)
-        {
-            Unit = null;
-            return;
-        }
-
         if (selector.GetObject(1 << 8, "EmptyTower") != null)
         {
             T previewedSpot = selector.GetObject(1 << 8, "EmptyTower");
@@ -51,26 +33,29 @@ public class GemManagement<T> : BuildingManagement<T> where T : Component
                 ShowcaseUnit(spot as T);
                 lastPlace = previewedSpot;
             }
-
         }
     }
 
     protected override void AddUnit(T place)
     {
-        GemBuilding structure = place as GemBuilding;
-        if (structure.ShowcasedGem == null)
+        if (place != default(T))
         {
-            Unit.gameObject.SetActive(true);
+            GemBuilding structure = place as GemBuilding;
+            Gem gem = Unit as Gem;
+            if (structure.ShowcasedGem == null)
+            {
+                Unit.gameObject.SetActive(true);
+            }
+            structure.InsertGem(gem);
+            Global.Instance.Mana -= (int)gem.cost;
+            Unit.transform.SetParent(structure.transform);
+            Unit = null;
+            GameObject.Destroy(UnitPreview.gameObject);
+            buildingMode = false;
         }
-        structure.InsertGem(Unit as Gem);
-        Unit.transform.SetParent(structure.transform);
-        GameObject.Destroy(UnitPreview.gameObject);
-        Unit = null;
-
     }
     protected override void DeleteUnit(T place, T unit)
     {
-
     }
 
     protected override void ShowcaseUnit(T place)
@@ -80,9 +65,4 @@ public class GemManagement<T> : BuildingManagement<T> where T : Component
         UnitPreview.transform.SetParent(spot.transform);
         UnitPreview.transform.localPosition = new Vector3(0, 0, 0);
     }
-
-
-
-
-
 }

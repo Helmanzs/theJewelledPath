@@ -1,9 +1,6 @@
 using UnityEngine;
 
-public class PassiveEffect : Effect
+public abstract class PassiveEffect : Effect
 {
-    public override void Use(Unit target)
-    {
-        throw new System.NotImplementedException();
-    }
+    public abstract override void Use(Enemy target);
 }

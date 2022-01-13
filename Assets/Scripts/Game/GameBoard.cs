@@ -8,6 +8,7 @@ public class GameBoard : MonoBehaviour
     public GameObject buildingSpot;
     public GameObject pathBuildingSpot;
     public GameObject endSpot;
+    public SpawnTile spawnSpot;
     public GameObject paths;
     public GameObject spots;
 
@@ -38,7 +39,7 @@ public class GameBoard : MonoBehaviour
 
     void Start()
     {
-
+        Time.timeScale = 1f;
         //create path blocks
         CreateTestPath();
 
@@ -56,14 +57,14 @@ public class GameBoard : MonoBehaviour
             {
                 if (i == 2 && j == 0)
                 {
-                    GameObject spawnTile = GeneratePathTile(i, j);
-                    Global.spawnTile = spawnTile;
-                    grid[i, j] = spawnTile;
+                    SpawnTile spawnTile = CreateSpawnTile(i, j);
+                    Global.Instance.spawnTile = spawnTile;
+                    grid[i, j] = spawnTile.gameObject;
                 }
                 if (i == 29 && j == 0)
                 {
                     GameObject endTile = CreateEndTile(i, j);
-                    Global.endTile = endTile;
+                    Global.Instance.endTile = endTile;
                     grid[i, j] = endTile;
                 }
                 if ((i == 2 && j <= 29) || (i == 29 && j <= 29))
@@ -95,6 +96,16 @@ public class GameBoard : MonoBehaviour
 
         return endTile;
     }
+
+    private SpawnTile CreateSpawnTile(int i, int j)
+    {
+        SpawnTile spawnTile = Instantiate(spawnSpot, new Vector3(i * gameTileWidth + gameTileWidth / 2, 0.51f, j * gameTileHeight + gameTileHeight / 2), Quaternion.identity);
+        spawnTile.transform.localScale = new Vector3(gameTileWidth / 10, 0.01f, gameTileHeight / 10);
+        spawnTile.transform.SetParent(paths.transform);
+
+        return spawnTile;
+
+    }
     private void GenerateGrid()
     {
         GameObject spot;
@@ -107,20 +118,22 @@ public class GameBoard : MonoBehaviour
                 {
                     spot = Instantiate(buildingSpot, new Vector3(i * gameTileWidth + gameTileWidth / 2, 1, j * gameTileHeight + gameTileHeight / 2), Quaternion.identity);
                     spot.transform.localScale = new Vector3(gameTileWidth / 10, 0.01f, gameTileHeight / 10);
-                    Global.buildingSpots.Add(spot);
+                    Global.Instance.buildingSpots.Add(spot);
 
                     spot.transform.SetParent(spots.transform);
                 }
             }
         }
         int count = 0;
-        foreach (GameObject tile in Global.buildingSpots)
+        foreach (GameObject tile in Global.Instance.buildingSpots)
         {
+
             if (tile.tag == "EmptyBuildingSpot")
             {
                 tile.name = $"BuildingSpot-{count}";
             }
             count++;
+
         }
     }
 }

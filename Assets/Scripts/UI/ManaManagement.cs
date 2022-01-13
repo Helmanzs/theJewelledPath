@@ -11,12 +11,7 @@ public class ManaManagement : MonoBehaviour
 
     void Update()
     {
-        if (nextTimeCall < Time.time)
-        {
-            nextTimeCall = Time.time + 1;
-            Global.Mana += 100;
-        }
-        mana.text = Global.Mana.ToString();
+        mana.text = Global.Instance.Mana.ToString();
     }
 
 }

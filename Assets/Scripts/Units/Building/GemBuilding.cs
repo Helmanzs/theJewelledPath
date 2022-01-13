@@ -16,7 +16,7 @@ abstract public class GemBuilding : Structure
     private float range = 0;
     private float attackSpeed = 0;
 
-    public Gem ShowcasedGem
+    public virtual Gem ShowcasedGem
     {
         get { return showcasedGem; }
         set { showcasedGem = value; }
@@ -31,12 +31,18 @@ abstract public class GemBuilding : Structure
         get { return range; }
         protected set
         {
-            print(value);
             if (range <= 0)
             {
                 range = value;
             }
-            range = value / 2;
+            if (range > 9)
+            {
+                range = 9;
+            }
+            else
+            {
+                range = value / 2;
+            }
             UpdateCollider(range);
         }
     }

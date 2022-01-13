@@ -16,18 +16,6 @@ public class Tower : GemBuilding
         sphereCollider = GetComponentInChildren<SphereCollider>();
     }
 
-    protected override void DealDamage()
-    {
-        if (nextTimeCall < Time.time)
-        {
-            nextTimeCall = Time.time + (2 / (1 + (AttackSpeed / 100)));
-            UseGemEffect(_primaryTarget, showcasedGem);
-            _primaryTarget.ApplyDamage(Damage);
-            DrawLine();
-        }
-
-    }
-
     private void Update()
     {
         if (_primaryTarget != null && lineRendererComponent != null && drawLineComponent != null && gems.Any())
@@ -40,15 +28,37 @@ public class Tower : GemBuilding
         }
     }
 
+    public override Gem ShowcasedGem
+    {
+        get { return showcasedGem; }
+        set
+        {
+            showcasedGem = value;
+            drawLineComponent.ColorBeam();
+        }
+    }
+    protected override void DealDamage()
+    {
+        if (showcasedGem != null)
+        {
+            if (nextTimeCall < Time.time)
+            {
+                nextTimeCall = Time.time + (2 / (1 + (AttackSpeed / 100)));
+                UseGemEffect(_primaryTarget, showcasedGem);
+                _primaryTarget.ApplyDamage(Damage);
+                DrawLine();
+            }
+        }
+    }
 
     public override void InsertGem(Gem gem)
     {
         this.Damage += gem.Damage;
         this.Range += gem.Range;
         this.AttackSpeed += gem.AttackSpeed;
-        if (showcasedGem == null)
+        if (ShowcasedGem == null)
         {
-            this.showcasedGem = gem;
+            this.ShowcasedGem = gem;
         }
         gems.Add(gem);
     }
@@ -79,6 +89,6 @@ public class Tower : GemBuilding
 
     protected override void UseGemEffect(Enemy target, Gem gem)
     {
-        // gem.Effect.Use(target);
+        gem.Effect.Use(target);
     }
 }

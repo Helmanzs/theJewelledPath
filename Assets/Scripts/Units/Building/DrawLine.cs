@@ -4,26 +4,33 @@ using UnityEngine;
 
 public class DrawLine : MonoBehaviour
 {
-    private Structure parent;
     private LineRenderer lineRenderer;
+    private Color mainColor;
+    private Color darkerColor;
 
     private void Start()
     {
-        parent = GetComponentInParent<Structure>();
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.startWidth = 0.5f;
-        lineRenderer.endWidth = 0.1f;
     }
 
     public void MakeLine(Vector3 pos1, Vector3 pos2)
     {
-        lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, pos1);
         lineRenderer.SetPosition(1, pos2);
     }
 
-    private void ColorBeam()
+    public void ColorBeam()
     {
-        //   lineRenderer.SetColors(null, null);
+        mainColor = GetComponentInParent<GemBuilding>().ShowcasedGem.Color;
+        darkerColor = new Color(mainColor.r * 0.1f, mainColor.g * 0.1f, mainColor.b * 0.1f);
+
+        float alpha = 1.0f;
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[] { new GradientColorKey(mainColor, 0.0f), new GradientColorKey(darkerColor, 1.0f) },
+            new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
+        );
+        lineRenderer.colorGradient = gradient;
+
     }
 }

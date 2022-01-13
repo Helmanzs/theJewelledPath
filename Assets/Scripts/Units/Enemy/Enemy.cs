@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public abstract class Enemy : Unit
 {
     [SerializeField] private Image enemySprite;
+    private NavMeshAgent agent;
     private float hp = 0;
     private float damage = 0;
     private float speed = 0;
@@ -18,7 +19,7 @@ public abstract class Enemy : Unit
         set
         {
             speed = (value < 0) ? 0 : value;
-            GetComponent<NavMeshAgent>().speed = speed;
+            agent.speed = speed;
         }
     }
 
@@ -39,6 +40,7 @@ public abstract class Enemy : Unit
             hp = value;
             if (hp <= 0)
             {
+                this.gameObject.SetActive(false);
                 Kill();
             }
         }
@@ -55,9 +57,15 @@ public abstract class Enemy : Unit
 
     public Image EnemySprite { get => enemySprite; private set => enemySprite = value; }
 
-    private void Awake()
+    protected virtual void Start()
     {
-        GetComponent<NavMeshAgent>().speed = speed;
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    protected virtual void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+
     }
 
     public void ApplyDamage(float damage)
@@ -66,9 +74,9 @@ public abstract class Enemy : Unit
     }
     public void Kill()
     {
-        Global.enemies.Remove(this);
-        Global.Mana += (int)Reward;
         Destroy(transform.gameObject);
+        Global.Instance.enemies.Remove(this);
+        Global.Instance.Mana += (int)Reward;
     }
 
     public override string ToString()

@@ -11,9 +11,9 @@ public class KillSpell : SpellCooldown
             return;
         }
         PutOnCooldown();
-        for (int i = Global.enemies.Count - 1; i >= 0; i--)
+        for (int i = Global.Instance.enemies.Count - 1; i >= 0; i--)
         {
-            Enemy enemy = Global.enemies[i];
+            Enemy enemy = Global.Instance.enemies[i];
             enemy.Kill();
         }
     }

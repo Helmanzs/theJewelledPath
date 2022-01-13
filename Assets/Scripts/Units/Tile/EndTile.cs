@@ -9,8 +9,9 @@ public class EndTile : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
+            Global.Instance.enemies.Remove(other.gameObject.GetComponent<Enemy>());
             Destroy(other.gameObject);
-            Global.Mana -= 1000;
+            Global.Instance.Mana -= 1000;
 
         }
     }
