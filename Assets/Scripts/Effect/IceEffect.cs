@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class IceEffect : ActiveEffect
 {
-    public override void Use(Enemy target)
+    public override void Use(Enemy target, float value)
     {
-        target.Speed -= 100;
+        target.Speed = target.DefaultSpeed * value;
     }
 }

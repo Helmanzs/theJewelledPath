@@ -8,10 +8,10 @@ public abstract class Enemy : Unit
 {
     [SerializeField] private Image enemySprite;
     private NavMeshAgent agent;
-    private float hp = 0;
-    private float damage = 0;
-    private float speed = 0;
-    private float reward = 0;
+    private float hp = 50;
+    private float damage = 100;
+    private float speed = 10;
+    private float reward = 500;
 
     public float Speed
     {
@@ -22,6 +22,8 @@ public abstract class Enemy : Unit
             agent.speed = speed;
         }
     }
+
+    public float DefaultSpeed { get; private set; } = 10;
 
     public float Reward
     {
@@ -55,7 +57,7 @@ public abstract class Enemy : Unit
         }
     }
 
-    public Image EnemySprite { get => enemySprite; private set => enemySprite = value; }
+    public Image EnemySprite { get => enemySprite; protected set => enemySprite = value; }
 
     protected virtual void Start()
     {
@@ -81,6 +83,6 @@ public abstract class Enemy : Unit
 
     public override string ToString()
     {
-        return $"Damage: {Damage}, HP: {HP}, Speed: {Speed}, Reward: {Reward}";
+        return $"Damage: {Damage}, HP: {HP}, Speed: {Speed}, Reward: {Reward}, Type: {this.GetType()}";
     }
 }

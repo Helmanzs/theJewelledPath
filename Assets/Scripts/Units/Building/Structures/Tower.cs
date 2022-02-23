@@ -89,6 +89,6 @@ public class Tower : GemBuilding
 
     protected override void UseGemEffect(Enemy target, Gem gem)
     {
-        gem.Effect.Use(target);
+        gem.Effect.Use(target, 0.6f);
     }
 }

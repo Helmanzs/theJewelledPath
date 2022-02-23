@@ -14,10 +14,6 @@ public class Amplifier : GemBuilding
         throw new System.NotImplementedException();
     }
 
-    protected override void RemoveGem(GameObject gem)
-    {
-        throw new System.NotImplementedException();
-    }
 
     protected override void UpdateCollider(float range)
     {
@@ -28,4 +24,10 @@ public class Amplifier : GemBuilding
     {
         throw new System.NotImplementedException();
     }
+
+    protected override void RemoveGem(GameObject gem)
+    {
+        throw new System.NotImplementedException();
+    }
+
 }

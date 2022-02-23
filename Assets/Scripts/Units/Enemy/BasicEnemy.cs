@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class BasicEnemy : Enemy
 {
+    
     protected override void Start()
     {
         base.Start();
@@ -13,6 +14,7 @@ public class BasicEnemy : Enemy
         Damage = 20;
         Speed = 10;
         Reward = 500;
+        
     }
 
     protected override void Awake()
