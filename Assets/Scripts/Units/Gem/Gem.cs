@@ -25,9 +25,4 @@ abstract public class Gem : Unit
         get { return color; }
         protected set { color = value; }
     }
-
-    public override string ToString()
-    {
-        return $"Damage: {damage}, Range: {range}, Attackspeed: {attackSpeed}";
-    }
 }

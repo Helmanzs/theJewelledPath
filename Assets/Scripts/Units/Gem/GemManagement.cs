@@ -42,7 +42,7 @@ public class GemManagement<T> : BuildingManagement<T> where T : Component
         {
             GemBuilding structure = place as GemBuilding;
             Gem gem = Unit as Gem;
-            if (structure.ShowcasedGem == null)
+            if (structure.Gem == null)
             {
                 Unit.gameObject.SetActive(true);
             }

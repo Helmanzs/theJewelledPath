@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public abstract class Enemy : Unit
+public abstract class Enemy : Unit, ITargetable<Enemy>
 {
     public event Action<float> UnitTakenDamage;
 
@@ -25,7 +25,6 @@ public abstract class Enemy : Unit
             agent.speed = speed;
         }
     }
-
     public float DefaultSpeed { get; private set; } = 10;
 
     public float Reward
@@ -36,7 +35,6 @@ public abstract class Enemy : Unit
             reward = value;
         }
     }
-
     public float HP
     {
         get { return hp; }
@@ -50,7 +48,6 @@ public abstract class Enemy : Unit
             }
         }
     }
-
     public float Damage
     {
         get { return damage; }
@@ -92,5 +89,10 @@ public abstract class Enemy : Unit
     public override string ToString()
     {
         return $"Damage: {Damage}, HP: {HP}, Speed: {Speed}, Reward: {Reward}, Type: {this.GetType()}";
+    }
+
+    public Enemy Interact()
+    {
+        return this;
     }
 }

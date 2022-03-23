@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Wave
+public struct Wave
 {
     public Enemy enemy;
     public int count;

@@ -21,7 +21,7 @@ public class DrawLine : MonoBehaviour
 
     public void ColorBeam()
     {
-        mainColor = GetComponentInParent<GemBuilding>().ShowcasedGem.Color;
+        mainColor = GetComponentInParent<GemBuilding>().Gem.Color;
         darkerColor = new Color(mainColor.r * 0.1f, mainColor.g * 0.1f, mainColor.b * 0.1f);
 
         float alpha = 1.0f;
