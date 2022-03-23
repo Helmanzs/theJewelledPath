@@ -44,18 +44,18 @@ public class Tower : GemBuilding
             if (nextTimeCall < Time.time)
             {
                 nextTimeCall = Time.time + (2 / (1 + (AttackSpeed / 100)));
+                DrawLine();
                 UseGemEffect(_primaryTarget, showcasedGem);
                 _primaryTarget.ApplyDamage(Damage);
-                DrawLine();
             }
         }
     }
 
     public override void InsertGem(Gem gem)
     {
-        this.Damage += gem.Damage;
-        this.Range += gem.Range;
-        this.AttackSpeed += gem.AttackSpeed;
+        this.Damage += gem.damage;
+        this.Range += gem.range;
+        this.AttackSpeed += gem.attackSpeed;
         if (ShowcasedGem == null)
         {
             this.ShowcasedGem = gem;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 
 public abstract class Enemy : Unit
 {
+    public event Action<float> UnitTakenDamage;
+
     [SerializeField] private Image enemySprite;
     private NavMeshAgent agent;
     private float hp = 50;
@@ -37,7 +40,7 @@ public abstract class Enemy : Unit
     public float HP
     {
         get { return hp; }
-        protected set
+        set
         {
             hp = value;
             if (hp <= 0)
@@ -70,8 +73,13 @@ public abstract class Enemy : Unit
 
     }
 
+    public void OnMouseDown()
+    {
+        CameraController.Instance.followTransform = transform;
+    }
     public void ApplyDamage(float damage)
     {
+        UnitTakenDamage?.Invoke(damage);
         HP -= damage;
     }
     public void Kill()

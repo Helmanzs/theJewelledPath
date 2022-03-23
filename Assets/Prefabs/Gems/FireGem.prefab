@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 1123825581617589475}
   - component: {fileID: 5173636763707828587}
   - component: {fileID: 8317450175704340839}
-  - component: {fileID: -202435357860293363}
   - component: {fileID: 886906379}
   - component: {fileID: -7116638297395275066}
   - component: {fileID: -518315903388832262}
   - component: {fileID: 7002962873475337122}
+  - component: {fileID: 6860377057528986054}
   m_Layer: 0
   m_Name: FireGem
   m_TagString: Untagged
@@ -86,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-202435357860293363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5337075560078372031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d73f557ca58c374cbdbd8c10b617b5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  previewUnit: {fileID: 8128108436108995011, guid: 03dee9c6be9711a4b833e3dd39463bd6, type: 3}
-  cost: 50
 --- !u!95 &886906379
 Animator:
   serializedVersion: 3
@@ -4903,3 +4889,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5091ca6986315b445ac881d0870dd84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6860377057528986054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337075560078372031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d093600580e9eb047b27e001f34eb2b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previewUnit: {fileID: 8128108436108995011, guid: 03dee9c6be9711a4b833e3dd39463bd6, type: 3}
+  damage: 10
+  range: 10
+  attackSpeed: 100
+  cost: 50

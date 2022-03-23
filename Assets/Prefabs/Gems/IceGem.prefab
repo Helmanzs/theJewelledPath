@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   previewUnit: {fileID: 8128108436108995011, guid: 44f7fa91c24dea344bceb8bf1303fbb3, type: 3}
+  damage: 10
+  range: 10
+  attackSpeed: 100
   cost: 50
 --- !u!95 &886906379
 Animator:

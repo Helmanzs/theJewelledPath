@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceGem : Gem
+public class FireGem : Gem
 {
     void Awake()
     {
-        Damage = 10;
-        Range = 10;
-        AttackSpeed = 100;
+        damage = 10;
+        range = 10;
+        attackSpeed = 100;
         Color = transform.GetComponent<Renderer>().material.color;
         Effect = GetComponent<Effect>();
     }

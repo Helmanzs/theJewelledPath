@@ -5,7 +5,7 @@
 //  <author>Pavel Fadrhonc</author>
 //  <email>pavel.fadrhonc@xinity.com</email>
 //  <date>8.7.2013</date>
-//  <summary>Base class for any singleton that want to be physically present in scene (i.e. for easier debugging and tweaking) 
+//  <summary>Base class for any singleton that wants to be physically present in scene (i.e. for easier debugging and tweaking) 
 // 		 it has drawback of being MonoBehaviour which brings a lot of overhead. Does not persist through scene load. Use
 //      GameSingleton for that purpose. </summary>
 
@@ -14,46 +14,46 @@ using UnityEngine;
 
 public class SceneSingleton<T> : OakMonoBehaviour where T : OakMonoBehaviour
 {
-   protected static T _instance;
-   
-   protected SceneSingleton() { }
+    protected static T _instance;
 
-   private static object _lock = new object();
+    protected SceneSingleton() { }
 
-   //private static bool _applicationIsQuitting = false;
+    private static object _lock = new object();
 
-   //   Returns the instance of this singleton.
-   public static T Instance
-   {
-      get
-      {
-//          if (_applicationIsQuitting)
-//          {
-//              return null;
-//          }
+    //private static bool _applicationIsQuitting = false;
 
-         lock (_lock)
-         {
-             if (_instance == null)
-             {
-                 _instance = (T)FindObjectOfType(typeof(T));
+    //   Returns the instance of this singleton.
+    public static T Instance
+    {
+        get
+        {
+            //          if (_applicationIsQuitting)
+            //          {
+            //              return null;
+            //          }
 
-                 if (_instance == null)
-                 {
-                     var go = new GameObject(typeof(T).Name);
-                     _instance = go.AddComponent<T>();
-                 }
-             }
+            lock (_lock)
+            {
+                if (_instance == null)
+                {
+                    _instance = (T)FindObjectOfType(typeof(T));
 
-             return _instance;   
-         }
-      }
-   }
-   // public static Y GetInstance<Y>() where Y : OakMonoBehaviour { return _instance as Y; }
+                    if (_instance == null)
+                    {
+                        var go = new GameObject(typeof(T).Name);
+                        _instance = go.AddComponent<T>();
+                    }
+                }
+
+                return _instance;
+            }
+        }
+    }
+    // public static Y GetInstance<Y>() where Y : OakMonoBehaviour { return _instance as Y; }
     public new void OnDestroy()
-   {
-       //_applicationIsQuitting = true;
-   }
+    {
+        //_applicationIsQuitting = true;
+    }
     public static bool HasInstance()
     {
         return _instance != null;
