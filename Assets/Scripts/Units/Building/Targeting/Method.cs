@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public abstract class Method : MonoBehaviour
 {
-    public TargetMethod TargetMethod;
     protected Structure structure;
 
     public virtual void InitState(Structure structure)
@@ -12,7 +12,7 @@ public abstract class Method : MonoBehaviour
         this.structure = structure;
     }
 
-    public abstract TargetMethod ChangeState();
+    public abstract TargetMethod ChangeMethod();
 
-    public abstract void Aim();
+    public abstract Enemy Aim(IEnumerable<Enemy> possibleTargets);
 }

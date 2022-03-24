@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MethodLeastHp : Method
 {
-    public override void Aim()
+    public override Enemy Aim(IEnumerable<Enemy> possibleTargets)
     {
-        throw new System.NotImplementedException();
+        Enemy leastHPTarget = possibleTargets.FirstOrDefault();
+        foreach (Enemy target in possibleTargets)
+        {
+            if (target.HP < leastHPTarget.HP)
+                leastHPTarget = target;
+        }
+        return leastHPTarget;
     }
 
-    public override TargetMethod ChangeState()
+    public override TargetMethod ChangeMethod()
     {
-        throw new System.NotImplementedException();
+        return TargetMethod.LeastHP;
     }
 }

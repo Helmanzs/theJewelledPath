@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MethodBoss : Method
 {
-    public override void Aim()
+    public override Enemy Aim(IEnumerable<Enemy> possibleTargets)
     {
         throw new System.NotImplementedException();
     }
-    public override TargetMethod ChangeState()
+
+    public override TargetMethod ChangeMethod()
     {
         throw new System.NotImplementedException();
     }

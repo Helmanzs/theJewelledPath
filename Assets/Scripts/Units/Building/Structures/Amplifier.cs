@@ -58,6 +58,11 @@ public class Amplifier : GemBuilding
         throw new NotImplementedException();
     }
 
+    protected override void DealDamage()
+    {
+        throw new NotImplementedException();
+    }
+
     protected override void RemoveGem(GemHolder gem)
     {
         throw new NotImplementedException();

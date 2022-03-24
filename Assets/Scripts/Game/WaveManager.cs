@@ -34,7 +34,6 @@ public class WaveManager : MonoBehaviour
             countdown -= Time.deltaTime;
         }
         UpdateFields(waves[currentWave]);
-        print(currentWave);
 
         if (currentWave == waves.Length - 1 && Global.Instance.enemies.Count == 0)
         {

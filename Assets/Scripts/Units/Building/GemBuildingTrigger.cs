@@ -13,7 +13,7 @@ public class GemBuildingTrigger : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            //gemBuilding.AddTarget(other.GetComponent<Enemy>());
+            gemBuilding.AddTarget(other.GetComponent<Enemy>());
         }
     }
 
@@ -22,7 +22,7 @@ public class GemBuildingTrigger : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
-            //gemBuilding.RemoveTarget(other.GetComponent<Enemy>());
+            gemBuilding.RemoveTarget(other.GetComponent<Enemy>());
         }
     }
 }

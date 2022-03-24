@@ -9,6 +9,10 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, ITargetable<Tow
     private LineRenderer lineRendererComponent = null;
     private DrawLine drawLineComponent = null;
     private SphereCollider sphereCollider = null;
+    private TargetStateManager targetStateManager = null;
+    private float nextTimeCall;
+
+    public bool TestMethod = false;
 
     public Enemy Target
     {
@@ -22,20 +26,23 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, ITargetable<Tow
 
     protected override void Awake()
     {
-        Gem = new GemHolder();
         lineRendererComponent = GetComponent<LineRenderer>();
         drawLineComponent = GetComponent<DrawLine>();
         sphereCollider = GetComponentInChildren<SphereCollider>();
-        base.Awake();
+        targetStateManager = GetComponent<TargetStateManager>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (Target != null && lineRendererComponent != null && drawLineComponent != null)
+        if (possibleTargets.Count == 0) return;
+        if (TestMethod)
         {
-            DrawLine();
+            targetStateManager.ChangeMethod(TargetMethod.MostHP);
         }
-        else
+        Target = FindTarget(targetStateManager.CurrentMethod);
+        DrawLine();
+        DealDamage();
+        if (Target == null)
         {
             DestroyLine();
         }
@@ -44,14 +51,6 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, ITargetable<Tow
     public override void InsertGem(Gem gem)
     {
         Gem.AddGem(gem);
-        /*this.Damage += gem.damage;
-        this.Range += gem.range;
-        this.AttackSpeed += gem.attackSpeed;
-        if (ShowcasedGem == null)
-        {
-            this.ShowcasedGem = gem;
-        }
-        gems.Add(gem);*/
     }
 
     protected override void UpdateCollider(float range)
@@ -64,33 +63,13 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, ITargetable<Tow
         if (Gem != null)
         {
             lineRendererComponent.enabled = true;
-            //drawLineComponent.MakeLine(Gem.transform.position, Target.transform.position);
+            drawLineComponent.MakeLine(Gem.transform.position, Target.transform.position);
         }
 
     }
     private void DestroyLine()
     {
         lineRendererComponent.enabled = false;
-    }
-
-    /*protected override void UseGemEffect(Enemy target, Gem gem)
-    {
-        gem.Effect.Use(target, 0.6f);
-    }*/
-
-    public ITargetable<Enemy> FindTarget(TargetMethod method)
-    {
-        return null;
-    }
-
-    public void AddTarget(ITargetable<Enemy> target)
-    {
-
-    }
-
-    public void RemoveTarget(ITargetable<Enemy> target)
-    {
-
     }
 
     protected override void RemoveGem(GemHolder gem)
@@ -103,5 +82,17 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, ITargetable<Tow
         return this;
     }
 
+    public Enemy FindTarget(Method method)
+    {
+        return method.Aim(possibleTargets);
+    }
 
+    protected override void DealDamage()
+    {
+        if (nextTimeCall < Time.time)
+        {
+            nextTimeCall = Time.time + (2 / (1 + (Gem.AttackSpeed / 100)));
+            Target.ApplyDamage(Gem.Damage);
+        }
+    }
 }

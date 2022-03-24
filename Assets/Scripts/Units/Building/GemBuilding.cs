@@ -5,17 +5,12 @@ using UnityEngine;
 
 abstract public class GemBuilding : Structure
 {
-    public GemHolder gem = new GemHolder();
-    protected List<ITargetable<Enemy>> possibleTargets = new List<ITargetable<Enemy>>();
+    public GemHolder Gem;
+    protected List<Enemy> possibleTargets = new List<Enemy>();
 
     private float damage = 0;
     private float range = 0;
     private float attackSpeed = 0;
-    public GemHolder Gem
-    {
-        get { return gem; }
-        set { gem = value; }
-    }
     public float Damage
     {
         get { return damage; }
@@ -28,7 +23,7 @@ abstract public class GemBuilding : Structure
         {
             if (range <= 0)
             {
-                range = value;
+                range = 0;
             }
             if (range > 9)
             {
@@ -52,67 +47,71 @@ abstract public class GemBuilding : Structure
     protected virtual void Awake()
     {
         UpdateCollider(range);
-        gem = new GemHolder();
     }
 
-
-    protected abstract void UpdateCollider(float range);
     public abstract void InsertGem(Gem gem);
-    protected abstract void RemoveGem(GemHolder gem);
-
-    /*protected List<Gem> gems = new List<Gem>();
-    protected Enemy _primaryTarget = null;
-    protected float nextTimeCall = 0;
-
-   
-    
-    
-
-    
-
-
-    
+    public void EnableGem()
+    {
+        Gem.gameObject.SetActive(true);
+    }
     protected abstract void DealDamage();
-    
-    protected abstract void UseGemEffect(Enemy target, Gem gem);
-
-    public List<Gem> GetPlacedGems
+    protected abstract void UpdateCollider(float range);
+    protected abstract void RemoveGem(GemHolder gem);
+    public void AddTarget(Enemy target)
     {
-        get { return gems; }
+        possibleTargets.Add(target);
     }
-    protected virtual Enemy Target
+    public void RemoveTarget(Enemy target)
     {
-        get
-        {
-            if (_primaryTarget == null)
-            {
-                targets.RemoveAll(eachTarget => { return eachTarget == null; });
-                if (targets.Count > 0)
-                {
-                    //_primaryTarget = targets.Find(target => { return true; });
-                }
-            }
-            return _primaryTarget;
-        }
+        possibleTargets.Remove(target);
     }
+}
 
-    protected virtual void FindTarget()
+/*protected List<Gem> gems = new List<Gem>();
+protected Enemy _primaryTarget = null;
+protected float nextTimeCall = 0;
+
+
+
+
+protected abstract void UseGemEffect(Enemy target, Gem gem);
+
+public List<Gem> GetPlacedGems
+{
+    get { return gems; }
+}
+protected virtual Enemy Target
+{
+    get
     {
         if (_primaryTarget == null)
         {
-            _primaryTarget = Target;
+            targets.RemoveAll(eachTarget => { return eachTarget == null; });
+            if (targets.Count > 0)
+            {
+                //_primaryTarget = targets.Find(target => { return true; });
+            }
         }
+        return _primaryTarget;
     }
-
-    
-
-    public void RemoveTarget(Enemy other)
-    {
-        if (ReferenceEquals(_primaryTarget, other))
-        {
-            _primaryTarget = null;
-        }
-        targets.Remove(other);
-    }
-    */
 }
+
+protected virtual void FindTarget()
+{
+    if (_primaryTarget == null)
+    {
+        _primaryTarget = Target;
+    }
+}
+
+
+
+public void RemoveTarget(Enemy other)
+{
+    if (ReferenceEquals(_primaryTarget, other))
+    {
+        _primaryTarget = null;
+    }
+    targets.Remove(other);
+}
+*/

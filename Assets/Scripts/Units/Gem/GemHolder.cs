@@ -11,6 +11,9 @@ public class GemHolder : MonoBehaviour
     private Color color;
     private List<EffectDataHolder> effects = new List<EffectDataHolder>();
 
+
+    private Renderer rend = null;
+
     public float Damage
     {
         get => damage;
@@ -36,15 +39,19 @@ public class GemHolder : MonoBehaviour
         get => color;
         set
         {
-            color = (color + value) * .5f; ;
+            if (rend == null) rend = GetComponent<Renderer>();
+            color = (color + value) * .5f;
+            rend.material.color = color;
+
         }
     }
-
+    public bool IsEmpty => effects.Count == 0;
     public void AddGem(Gem gem)
     {
         this.Damage += gem.damage;
         this.Range += gem.range;
         this.AttackSpeed += gem.attackSpeed;
+        this.Color = gem.Color;
         AddEffect(gem.Effect);
     }
 

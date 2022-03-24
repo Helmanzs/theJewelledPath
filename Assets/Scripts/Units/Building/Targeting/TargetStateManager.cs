@@ -11,7 +11,11 @@ public class TargetStateManager : MonoBehaviour
     public event Action<Method> TargetingMethodChanged;
     private Structure structure;
 
+    [SerializeField]
     private Method currentMethod;
+
+    public Method CurrentMethod => currentMethod;
+
     private List<Method> pastMethods = new List<Method>();
 
     private static Dictionary<TargetMethod, Type> methods = new Dictionary<TargetMethod, Type> {
