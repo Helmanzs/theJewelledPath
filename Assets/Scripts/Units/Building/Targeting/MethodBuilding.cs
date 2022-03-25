@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MethodBuilding : Method
 {
     public override Enemy Aim(IEnumerable<Enemy> possibleTargets)
     {
-        throw new System.NotImplementedException();
+        return possibleTargets.FirstOrDefault();
     }
 
     public override TargetMethod ChangeMethod()
     {
-        throw new System.NotImplementedException();
+        return TargetMethod.Building;
     }
 }
 

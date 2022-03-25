@@ -5,37 +5,18 @@ using UnityEngine;
 
 abstract public class GemBuilding : Structure
 {
+
     public GemHolder Gem;
     protected List<Enemy> possibleTargets = new List<Enemy>();
 
     private float damage = 0;
-    private float range = 0;
     private float attackSpeed = 0;
     public float Damage
     {
         get { return damage; }
         protected set { damage = value; }
     }
-    public float Range
-    {
-        get { return range; }
-        protected set
-        {
-            if (range <= 0)
-            {
-                range = 0;
-            }
-            if (range > 9)
-            {
-                range = 9;
-            }
-            else
-            {
-                range = value / 2;
-            }
-            UpdateCollider(range);
-        }
-    }
+
     public float AttackSpeed
     {
         get { return attackSpeed; }
@@ -44,10 +25,7 @@ abstract public class GemBuilding : Structure
             attackSpeed = value;
         }
     }
-    protected virtual void Awake()
-    {
-        UpdateCollider(range);
-    }
+
 
     public abstract void InsertGem(Gem gem);
     public void EnableGem()
@@ -55,24 +33,17 @@ abstract public class GemBuilding : Structure
         Gem.gameObject.SetActive(true);
     }
     protected abstract void DealDamage();
-    protected abstract void UpdateCollider(float range);
     protected abstract void RemoveGem(GemHolder gem);
     public void AddTarget(Enemy target)
     {
         possibleTargets.Add(target);
     }
-    public void RemoveTarget(Enemy target)
-    {
-        possibleTargets.Remove(target);
-    }
+    public abstract void RemoveTarget(Enemy target);
 }
 
 /*protected List<Gem> gems = new List<Gem>();
 protected Enemy _primaryTarget = null;
 protected float nextTimeCall = 0;
-
-
-
 
 protected abstract void UseGemEffect(Enemy target, Gem gem);
 
@@ -103,8 +74,6 @@ protected virtual void FindTarget()
         _primaryTarget = Target;
     }
 }
-
-
 
 public void RemoveTarget(Enemy other)
 {

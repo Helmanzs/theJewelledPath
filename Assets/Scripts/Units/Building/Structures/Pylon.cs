@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Pylon : Structure
 {
-
+    protected override void UpdateCollider(float range)
+    {
+        throw new System.NotImplementedException();
+    }
 }

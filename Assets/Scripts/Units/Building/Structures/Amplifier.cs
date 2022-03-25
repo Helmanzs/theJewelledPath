@@ -58,6 +58,11 @@ public class Amplifier : GemBuilding
         throw new NotImplementedException();
     }
 
+    public override void RemoveTarget(Enemy target)
+    {
+        throw new NotImplementedException();
+    }
+
     protected override void DealDamage()
     {
         throw new NotImplementedException();

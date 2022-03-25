@@ -3,24 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, ITargetable<Tower>
+public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
 {
     private Enemy target = null;
+
     private LineRenderer lineRendererComponent = null;
     private DrawLine drawLineComponent = null;
     private SphereCollider sphereCollider = null;
     private TargetStateManager targetStateManager = null;
-    private float nextTimeCall;
 
-    public bool TestMethod = false;
+    private float nextTimeCall = 0;
 
     public Enemy Target
     {
-        get => target;
+        get
+        {
+            if (target == null)
+            {
+                possibleTargets.RemoveAll(target => { return target == null; });
+                if (possibleTargets.Count > 0)
+                {
+                    target = FindTarget(targetStateManager.CurrentMethod);
+                }
+            }
+            return target;
+        }
         set
         {
             target = value;
-            drawLineComponent.ColorBeam();
         }
     }
 
@@ -34,15 +44,12 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, ITargetable<Tow
 
     private void FixedUpdate()
     {
-        if (possibleTargets.Count == 0) return;
-        if (TestMethod)
+        if (Target != null)
         {
-            targetStateManager.ChangeMethod(TargetMethod.MostHP);
+            DrawLine();
+            DealDamage();
         }
-        Target = FindTarget(targetStateManager.CurrentMethod);
-        DrawLine();
-        DealDamage();
-        if (Target == null)
+        else
         {
             DestroyLine();
         }
@@ -51,6 +58,8 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, ITargetable<Tow
     public override void InsertGem(Gem gem)
     {
         Gem.AddGem(gem);
+        drawLineComponent.ColorBeam();
+
     }
 
     protected override void UpdateCollider(float range)
@@ -60,7 +69,7 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, ITargetable<Tow
 
     private void DrawLine()
     {
-        if (Gem != null)
+        if (Gem.isActiveAndEnabled && Target != null)
         {
             lineRendererComponent.enabled = true;
             drawLineComponent.MakeLine(Gem.transform.position, Target.transform.position);
@@ -77,13 +86,9 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, ITargetable<Tow
         Gem = null;
     }
 
-    public Tower Interact()
-    {
-        return this;
-    }
-
     public Enemy FindTarget(Method method)
     {
+        if (possibleTargets.Count == 0) return null;
         return method.Aim(possibleTargets);
     }
 
@@ -94,5 +99,14 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, ITargetable<Tow
             nextTimeCall = Time.time + (2 / (1 + (Gem.AttackSpeed / 100)));
             Target.ApplyDamage(Gem.Damage);
         }
+    }
+
+    public override void RemoveTarget(Enemy target)
+    {
+        if (ReferenceEquals(Target, target))
+        {
+            Target = null;
+        }
+        possibleTargets.Remove(target);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
-public abstract class Enemy : Unit, ITargetable<Enemy>
+public abstract class Enemy : Unit
 {
     public event Action<float> UnitTakenDamage;
 
@@ -81,9 +81,10 @@ public abstract class Enemy : Unit, ITargetable<Enemy>
     }
     public void Kill()
     {
-        Destroy(transform.gameObject);
         Global.Instance.enemies.Remove(this);
         Global.Instance.Mana += (int)Reward;
+        Destroy(transform.gameObject);
+
     }
 
     public override string ToString()

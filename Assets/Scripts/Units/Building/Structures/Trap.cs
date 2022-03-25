@@ -9,6 +9,11 @@ public class Trap : GemBuilding
         throw new System.NotImplementedException();
     }
 
+    public override void RemoveTarget(Enemy target)
+    {
+        throw new System.NotImplementedException();
+    }
+
     protected override void DealDamage()
     {
         throw new System.NotImplementedException();
