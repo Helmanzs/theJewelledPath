@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public interface IClickable
 {
-    public Unit previewUnit;
+    public void Click();
 }

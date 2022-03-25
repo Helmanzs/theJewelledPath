@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Trap : GemBuilding
 {
+    public override void Click()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void InsertGem(Gem gem)
     {
         throw new System.NotImplementedException();

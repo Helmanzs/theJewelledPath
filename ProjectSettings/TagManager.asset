@@ -44,8 +44,11 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Ignore
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1188678847
     locked: 0

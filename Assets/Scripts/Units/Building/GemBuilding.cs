@@ -39,6 +39,7 @@ abstract public class GemBuilding : Structure
         possibleTargets.Add(target);
     }
     public abstract void RemoveTarget(Enemy target);
+
 }
 
 /*protected List<Gem> gems = new List<Gem>();

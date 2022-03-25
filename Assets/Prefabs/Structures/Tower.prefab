@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4e793b456887847af4e16916fac661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMethod: {fileID: 0}
 --- !u!1 &6167608893756498273
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +259,7 @@ GameObject:
   - component: {fileID: 112640084698317020}
   - component: {fileID: 4490175013901839246}
   - component: {fileID: 6844852528289741453}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: RangeCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

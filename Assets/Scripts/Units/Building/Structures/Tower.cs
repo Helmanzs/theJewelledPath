@@ -109,4 +109,9 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
         }
         possibleTargets.Remove(target);
     }
+
+    public override void Click()
+    {
+        UIPanel.Instance.OpenPanel();
+    }
 }

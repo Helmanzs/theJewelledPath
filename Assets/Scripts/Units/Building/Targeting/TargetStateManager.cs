@@ -8,7 +8,6 @@ public class TargetStateManager : MonoBehaviour
 {
     private TargetMethod defaultMethod = TargetMethod.LeastHP;
 
-    public event Action<Method> TargetingMethodChanged;
     private Structure structure;
 
     [SerializeField]

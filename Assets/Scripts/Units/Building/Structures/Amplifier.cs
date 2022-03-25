@@ -5,54 +5,59 @@ using UnityEngine;
 
 public class Amplifier : GemBuilding
 {
+    public override void Click()
+    {
+        throw new NotImplementedException();
+    }
+
     /*private Dictionary<Effect, float> effects = new Dictionary<Effect, float>();
-    private List<GemBuilding> affectedBuildings = new List<GemBuilding>();
+private List<GemBuilding> affectedBuildings = new List<GemBuilding>();
 
-    private SphereCollider sphereCollider = null;
+private SphereCollider sphereCollider = null;
 
-    private void Awake()
-    {
-        sphereCollider = GetComponentInChildren<SphereCollider>();
-    }
+private void Awake()
+{
+   sphereCollider = GetComponentInChildren<SphereCollider>();
+}
 
-    public override void InsertGem(Gem gem)
-    {
-        RecalculateEffects();
-        effects.Add(gem.Effect, 0);
-    }
+public override void InsertGem(Gem gem)
+{
+   RecalculateEffects();
+   effects.Add(gem.Effect, 0);
+}
 
-    private void RecalculateEffects()
-    {
+private void RecalculateEffects()
+{
 
-    }
+}
 
-    protected override void DealDamage()
-    {
-        throw new System.NotImplementedException();
-    }
+protected override void DealDamage()
+{
+   throw new System.NotImplementedException();
+}
 
 
-    protected override void UpdateCollider(float range)
-    {
-        sphereCollider.radius = range / 2;
-        affectedBuildings = GetBuildingsInRange();
+protected override void UpdateCollider(float range)
+{
+   sphereCollider.radius = range / 2;
+   affectedBuildings = GetBuildingsInRange();
 
-    }
+}
 
-    private List<GemBuilding> GetBuildingsInRange()
-    {
-        return null;
-    }
+private List<GemBuilding> GetBuildingsInRange()
+{
+   return null;
+}
 
-    protected override void UseGemEffect(Enemy target, Gem gem)
-    {
-        throw new System.NotImplementedException();
-    }
+protected override void UseGemEffect(Enemy target, Gem gem)
+{
+   throw new System.NotImplementedException();
+}
 
-    protected override void RemoveGem(GameObject gem)
-    {
-        throw new System.NotImplementedException();
-    }*/
+protected override void RemoveGem(GameObject gem)
+{
+   throw new System.NotImplementedException();
+}*/
     public override void InsertGem(Gem gem)
     {
         throw new NotImplementedException();

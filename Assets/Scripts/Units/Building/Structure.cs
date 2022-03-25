@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-abstract public class Structure : Unit
+abstract public class Structure : Unit, IClickable
 {
     public float cost;
     private float range = 0;
@@ -26,10 +26,14 @@ abstract public class Structure : Unit
             UpdateCollider(range);
         }
     }
+
+
     protected virtual void Awake()
     {
         UpdateCollider(range);
     }
     protected abstract void UpdateCollider(float range);
+    public abstract void Click();
+
 
 }
