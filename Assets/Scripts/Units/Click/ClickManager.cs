@@ -29,7 +29,7 @@ public class ClickManager : MonoBehaviour
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hitInfo, float.PositiveInfinity, ~(1 << 31));
             if (hit && hitInfo.collider.TryGetComponent(out IClickable clickable))
             {
-                clickable?.Click();
+                clickable?.Click(Input.mousePosition);
             }
             else
             {

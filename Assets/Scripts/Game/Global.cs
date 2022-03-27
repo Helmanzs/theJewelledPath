@@ -9,7 +9,7 @@ public class Global : SceneSingleton<Global>
     public List<GemBuilding> gemBuildings = new List<GemBuilding>();
     public List<Enemy> enemies = new List<Enemy>();
 
-    private int mana = 300;
+    private int mana = 30000;
     public int Mana
     {
         get { return mana; }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Pylon : Structure
 {
-    public override void Click()
+
+    public override void Click(Vector3 mousePos)
     {
         throw new System.NotImplementedException();
     }

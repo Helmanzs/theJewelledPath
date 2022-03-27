@@ -33,7 +33,7 @@ abstract public class Structure : Unit, IClickable
         UpdateCollider(range);
     }
     protected abstract void UpdateCollider(float range);
-    public abstract void Click();
+    public abstract void Click(Vector3 mousePos);
 
 
 }

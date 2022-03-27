@@ -14,6 +14,10 @@ public class MethodBuilding : Method
     {
         return TargetMethod.Building;
     }
+    public override string GetName()
+    {
+        return "Target Building";
+    }
 }
 
 

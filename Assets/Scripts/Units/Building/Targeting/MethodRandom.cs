@@ -14,4 +14,8 @@ public class MethodRandom : Method
     {
         return TargetMethod.Random;
     }
+    public override string GetName()
+    {
+        return "Target Random";
+    }
 }

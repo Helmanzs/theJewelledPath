@@ -15,4 +15,6 @@ public abstract class Method : MonoBehaviour
     public abstract TargetMethod ChangeMethod();
 
     public abstract Enemy Aim(IEnumerable<Enemy> possibleTargets);
+
+    public abstract string GetName();
 }

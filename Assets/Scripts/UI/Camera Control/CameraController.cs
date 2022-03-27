@@ -9,7 +9,8 @@ public class CameraController : SceneSingleton<CameraController>
     public float movementSpeed;
     public float movementTime;
     public float rotationAmount;
-    public Vector3 zoomAmount;
+    public Vector3 MouseZoomAmount;
+    public Vector3 KeyboardZoomAmount;
 
     public Vector3 newPosition;
     public Quaternion newRotation;
@@ -20,6 +21,8 @@ public class CameraController : SceneSingleton<CameraController>
     public Vector3 rotateStartPosition;
     public Vector3 rotateCurrentPosition;
 
+    public bool cameraMoved = false;
+
     private void Start()
     {
         newPosition = transform.position;
@@ -27,29 +30,27 @@ public class CameraController : SceneSingleton<CameraController>
         newZoom = cameraTransform.localPosition;
     }
 
+    private void OnCameraMoveClosePanels()
+    {
+        if (cameraMoved)
+            ClickManager.CallCloseAllPanels();
+        cameraMoved = false;
+    }
+
     private void Update()
     {
-        if (followTransform != null)
-        {
-            transform.position = followTransform.position;
-        }
-        else
-        {
-            HandleMovementInput();
-            HandleMouseInput();
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            followTransform = null;
-        }
+        HandleMovementInput();
+        HandleMouseInput();
+        OnCameraMoveClosePanels();
     }
 
     private void HandleMouseInput()
     {
         if (Input.mouseScrollDelta.y != 0)
         {
-            newZoom += Input.mouseScrollDelta.y * zoomAmount;
+            cameraMoved = true;
+
+            newZoom += Input.mouseScrollDelta.y * MouseZoomAmount;
         }
         if (Input.GetMouseButtonDown(0))
         {
@@ -70,6 +71,10 @@ public class CameraController : SceneSingleton<CameraController>
             {
                 dragCurrentPosition = ray.GetPoint(entry);
                 newPosition = transform.position + dragStartPosition - dragCurrentPosition;
+                if (newPosition != transform.position)
+                {
+                    cameraMoved = true;
+                }
             }
         }
         if (Input.GetMouseButtonDown(2))
@@ -78,6 +83,8 @@ public class CameraController : SceneSingleton<CameraController>
         }
         if (Input.GetMouseButton(2))
         {
+            cameraMoved = true;
+
             rotateCurrentPosition = Input.mousePosition;
             Vector3 difference = rotateStartPosition - rotateCurrentPosition;
             rotateStartPosition = rotateCurrentPosition;
@@ -89,35 +96,51 @@ public class CameraController : SceneSingleton<CameraController>
     {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
+            cameraMoved = true;
+
             newPosition += (transform.forward * movementSpeed);
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
+            cameraMoved = true;
+
             newPosition += (transform.forward * -movementSpeed);
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
+            cameraMoved = true;
+
             newPosition += (transform.right * -movementSpeed);
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
+            cameraMoved = true;
+
             newPosition += (transform.right * movementSpeed);
         }
         if (Input.GetKey(KeyCode.Q))
         {
+            cameraMoved = true;
+
             newRotation *= Quaternion.Euler(Vector3.up * rotationAmount);
         }
         if (Input.GetKey(KeyCode.E))
         {
+            cameraMoved = true;
+
             newRotation *= Quaternion.Euler(Vector3.up * -rotationAmount);
         }
         if (Input.GetKey(KeyCode.R))
         {
-            newZoom += zoomAmount;
+            cameraMoved = true;
+
+            newZoom += KeyboardZoomAmount;
         }
         if (Input.GetKey(KeyCode.F))
         {
-            newZoom -= zoomAmount;
+            cameraMoved = true;
+
+            newZoom -= KeyboardZoomAmount;
         }
 
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
@@ -125,125 +148,3 @@ public class CameraController : SceneSingleton<CameraController>
         cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * movementTime);
     }
 }
-
-
-
-
-
-
-
-/*[Header("Camera positioning")]
-public Vector2 cameraOffset = new Vector2(10f, 14f);
-public float lookAtOffset = 2f;
-
-[Header("Move controls")]
-public float inOutSpeed = 5f;
-public float lateralSpeed = 5f;
-public float rotateSpeed = 45f;
-
-[Header("Movement Bounds")]
-public Vector2 maxBounds;
-public Vector2 minBounds;
-
-[Header("Zoom Controls")]
-public float zoomSpeed = 10f;
-public float nearZoomLimit = 2f;
-public float farZoomLimit = 64f;
-public float startingZoom = 64f;
-
-IZoomStrategy zoomStrategy;
-Vector3 frameMove;
-float frameRotate;
-float frameZoom;
-Camera cam;
-
-private void Awake()
-{
-    cam = GetComponentInChildren<Camera>();
-    cam.transform.localPosition = new Vector3(0f, Mathf.Abs(cameraOffset.y), -Mathf.Abs(cameraOffset.x));
-    zoomStrategy = cam.orthographic ? (IZoomStrategy)new OrtographicZoomStrategy(cam, startingZoom) : new PerspectiveZoomStrategy(cam, cameraOffset, startingZoom);
-    cam.transform.LookAt(transform.position + Vector3.up * lookAtOffset);
-    OnEnable();
-}
-
-private void OnEnable()
-{
-    KeyboardInputManager.OnMoveInput += UpdateFrameMove;
-    KeyboardInputManager.OnRotateInput += UpdateFrameRotate;
-    KeyboardInputManager.OnZoomInput += UpdateFrameZoom;
-
-    MouseInputManager.OnMoveInput += UpdateFrameMove;
-    MouseInputManager.OnRotateInput += UpdateFrameRotate;
-    MouseInputManager.OnZoomInput += UpdateFrameZoom;
-    MouseInputManager.DragMoveInputHandler += UpdateFrameDrag;
-}
-
-private void OnDisable()
-{
-    KeyboardInputManager.OnMoveInput -= UpdateFrameMove;
-    KeyboardInputManager.OnRotateInput -= UpdateFrameRotate;
-    KeyboardInputManager.OnZoomInput -= UpdateFrameZoom;
-
-    MouseInputManager.OnMoveInput -= UpdateFrameMove;
-    MouseInputManager.OnRotateInput -= UpdateFrameRotate;
-    MouseInputManager.OnZoomInput -= UpdateFrameZoom;
-    MouseInputManager.DragMoveInputHandler -= UpdateFrameDrag;
-}
-
-private void UpdateFrameMove(Vector3 moveVector)
-{
-    frameMove += moveVector;
-}
-
-private void UpdateFrameRotate(float rotateAmount)
-{
-    frameRotate += rotateAmount;
-}
-
-private void UpdateFrameZoom(float zoomAmount)
-{
-    frameZoom += zoomAmount;
-}
-
-private void UpdateFrameDrag(Vector3 moveVector)
-{
-
-}
-
-private void LateUpdate()
-{
-    if (frameMove != Vector3.zero)
-    {
-        Vector3 speedModFrameMove = new Vector3(frameMove.x * lateralSpeed, frameMove.y, frameMove.z * inOutSpeed);
-        transform.position += transform.TransformDirection(speedModFrameMove) * Time.deltaTime;
-        //LockPositionInBounds();
-        frameMove = Vector3.zero;
-    }
-
-    if (frameRotate != 0)
-    {
-        transform.Rotate(Vector3.up, frameRotate * Time.deltaTime * rotateSpeed);
-        frameRotate = 0f;
-    }
-
-    if (frameZoom < 0f)
-    {
-        zoomStrategy.ZoomIn(cam, Time.deltaTime * Mathf.Abs(frameZoom) * zoomSpeed, nearZoomLimit);
-        frameZoom = 0f;
-    }
-
-    if (frameZoom > 0f)
-    {
-        zoomStrategy.ZoomOut(cam, Time.deltaTime * frameZoom * zoomSpeed, farZoomLimit);
-        frameZoom = 0f;
-    }
-}
-
-private void LockPositionInBounds()
-{
-    transform.position = new Vector3(
-        Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x),
-        transform.position.y,
-        Mathf.Clamp(transform.position.z, minBounds.y, maxBounds.y)
-        );
-}*/

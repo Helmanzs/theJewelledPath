@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IClickable
 {
-    public void Click();
+    public void Click(Vector3 mousePos);
 }

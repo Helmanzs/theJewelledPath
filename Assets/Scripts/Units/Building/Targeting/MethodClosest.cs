@@ -23,4 +23,8 @@ public class MethodClosest : Method
     {
         return TargetMethod.Closest;
     }
+    public override string GetName()
+    {
+        return "Target Closest";
+    }
 }

@@ -58,7 +58,6 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
     public override void InsertGem(Gem gem)
     {
         Gem.AddGem(gem);
-        drawLineComponent.ColorBeam();
 
     }
 
@@ -69,6 +68,7 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
 
     private void DrawLine()
     {
+        drawLineComponent.ColorBeam();
         if (Gem.isActiveAndEnabled && Target != null)
         {
             lineRendererComponent.enabled = true;
@@ -96,7 +96,7 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
     {
         if (nextTimeCall < Time.time)
         {
-            nextTimeCall = Time.time + (2 / (1 + (Gem.AttackSpeed / 100)));
+            nextTimeCall = Time.time + (2 / (1 + Gem.AttackSpeed / 100));
             Target.ApplyDamage(Gem.Damage);
         }
     }
@@ -110,8 +110,8 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
         possibleTargets.Remove(target);
     }
 
-    public override void Click()
+    public override void Click(Vector3 mousePos)
     {
-        UIPanel.Instance.OpenPanel();
+        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, mousePos));
     }
 }

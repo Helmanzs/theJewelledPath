@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Amplifier : GemBuilding
 {
-    public override void Click()
+    public override void Click(Vector3 mousePos)
     {
-        throw new NotImplementedException();
+        throw new System.NotImplementedException();
     }
 
     /*private Dictionary<Effect, float> effects = new Dictionary<Effect, float>();

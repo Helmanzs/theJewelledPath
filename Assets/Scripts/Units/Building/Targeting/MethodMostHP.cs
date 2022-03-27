@@ -20,4 +20,8 @@ public class MethodMostHP : Method
     {
         return TargetMethod.LeastHP;
     }
+    public override string GetName()
+    {
+        return "Target Highest HP";
+    }
 }

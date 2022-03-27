@@ -23,4 +23,8 @@ public class MethodFurthest : Method
     {
         return TargetMethod.Furthest;
     }
+    public override string GetName()
+    {
+        return "Target Furthest";
+    }
 }

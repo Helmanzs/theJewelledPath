@@ -21,4 +21,9 @@ public class MethodBoss : Method
     {
         return TargetMethod.Boss;
     }
+
+    public override string GetName()
+    {
+        return "Target Boss";
+    }
 }

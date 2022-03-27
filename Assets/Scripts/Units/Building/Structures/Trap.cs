@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Trap : GemBuilding
 {
-    public override void Click()
+    public override void Click(Vector3 mousePos)
     {
         throw new System.NotImplementedException();
     }
