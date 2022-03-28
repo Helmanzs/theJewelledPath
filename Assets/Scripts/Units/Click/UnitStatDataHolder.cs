@@ -7,26 +7,18 @@ public struct UnitStatDataHolder
 {
     public Structure Structure;
     public string Name;
-    public string Damage;
-    public string Range;
-    public string AttackSpeed;
+    public float Damage;
+    public float Range;
+    public float AttackSpeed;
     public Vector3 MousePos;
 
     public UnitStatDataHolder(Structure structure, string name, float damage, float range, float attackSpeed, Vector3 mousePos)
     {
         Structure = structure;
         Name = name;
-        Damage = damage.ToString();
-        Range = (range / 2).ToString();
-        if (attackSpeed == 0)
-        {
-            AttackSpeed = "0";
-        }
-        else
-        {
-            AttackSpeed = (2 / (1 + attackSpeed / 100)).ToString("0.00");
-
-        }
+        Damage = damage;
+        Range = (range / 2);
+        AttackSpeed = (2 / (1 + attackSpeed / 100));
         MousePos = mousePos;
     }
 }

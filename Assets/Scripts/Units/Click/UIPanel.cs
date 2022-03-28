@@ -15,6 +15,7 @@ public class UIPanel : SceneSingleton<UIPanel>
     public TextMeshProUGUI RangeText;
     public TextMeshProUGUI AttackSpeedText;
     public TMP_Dropdown MethodDropdown;
+    public TextMeshProUGUI MissingGemText;
 
     private RectTransform parentRectTransform;
     private RectTransform panelRectTransform;
@@ -39,18 +40,42 @@ public class UIPanel : SceneSingleton<UIPanel>
     {
         ClickManager.CallCloseAllPanels();
         Panel.gameObject.SetActive(true);
-
         currentStructure = data.Structure;
         TitleText.text = data.Name;
-        DamageText.text = $"Damage: {data.Damage}";
-        RangeText.text = $"Range: {data.Range}";
-        AttackSpeedText.text = $"Attack Speed: {data.AttackSpeed}/s";
+        if (data.Damage != 0)
+        {
+            ActivateElements();
+            DamageText.text = $"Damage: {data.Damage}";
+            RangeText.text = $"Range: {data.Range}";
+            AttackSpeedText.text = $"Attack Speed: {data.AttackSpeed:0.00}/s";
+            dropdownHandler.SetDropdownValue(data.Structure.GetComponent<TargetStateManager>().TargetMethodPointer);
+        }
+        else
+        {
+            DeactivateElements();
+        }
 
         PositionPanel(data.MousePos);
-        dropdownHandler.SetDropdownValue(data.Structure.GetComponent<TargetStateManager>().TargetMethodPointer);
-
-
     }
+
+    private void ActivateElements()
+    {
+        DamageText.gameObject.SetActive(true);
+        RangeText.gameObject.SetActive(true);
+        AttackSpeedText.gameObject.SetActive(true);
+        MethodDropdown.gameObject.SetActive(true);
+        MissingGemText.gameObject.SetActive(false);
+    }
+
+    private void DeactivateElements()
+    {
+        DamageText.gameObject.SetActive(false);
+        RangeText.gameObject.SetActive(false);
+        AttackSpeedText.gameObject.SetActive(false);
+        MethodDropdown.gameObject.SetActive(false);
+        MissingGemText.gameObject.SetActive(true);
+    }
+
     public void ClosePanel()
     {
         Panel.gameObject.SetActive(false);

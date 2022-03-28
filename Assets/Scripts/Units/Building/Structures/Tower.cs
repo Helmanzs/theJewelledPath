@@ -44,6 +44,8 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
 
     private void FixedUpdate()
     {
+        Gem.DisplayEffects();
+
         if (Target != null)
         {
             DrawLine();
@@ -58,7 +60,7 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
     public override void InsertGem(Gem gem)
     {
         Gem.AddGem(gem);
-
+        Gem.DisplayEffects();
     }
 
     protected override void UpdateCollider(float range)

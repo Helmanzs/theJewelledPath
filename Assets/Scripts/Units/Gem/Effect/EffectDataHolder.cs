@@ -5,11 +5,8 @@ using UnityEngine;
 
 public struct EffectDataHolder
 {
-    private Effect effect;
-    private float effectMultiplier;
-
-    public Effect Effect { get => effect; set => effect = value; }
-    public float EffectMultiplier { get => effectMultiplier; set => effectMultiplier = value; }
+    public Effect effect;
+    public float effectMultiplier;
 
     public EffectDataHolder(Effect effect, float value)
     {

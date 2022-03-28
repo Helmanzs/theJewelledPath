@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class CritEffect : ActiveEffect
 {
+    public override Effect Clone()
+    {
+        CritEffect temp = new CritEffect();
+        return temp;
+    }
+
     public override void Use(Enemy target, float value)
     {
 
-        if (target.TryGetComponent<Vulnerable>(out Vulnerable vulnComponent))
+        if (target.TryGetComponent(out Vulnerable vulnComponent))
         {
             vulnComponent.RefreshDuration(5);
             if (vulnComponent.multiplier < value)

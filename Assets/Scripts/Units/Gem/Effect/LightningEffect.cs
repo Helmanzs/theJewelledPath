@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class LightningEffect : ActiveEffect
 {
+    public override Effect Clone()
+    {
+        LightningEffect temp = new LightningEffect();
+        return temp;
+    }
+
     public override void Use(Enemy target, float value)
     {
         int chainDepth = (int)Math.Round(value, MidpointRounding.AwayFromZero);

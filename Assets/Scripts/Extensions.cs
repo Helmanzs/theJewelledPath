@@ -20,5 +20,4 @@ public static class Extensions
     {
         return array[UnityEngine.Random.Range(0, array.Length - 1)];
     }
-
 }

@@ -40,7 +40,6 @@ abstract public class Structure : Unit, IClickable
     public abstract void Click(Vector3 mousePos);
     public void SetMethod(TargetMethod method)
     {
-        print("setmethod");
         methodManager.ChangeMethod(method);
     }
 
