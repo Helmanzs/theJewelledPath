@@ -112,6 +112,6 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
 
     public override void Click(Vector3 mousePos)
     {
-        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, mousePos));
+        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this, this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, mousePos));
     }
 }

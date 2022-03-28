@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class TargetStateManager : MonoBehaviour
 {
-    private TargetMethod defaultMethod = TargetMethod.LeastHP;
+    private TargetMethod defaultMethod = TargetMethod.Closest;
 
     private Structure structure;
-
-    [SerializeField]
     private Method currentMethod;
+    private TargetMethod targetMethodPointer = TargetMethod.Closest;
 
     public Method CurrentMethod => currentMethod;
+    public TargetMethod TargetMethodPointer => targetMethodPointer;
 
     private List<Method> pastMethods = new List<Method>();
 
@@ -27,9 +27,15 @@ public class TargetStateManager : MonoBehaviour
         { TargetMethod.Building, typeof(MethodBuilding) }
     };
 
+    public static Dictionary<TargetMethod, Type> Methods => methods;
+    public static Dictionary<TargetMethod, Type> GetMethod => methods;
+
     private void Start()
     {
         structure = GetComponent<Structure>();
+    }
+    private void Awake()
+    {
         ChangeMethod(defaultMethod);
     }
     public void ChangeMethod(TargetMethod newMethod)
@@ -48,16 +54,7 @@ public class TargetStateManager : MonoBehaviour
             currentMethod = pastMethods.First(x => x.GetType() == methods[newMethod]);
             currentMethod.enabled = true;
         }
+        targetMethodPointer = newMethod;
         currentMethod.InitState(structure);
     }
-}
-public enum TargetMethod
-{
-    Closest,
-    MostHP,
-    Furthest,
-    Random,
-    Boss,
-    LeastHP,
-    Building
 }

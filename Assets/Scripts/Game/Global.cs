@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,5 +22,4 @@ public class Global : SceneSingleton<Global>
 
     public GameObject endTile = null;
     public SpawnTile spawnTile = null;
-
 }

@@ -5,14 +5,16 @@ using UnityEngine;
 
 public struct UnitStatDataHolder
 {
+    public Structure Structure;
     public string Name;
     public string Damage;
     public string Range;
     public string AttackSpeed;
     public Vector3 MousePos;
 
-    public UnitStatDataHolder(string name, float damage, float range, float attackSpeed, Vector3 mousePos)
+    public UnitStatDataHolder(Structure structure, string name, float damage, float range, float attackSpeed, Vector3 mousePos)
     {
+        Structure = structure;
         Name = name;
         Damage = damage.ToString();
         Range = (range / 2).ToString();

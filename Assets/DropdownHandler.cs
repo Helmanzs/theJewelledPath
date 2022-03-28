@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class DropdownHandler : MonoBehaviour
 {
+    public event Action<TargetMethod> OnValueChanged;
     public TMP_Dropdown Dropdown;
     private void Start()
     {
@@ -15,5 +15,17 @@ public class DropdownHandler : MonoBehaviour
         {
             Dropdown.options.Add(new TMP_Dropdown.OptionData() { text = method.ToString() });
         }
+        Dropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(Dropdown); });//Add listener to Event
+
+    }
+    private void DropdownValueChanged(TMP_Dropdown change)
+    {
+        TargetMethod method = (TargetMethod)change.value; //Convert dropwdown value to enum
+        OnValueChanged?.Invoke(method);
+    }
+
+    public void SetDropdownValue(TargetMethod method)
+    {
+        Dropdown.value = (int)method;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,18 +14,22 @@ public class UIPanel : SceneSingleton<UIPanel>
     public TextMeshProUGUI DamageText;
     public TextMeshProUGUI RangeText;
     public TextMeshProUGUI AttackSpeedText;
+    public TMP_Dropdown MethodDropdown;
 
     private RectTransform parentRectTransform;
     private RectTransform panelRectTransform;
+    private DropdownHandler dropdownHandler;
+    private Structure currentStructure;
     private void Start()
     {
         parentRectTransform = GetComponent<RectTransform>();
         panelRectTransform = Panel.GetComponent<RectTransform>();
+        dropdownHandler.OnValueChanged += OnDropdownValueChanged;
     }
-
     public void OnEnable()
     {
         ClickManager.CloseAllPanels += ClosePanel;
+        dropdownHandler = MethodDropdown.GetComponent<DropdownHandler>();
     }
     private void OnDisable()
     {
@@ -34,11 +39,17 @@ public class UIPanel : SceneSingleton<UIPanel>
     {
         ClickManager.CallCloseAllPanels();
         Panel.gameObject.SetActive(true);
-        PositionPanel(data.MousePos);
+
+        currentStructure = data.Structure;
         TitleText.text = data.Name;
         DamageText.text = $"Damage: {data.Damage}";
         RangeText.text = $"Range: {data.Range}";
         AttackSpeedText.text = $"Attack Speed: {data.AttackSpeed}/s";
+
+        PositionPanel(data.MousePos);
+        dropdownHandler.SetDropdownValue(data.Structure.GetComponent<TargetStateManager>().TargetMethodPointer);
+
+
     }
     public void ClosePanel()
     {
@@ -58,9 +69,13 @@ public class UIPanel : SceneSingleton<UIPanel>
         if (pos.x + panelWidth > parentRectTransform.rect.width)
             pos.x = parentRectTransform.rect.width - panelWidth;
         if (pos.y + panelHeight * 2.4f > parentRectTransform.rect.height)
-            pos.y = parentRectTransform.rect.height - panelHeight;
-
+            pos.y = parentRectTransform.rect.height - panelHeight * 2.4f;
         Panel.position = transform.TransformPoint(pos);
-
     }
+
+    private void OnDropdownValueChanged(TargetMethod method)
+    {
+        currentStructure.SetMethod(method);
+    }
+
 }

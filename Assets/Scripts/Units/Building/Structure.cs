@@ -5,6 +5,7 @@ abstract public class Structure : Unit, IClickable
 {
     public float cost;
     private float range = 0;
+    private TargetStateManager methodManager;
 
     public float Range
     {
@@ -27,13 +28,20 @@ abstract public class Structure : Unit, IClickable
         }
     }
 
-
+    private void Start()
+    {
+        methodManager = GetComponent<TargetStateManager>();
+    }
     protected virtual void Awake()
     {
         UpdateCollider(range);
     }
     protected abstract void UpdateCollider(float range);
     public abstract void Click(Vector3 mousePos);
-
+    public void SetMethod(TargetMethod method)
+    {
+        print("setmethod");
+        methodManager.ChangeMethod(method);
+    }
 
 }
