@@ -40,10 +40,10 @@ public class GemManagement<T> : BuildingManagement<T> where T : Component
     {
         if (place != default(T))
         {
-            GemBuilding structure = place as GemBuilding;
+            GemBuilding gemBuilding = place as GemBuilding;
             Gem gem = Unit as Gem;
-            structure.EnableGem();
-            structure.InsertGem(gem);
+            gemBuilding.EnableGem();
+            gemBuilding.InsertGem(gem);
             Global.Instance.Mana -= (int)gem.cost;
             GameObject.Destroy(Unit.gameObject);
             GameObject.Destroy(UnitPreview.gameObject);

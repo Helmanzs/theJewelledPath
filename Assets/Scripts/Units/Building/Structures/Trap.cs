@@ -2,9 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : GemBuilding
+public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>
 {
+    public List<Enemy> Targets { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+    public void AddTarget(Enemy target)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void Click(Vector3 mousePos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public List<Enemy> FindTargets()
     {
         throw new System.NotImplementedException();
     }
@@ -14,7 +26,7 @@ public class Trap : GemBuilding
         throw new System.NotImplementedException();
     }
 
-    public override void RemoveTarget(Enemy target)
+    public void RemoveTarget(Enemy target)
     {
         throw new System.NotImplementedException();
     }

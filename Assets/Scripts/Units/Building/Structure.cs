@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,13 +29,15 @@ abstract public class Structure : Unit, IClickable
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         methodManager = GetComponent<TargetStateManager>();
     }
+
     protected virtual void Awake()
     {
         UpdateCollider(range);
+
     }
     protected abstract void UpdateCollider(float range);
     public abstract void Click(Vector3 mousePos);
@@ -42,5 +45,4 @@ abstract public class Structure : Unit, IClickable
     {
         methodManager.ChangeMethod(method);
     }
-
 }

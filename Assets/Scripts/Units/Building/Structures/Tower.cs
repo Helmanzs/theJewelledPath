@@ -6,6 +6,7 @@ using UnityEngine;
 public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
 {
     private Enemy target = null;
+    private List<Enemy> possibleTargets = new List<Enemy>();
 
     private LineRenderer lineRendererComponent = null;
     private DrawLine drawLineComponent = null;
@@ -20,8 +21,8 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
         {
             if (target == null)
             {
-                possibleTargets.RemoveAll(target => { return target == null; });
-                if (possibleTargets.Count > 0)
+                PossibleTargets.RemoveAll(target => { return target == null; });
+                if (PossibleTargets.Count > 0)
                 {
                     target = FindTarget(targetStateManager.CurrentMethod);
                 }
@@ -34,12 +35,15 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
         }
     }
 
+    protected override List<Enemy> PossibleTargets { get => possibleTargets; set => possibleTargets = value; }
     protected override void Awake()
     {
         lineRendererComponent = GetComponent<LineRenderer>();
         drawLineComponent = GetComponent<DrawLine>();
         sphereCollider = GetComponentInChildren<SphereCollider>();
         targetStateManager = GetComponent<TargetStateManager>();
+        sphereCollider.gameObject.AddComponent<GemBuildingTrigger>();
+        base.Awake();
     }
 
     private void FixedUpdate()
@@ -57,7 +61,7 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
 
     public override void InsertGem(Gem gem)
     {
-        Gem.AddGem(gem);
+        Gem.AddGem(gem, 0.35f);
     }
 
     protected override void UpdateCollider(float range)
@@ -87,8 +91,8 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
 
     public Enemy FindTarget(Method method)
     {
-        if (possibleTargets.Count == 0) return null;
-        return method.Aim(possibleTargets);
+        if (PossibleTargets.Count == 0) return null;
+        return method.Aim(PossibleTargets);
     }
 
     protected override void DealDamage()
@@ -100,18 +104,22 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
             Gem.Effects.ForEach(effect => effect.Item1.Use(Target, effect.Item2));
         }
     }
+    public override void Click(Vector3 mousePos)
+    {
+        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this, this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, mousePos));
+    }
 
-    public override void RemoveTarget(Enemy target)
+    public void RemoveTarget(Enemy target)
     {
         if (ReferenceEquals(Target, target))
         {
             Target = null;
         }
-        possibleTargets.Remove(target);
+        PossibleTargets.Remove(target);
     }
 
-    public override void Click(Vector3 mousePos)
+    public void AddTarget(Enemy target)
     {
-        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this, this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, mousePos));
+        PossibleTargets.Add(target);
     }
 }

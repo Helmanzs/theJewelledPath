@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public abstract class BuildingManagement<T>
 {
-
     protected Selector<T> selector = null;
 
     private Unit unit = null;
     private Unit unitPreview = null;
     protected bool buildingMode = false;
     protected T lastPlace = default(T);
-
 
     protected Unit Unit
     {

@@ -11,18 +11,25 @@ public class GemBuildingTrigger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.TryGetComponent(out Enemy enemy))
         {
-            gemBuilding.AddTarget(other.GetComponent<Enemy>());
+            gemBuilding.AddTarget(enemy);
+        }
+        if (other.TryGetComponent(out Structure structure))
+        {
+            gemBuilding.AddTarget(structure);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-
-        if (other.CompareTag("Enemy"))
+        if (other.TryGetComponent(out Enemy enemy))
         {
-            gemBuilding.RemoveTarget(other.GetComponent<Enemy>());
+            gemBuilding.RemoveTarget(enemy);
+        }
+        if (other.TryGetComponent(out Structure structure))
+        {
+            gemBuilding.RemoveTarget(structure);
         }
     }
 }

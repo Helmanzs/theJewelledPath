@@ -43,20 +43,20 @@ public class GemHolder : MonoBehaviour
         }
     }
     public bool IsEmpty => effects.Count == 0;
-    public void AddGem(Gem gem)
+    public void AddGem(Gem gem, float initMulti)
     {
         this.Damage += gem.damage;
         this.Range += gem.range;
         this.AttackSpeed += gem.attackSpeed;
         this.Color = gem.Color;
-        AddEffect(gem.Effect);
+        AddEffect(gem.Effect, initMulti);
     }
 
-    private void AddEffect(Effect effect)
+    private void AddEffect(Effect effect, float initMulti)
     {
         if (effects.Count == 0)
         {
-            Tuple<Effect, float> temp = new Tuple<Effect, float>(effect, 0.35f);
+            Tuple<Effect, float> temp = new Tuple<Effect, float>(effect, initMulti);
             effects.Add(temp);
             return;
         }
@@ -71,18 +71,18 @@ public class GemHolder : MonoBehaviour
         }
 
         Effects.Add(Tuple.Create(effect, 0.35f));
-        RecalculateEffects(Effects);
+        RecalculateEffects(Effects, initMulti);
     }
 
 
-    private void RecalculateEffects(List<Tuple<Effect, float>> effects)
+    private void RecalculateEffects(List<Tuple<Effect, float>> effects, float initMulti)
     {
         int differentElementCount = effects.Count;
         float addition;
         float multiplier;
         for (int i = effects.Count - 1; i >= 0; i--)
         {
-            addition = (effects[i].Item2 - 0.35f < 0) ? 0 : effects[i].Item2 - 0.35f;
+            addition = (effects[i].Item2 - initMulti < 0) ? 0 : effects[i].Item2 - initMulti;
             multiplier = (float)Math.Round(effects[i].Item2 - differentElementCount * 0.05f, 2);
             multiplier = (multiplier <= 0) ? 0.01f : multiplier;
             effects[i] = Tuple.Create(effects[i].Item1, multiplier + addition);

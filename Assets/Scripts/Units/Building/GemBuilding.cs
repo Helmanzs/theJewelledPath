@@ -7,7 +7,7 @@ abstract public class GemBuilding : Structure
 {
 
     public GemHolder Gem;
-    protected List<Enemy> possibleTargets = new List<Enemy>();
+    protected virtual List<Enemy> PossibleTargets { get; set; }
 
     private float damage = 0;
     private float attackSpeed = 0;
@@ -34,54 +34,28 @@ abstract public class GemBuilding : Structure
     }
     protected abstract void DealDamage();
     protected abstract void RemoveGem(GemHolder gem);
-    public void AddTarget(Enemy target)
+
+    public virtual void AddTarget<T>(T unit)
     {
-        possibleTargets.Add(target);
-    }
-    public abstract void RemoveTarget(Enemy target);
-
-}
-
-/*protected List<Gem> gems = new List<Gem>();
-protected Enemy _primaryTarget = null;
-protected float nextTimeCall = 0;
-
-protected abstract void UseGemEffect(Enemy target, Gem gem);
-
-public List<Gem> GetPlacedGems
-{
-    get { return gems; }
-}
-protected virtual Enemy Target
-{
-    get
-    {
-        if (_primaryTarget == null)
+        if (this is ISingleTargetStructure<T>)
         {
-            targets.RemoveAll(eachTarget => { return eachTarget == null; });
-            if (targets.Count > 0)
-            {
-                //_primaryTarget = targets.Find(target => { return true; });
-            }
+            this.GetComponent<ISingleTargetStructure<T>>().AddTarget(unit);
         }
-        return _primaryTarget;
+        if (this is IAreaOfEffectStructure<T>)
+        {
+            this.GetComponent<IAreaOfEffectStructure<T>>().AddTarget(unit);
+        }
     }
-}
-
-protected virtual void FindTarget()
-{
-    if (_primaryTarget == null)
+    public virtual void RemoveTarget<T>(T unit)
     {
-        _primaryTarget = Target;
+        if (this is ISingleTargetStructure<T>)
+        {
+            this.GetComponent<ISingleTargetStructure<T>>().RemoveTarget(unit);
+        }
+        if (this is IAreaOfEffectStructure<T>)
+        {
+            this.GetComponent<IAreaOfEffectStructure<T>>().RemoveTarget(unit);
+        }
     }
-}
 
-public void RemoveTarget(Enemy other)
-{
-    if (ReferenceEquals(_primaryTarget, other))
-    {
-        _primaryTarget = null;
-    }
-    targets.Remove(other);
 }
-*/
