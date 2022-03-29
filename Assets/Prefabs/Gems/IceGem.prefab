@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 886906379}
   - component: {fileID: -7116638297395275066}
   - component: {fileID: -518315903388832262}
-  - component: {fileID: 4841534260483974441}
   m_Layer: 0
   m_Name: IceGem
   m_TagString: Untagged
@@ -4894,15 +4893,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &4841534260483974441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5337075560078372031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47e71145b49e6f849a09a3c99d538e0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class CritEffect : ActiveEffect
 {
-    public override Effect Clone()
-    {
-        CritEffect temp = new CritEffect();
-        return temp;
-    }
-
     public override void Use(Enemy target, float value)
     {
 

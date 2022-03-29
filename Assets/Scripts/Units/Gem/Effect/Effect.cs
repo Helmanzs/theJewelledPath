@@ -1,8 +1,6 @@
 using UnityEngine;
 
-public abstract class Effect : MonoBehaviour
+public abstract class Effect
 {
     public abstract void Use(Enemy target, float value);
-
-    public abstract Effect Clone();
 }

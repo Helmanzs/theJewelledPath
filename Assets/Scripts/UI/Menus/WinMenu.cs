@@ -16,7 +16,7 @@ public class WinMenu : MonoBehaviour
 
     public void Menu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(1);
 
     }
     public void Exit()

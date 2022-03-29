@@ -56,56 +56,40 @@ public class GemHolder : MonoBehaviour
     {
         if (effects.Count == 0)
         {
-            Tuple<Effect, float> temp = new Tuple<Effect, float>(effect, 0);
+            Tuple<Effect, float> temp = new Tuple<Effect, float>(effect, 0.35f);
             effects.Add(temp);
-        }
-
-
-
-        /*EffectDataHolder holder = new EffectDataHolder(Instantiate(effect), 0f);
-
-        if (effects.Count == 0)
-        {
-            holder.effectMultiplier = 0.35f;
-            Effects.Add(holder);
             return;
         }
 
-        for (int i = Effects.Count - 1; i > 0; i--)
+        for (int i = Effects.Count - 1; i >= 0; i--)
         {
-            if (Effects[i].effect == effect)
+            if (Effects[i].Item1.GetType() == effect.GetType())
             {
-                EffectDataHolder data = Effects[i];
-                data.effectMultiplier += 0.05f;
-                Effects[i] = data;
+                Effects[i] = Tuple.Create(Effects[i].Item1, Effects[i].Item2 + 0.05f);
                 continue;
             }
-            Effects.Add(holder);
-            RecalculateEffects(Effects);*/
+
+            Effects.Add(Tuple.Create(effect, 0f));
+            RecalculateEffects(Effects);
+        }
     }
 
 
-    /*private void RecalculateEffects(List<EffectDataHolder> effects)
+    private void RecalculateEffects(List<Tuple<Effect, float>> effects)
     {
-        EffectDataHolder data;
         int differentElementCount = effects.Count;
-        float addition = 0;
-        for (int i = Effects.Count - 1; i > 0; i--)
+        float addition;
+        for (int i = effects.Count - 1; i >= 0; i--)
         {
-            data = Effects[i];
-            addition = data.effectMultiplier - 0.35f;
-            if (data.effectMultiplier <= 0)
+            addition = effects[i].Item2 - 0.35f;
+            if (effects[i].Item2 <= 0)
             {
-                data.effectMultiplier = 0.35f - differentElementCount * 0.05f;
+                effects[i] = Tuple.Create(effects[i].Item1, 0.35f - differentElementCount * 0.05f);
                 continue;
             }
-            else
-            {
-                data.effectMultiplier = 0.35f - differentElementCount * 0.05f + addition;
-            }
-            effects[i] = data;
+            effects[i] = Tuple.Create(effects[i].Item1, 0.35f - differentElementCount * 0.05f + addition);
         }
-    }*/
+    }
 
     public void DisplayEffects()
     {

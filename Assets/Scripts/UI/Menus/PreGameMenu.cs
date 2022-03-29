@@ -9,4 +9,9 @@ public class PreGameMenu : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void LoadLevel(int scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
 }

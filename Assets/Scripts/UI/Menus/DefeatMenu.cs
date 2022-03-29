@@ -25,11 +25,11 @@ public class DefeatMenu : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("TestLevel");
+        SceneManager.LoadScene(2);
     }
     public void Menu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(1);
 
     }
     public void Exit()

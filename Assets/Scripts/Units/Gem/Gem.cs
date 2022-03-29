@@ -11,10 +11,6 @@ abstract public class Gem : Unit
     private Effect effect = null;
     private Color color;
 
-    private void Awake()
-    {
-        effect = GetComponent<Effect>();
-    }
     public Effect Effect
     {
         get { return effect; }

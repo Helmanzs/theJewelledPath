@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 886906379}
   - component: {fileID: -7116638297395275066}
   - component: {fileID: -518315903388832262}
-  - component: {fileID: 501607822899563722}
   - component: {fileID: -7373305236301598349}
   m_Layer: 0
   m_Name: CritGem
@@ -4877,18 +4876,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &501607822899563722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5337075560078372031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bea360084876a0049a3bea03c1d5d310, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-7373305236301598349
 MonoBehaviour:
   m_ObjectHideFlags: 0

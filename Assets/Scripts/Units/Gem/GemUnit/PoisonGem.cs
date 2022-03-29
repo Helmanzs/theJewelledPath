@@ -10,6 +10,6 @@ public class PoisonGem : Gem
         range = 10;
         attackSpeed = 100;
         Color = transform.GetComponent<Renderer>().material.color;
-        Effect = GetComponent<Effect>();
+        Effect = new PoisonEffect();
     }
 }
