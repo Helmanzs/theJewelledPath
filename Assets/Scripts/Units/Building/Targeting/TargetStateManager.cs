@@ -33,10 +33,11 @@ public class TargetStateManager : MonoBehaviour
     private void Start()
     {
         structure = GetComponent<Structure>();
+        ChangeMethod(defaultMethod);
+
     }
     private void Awake()
     {
-        ChangeMethod(defaultMethod);
     }
     public void ChangeMethod(TargetMethod newMethod)
     {

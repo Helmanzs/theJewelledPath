@@ -65,13 +65,13 @@ public class GemHolder : MonoBehaviour
         {
             if (Effects[i].Item1.GetType() == effect.GetType())
             {
-                Effects[i] = Tuple.Create(Effects[i].Item1, Effects[i].Item2 + 0.05f);
-                continue;
+                Effects[i] = Tuple.Create(Effects[i].Item1, (float)Math.Round(Effects[i].Item2 + 0.05f, 2));
+                return;
             }
-
-            Effects.Add(Tuple.Create(effect, 0f));
-            RecalculateEffects(Effects);
         }
+
+        Effects.Add(Tuple.Create(effect, 0.35f));
+        RecalculateEffects(Effects);
     }
 
 
@@ -79,22 +79,13 @@ public class GemHolder : MonoBehaviour
     {
         int differentElementCount = effects.Count;
         float addition;
+        float multiplier;
         for (int i = effects.Count - 1; i >= 0; i--)
         {
-            addition = effects[i].Item2 - 0.35f;
-            if (effects[i].Item2 <= 0)
-            {
-                effects[i] = Tuple.Create(effects[i].Item1, 0.35f - differentElementCount * 0.05f);
-                continue;
-            }
-            effects[i] = Tuple.Create(effects[i].Item1, 0.35f - differentElementCount * 0.05f + addition);
+            addition = (effects[i].Item2 - 0.35f < 0) ? 0 : effects[i].Item2 - 0.35f;
+            multiplier = (float)Math.Round(effects[i].Item2 - differentElementCount * 0.05f, 2);
+            multiplier = (multiplier <= 0) ? 0.01f : multiplier;
+            effects[i] = Tuple.Create(effects[i].Item1, multiplier + addition);
         }
     }
-
-    public void DisplayEffects()
-    {
-
-        effects.ForEach(effect => Debug.Log($"Effect: {effect.Item1}, multiplier: {effect.Item2}"));
-    }
-
 }
