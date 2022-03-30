@@ -48,6 +48,8 @@ public class StructureBuildingManagement<T> : BuildingManagement<T> where T : Mo
             Global.Instance.Mana -= (int)spot.Structure.cost;
             Unit.transform.position = spot.transform.position;
             Unit.gameObject.SetActive(true);
+            Unit.transform.SetParent(spot.transform);
+
             if (Unit is GemBuilding)
             {
                 Global.Instance.gemBuildings.Add(Unit as GemBuilding);
@@ -56,7 +58,6 @@ public class StructureBuildingManagement<T> : BuildingManagement<T> where T : Mo
             {
                 Global.Instance.buildings.Add(Unit as Structure);
             }
-            Unit.transform.SetParent(spot.transform);
             Unit = null;
             GameObject.Destroy(UnitPreview.gameObject);
             buildingMode = false;

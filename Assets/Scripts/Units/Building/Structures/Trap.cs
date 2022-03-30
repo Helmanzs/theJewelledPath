@@ -31,7 +31,7 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>
         throw new System.NotImplementedException();
     }
 
-    protected override void DealDamage()
+    protected override void Act()
     {
         throw new System.NotImplementedException();
     }

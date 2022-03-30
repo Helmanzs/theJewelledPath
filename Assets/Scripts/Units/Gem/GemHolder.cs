@@ -42,7 +42,6 @@ public class GemHolder : MonoBehaviour
             rend.material.color = color;
         }
     }
-    public bool IsEmpty => effects.Count == 0;
     public void AddGem(Gem gem, float initMulti)
     {
         this.Damage += gem.damage;
@@ -51,7 +50,6 @@ public class GemHolder : MonoBehaviour
         this.Color = gem.Color;
         AddEffect(gem.Effect, initMulti);
     }
-
     private void AddEffect(Effect effect, float initMulti)
     {
         if (effects.Count == 0)
@@ -73,8 +71,6 @@ public class GemHolder : MonoBehaviour
         Effects.Add(Tuple.Create(effect, 0.35f));
         RecalculateEffects(Effects, initMulti);
     }
-
-
     private void RecalculateEffects(List<Tuple<Effect, float>> effects, float initMulti)
     {
         int differentElementCount = effects.Count;

@@ -5,36 +5,20 @@ using UnityEngine;
 
 abstract public class GemBuilding : Structure
 {
-
     public GemHolder Gem;
-    protected virtual List<Enemy> PossibleTargets { get; set; }
-
-    private float damage = 0;
-    private float attackSpeed = 0;
-    public float Damage
+    protected SphereCollider sphereCollider;
+    protected override void Awake()
     {
-        get { return damage; }
-        protected set { damage = value; }
+        sphereCollider = GetComponentInChildren<SphereCollider>();
+        base.Awake();
     }
-
-    public float AttackSpeed
-    {
-        get { return attackSpeed; }
-        protected set
-        {
-            attackSpeed = value;
-        }
-    }
-
-
-    public abstract void InsertGem(Gem gem);
-    public void EnableGem()
+    public virtual void EnableGem()
     {
         Gem.gameObject.SetActive(true);
     }
-    protected abstract void DealDamage();
+    protected abstract void Act();
+    public abstract void InsertGem(Gem gem);
     protected abstract void RemoveGem(GemHolder gem);
-
     public virtual void AddTarget<T>(T unit)
     {
         if (this is ISingleTargetStructure<T>)

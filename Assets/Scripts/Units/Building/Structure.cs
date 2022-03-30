@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 abstract public class Structure : Unit, IClickable
 {
-    public float cost;
-    private float range = 0;
-    private TargetStateManager methodManager;
+    protected static StructureBuilt OnStructurePlaced;
 
+    public float cost;
+    private TargetStateManager methodManager;
+    private float range = 0;
     public float Range
     {
         get { return range; }
@@ -28,19 +31,23 @@ abstract public class Structure : Unit, IClickable
             UpdateCollider(range);
         }
     }
-
     protected virtual void Start()
     {
         methodManager = GetComponent<TargetStateManager>();
+        OnStructurePlaced?.Invoke(this);
     }
-
     protected virtual void Awake()
     {
+        if (OnStructurePlaced == null)
+            OnStructurePlaced = new StructureBuilt();
         UpdateCollider(range);
-
     }
-    protected abstract void UpdateCollider(float range);
+    public void InvokeBuiltStructure()
+    {
+        OnStructurePlaced?.Invoke(this);
+    }
     public abstract void Click(Vector3 mousePos);
+    protected abstract void UpdateCollider(float range);
     public void SetMethod(TargetMethod method)
     {
         methodManager.ChangeMethod(method);
