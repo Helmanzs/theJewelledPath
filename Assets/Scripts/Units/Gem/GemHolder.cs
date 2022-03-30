@@ -8,7 +8,7 @@ public class GemHolder : MonoBehaviour
     private float damage = 0;
     private float range = 0;
     private float attackSpeed = 0;
-    private Color color;
+    private Color color = Color.white;
     private List<Tuple<Effect, float>> effects = new List<Tuple<Effect, float>>();
     private Renderer rend = null;
 
@@ -50,6 +50,32 @@ public class GemHolder : MonoBehaviour
         this.Color = gem.Color;
         AddEffect(gem.Effect, initMulti);
     }
+    public void AddGem(GemHolder gem, float initMulti)
+    {
+        this.Damage += gem.damage;
+        this.Range += gem.range;
+        this.AttackSpeed += gem.attackSpeed;
+        SumEffects(gem.effects);
+    }
+
+    private void SumEffects(List<Tuple<Effect, float>> ampEffects)
+    {
+        print("kek");
+        for (int i = Effects.Count - 1; i >= 0; i--)
+        {
+            Tuple<Effect, float> effect = Effects[i];
+            Tuple<Effect, float> ampEffect = ampEffects.Find(ampEf => ampEf.GetType() == effect.GetType());
+            if (ampEffect != null)
+            {
+                Effects[i] = Tuple.Create(effect.Item1, effect.Item2 + ampEffect.Item2);
+            }
+            else
+            {
+                Effects.Add(Tuple.Create(ampEffect.Item1, ampEffect.Item2));
+            }
+        }
+    }
+
     private void AddEffect(Effect effect, float initMulti)
     {
         if (effects.Count == 0)
@@ -83,5 +109,14 @@ public class GemHolder : MonoBehaviour
             multiplier = (multiplier <= 0) ? 0.01f : multiplier;
             effects[i] = Tuple.Create(effects[i].Item1, multiplier + addition);
         }
+    }
+
+    public void Clear()
+    {
+        Damage = 0;
+        Range = 0;
+        AttackSpeed = 0;
+        Color = Color.white;
+        Effects.Clear();
     }
 }

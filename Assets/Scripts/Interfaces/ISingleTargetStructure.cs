@@ -8,6 +8,6 @@ public interface ISingleTargetStructure<T>
     public abstract T FindTarget(Method method);
     public abstract void RemoveTarget(T target);
     public void AddTarget(T target);
-
+    public List<T> PossibleTargets { get; set; }
 }
 

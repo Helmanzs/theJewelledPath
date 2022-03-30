@@ -3,15 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Amplifier : GemBuilding, IAreaOfEffectStructure<Structure>
+public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
 {
-    private List<Structure> targets = new List<Structure>();
-    private List<Structure> possibleTargets = new List<Structure>();
+    private List<IAmplifiable> targets = new List<IAmplifiable>();
+    private List<IAmplifiable> possibleTargets = new List<IAmplifiable>();
     private float nextTimeCall = 0;
 
-
-    public List<Structure> Targets { get => targets; set => targets = value; }
-    public List<Structure> PossibleTargets { get => possibleTargets; set => possibleTargets = value; }
+    public List<IAmplifiable> Targets { get => targets; set => targets = value; }
+    public List<IAmplifiable> PossibleTargets { get => possibleTargets; set => possibleTargets = value; }
 
     protected override void Start()
     {
@@ -28,23 +27,29 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<Structure>
     {
         if (foundTarget is Amplifier) return;
         if (sphereCollider.radius == 0) return;
-        if (foundTarget.GetDistanceToUnit(this) < 2 * sphereCollider.radius)
+
+        if (foundTarget.GetDistanceToUnit(this) < 2 * sphereCollider.radius && foundTarget is IAmplifiable)
         {
-            Structure struc = foundTarget as Structure;
-            struc.AmplifierModifierRequest += OnAmplifierModifierRequest;
-            possibleTargets.Add(struc);
+            IAmplifiable ampl = foundTarget as IAmplifiable;
+            ampl.AmplifierModifierRequest += OnAmplifierModifierRequest;
+            ampl.Dirty = true;
+            possibleTargets.Add(ampl);
         }
     }
 
-    private void OnAmplifierModifierRequest(Structure structure)
+    private void OnAmplifierModifierRequest(IAmplifiable structure)
     {
-        print("yo");
-        structure.AmplifierEffect += 0.2f;
+        structure.AmplifierEffect.AddGem(Gem, 0);
     }
 
     private void FixedUpdate()
     {
         Act();
+    }
+    public override void EnableGem()
+    {
+        possibleTargets.ForEach(target => target.Dirty = true);
+        base.EnableGem();
     }
     public override void Click(Vector3 mousePos)
     {
@@ -62,6 +67,7 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<Structure>
     {
         Gem.AddGem(gem, 0.2f);
         UpdateCollider(Gem.Range);
+        possibleTargets.ForEach(target => target.Dirty = true);
         possibleTargets.Clear();
         Global.Instance.gemBuildings.ForEach(building => building.InvokeBuiltStructure());
 
@@ -71,7 +77,7 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<Structure>
         Gem = null;
     }
 
-    public void AddTarget(Structure target)
+    public void AddTarget(IAmplifiable target)
     {
         PossibleTargets.Add(target);
     }
@@ -84,16 +90,15 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<Structure>
         base.AddTarget(unit);
     }
 
-    public void RemoveTarget(Structure target)
+    public void RemoveTarget(IAmplifiable target)
     {
         target.AmplifierModifierRequest -= OnAmplifierModifierRequest;
         targets.Remove(target);
     }
 
-    public List<Structure> FindTargets()
+    public List<IAmplifiable> FindTargets()
     {
-
-        return new List<Structure>(PossibleTargets);
+        return PossibleTargets;
     }
 
     protected override void UpdateCollider(float range)

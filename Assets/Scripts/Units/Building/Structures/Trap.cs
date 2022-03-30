@@ -5,6 +5,7 @@ using UnityEngine;
 public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>
 {
     public List<Enemy> Targets { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public List<Enemy> PossibleTargets { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     public void AddTarget(Enemy target)
     {

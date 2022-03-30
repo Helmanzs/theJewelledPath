@@ -1,18 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
+public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
 {
+    public event Action<IAmplifiable> AmplifierModifierRequest;
+
     private Enemy target = null;
     private List<Enemy> possibleTargets = new List<Enemy>();
+    private bool dirty = false;
+    private GemHolder amplifierEffect;
 
     private LineRenderer lineRendererComponent = null;
     private DrawLine drawLineComponent = null;
     private TargetStateManager targetStateManager = null;
 
     private float nextTimeCall = 0;
+
 
     public Enemy Target
     {
@@ -34,20 +40,28 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
         }
     }
     public List<Enemy> PossibleTargets { get => possibleTargets; set => possibleTargets = value; }
+    public bool Dirty { get => dirty; set => dirty = value; }
+    public GemHolder AmplifierEffect
+    {
+        get => amplifierEffect;
+        set
+        {
+            amplifierEffect = value;
+        }
+    }
 
     protected override void Awake()
     {
         lineRendererComponent = GetComponent<LineRenderer>();
         drawLineComponent = GetComponent<DrawLine>();
         targetStateManager = GetComponent<TargetStateManager>();
+        amplifierEffect = GetComponent<GemHolder>();
 
         base.Awake();
     }
 
     private void FixedUpdate()
     {
-        RequestAmplifierModifier(this);
-
         if (Target != null)
         {
             DrawLine();
@@ -67,8 +81,9 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
         if (nextTimeCall < Time.time)
         {
             nextTimeCall = Time.time + (2 / (1 + Gem.AttackSpeed / 100));
-            Target.ApplyDamage(Gem.Damage);
+            RequestAmplifierModifier(this);
             Gem.Effects.ForEach(effect => effect.Item1.Use(Target, effect.Item2));
+            Target.ApplyDamage(Gem.Damage);
         }
     }
     public override void InsertGem(Gem gem)
@@ -117,5 +132,9 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
     public void AddTarget(Enemy target)
     {
         PossibleTargets.Add(target);
+    }
+    protected void RequestAmplifierModifier()
+    {
+        AmplifierModifierRequest?.Invoke(this);
     }
 }

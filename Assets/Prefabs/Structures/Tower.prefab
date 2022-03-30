@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3888013340752838862}
   - component: {fileID: 8267110857687402126}
   - component: {fileID: -3260700456006190160}
+  - component: {fileID: 2035776962827131749}
   m_Layer: 8
   m_Name: Tower
   m_TagString: EmptyTower
@@ -116,6 +117,7 @@ MonoBehaviour:
   previewUnit: {fileID: 5512577985820444552, guid: eaa6ac026ad66ef499381a9f1019b49f, type: 3}
   cost: 100
   Gem: {fileID: 8046764737381632602}
+  amplifierEffect: {fileID: 2035776962827131749}
 --- !u!114 &3888013340752838862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +247,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d4e793b456887847af4e16916fac661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2035776962827131749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383112843604117426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c252b9031f4da24591bd9f600576498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6167608893756498273

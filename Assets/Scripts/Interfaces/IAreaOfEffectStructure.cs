@@ -8,4 +8,6 @@ public interface IAreaOfEffectStructure<T>
     public abstract List<T> FindTargets();
     public abstract void AddTarget(T target);
     public abstract void RemoveTarget(T target);
+    public List<T> PossibleTargets { get; set; }
+
 }
