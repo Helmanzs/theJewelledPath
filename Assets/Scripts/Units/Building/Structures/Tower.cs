@@ -40,11 +40,14 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>
         lineRendererComponent = GetComponent<LineRenderer>();
         drawLineComponent = GetComponent<DrawLine>();
         targetStateManager = GetComponent<TargetStateManager>();
+
         base.Awake();
     }
 
     private void FixedUpdate()
     {
+        RequestAmplifierModifier(this);
+
         if (Target != null)
         {
             DrawLine();

@@ -18,20 +18,28 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<Structure>
         OnStructurePlaced.AddListener(FindTarget);
         base.Start();
     }
-    protected override void Awake()
+
+    private void AddModifier(Unit unit)
     {
-        base.Awake();
+        Debug.Log(unit, unit);
     }
+
     private void FindTarget(Unit foundTarget)
     {
         if (foundTarget is Amplifier) return;
         if (sphereCollider.radius == 0) return;
-
-        print($"Distance to target: {foundTarget.GetDistanceToUnit(this)}, radius: {2 * sphereCollider.radius}");
         if (foundTarget.GetDistanceToUnit(this) < 2 * sphereCollider.radius)
         {
-            possibleTargets.Add(foundTarget as Structure);
+            Structure struc = foundTarget as Structure;
+            struc.AmplifierModifierRequest += OnAmplifierModifierRequest;
+            possibleTargets.Add(struc);
         }
+    }
+
+    private void OnAmplifierModifierRequest(Structure structure)
+    {
+        print("yo");
+        structure.AmplifierEffect += 0.2f;
     }
 
     private void FixedUpdate()
@@ -73,11 +81,12 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<Structure>
         {
             return;
         }
-        base.AddTarget<T>(unit);
+        base.AddTarget(unit);
     }
 
     public void RemoveTarget(Structure target)
     {
+        target.AmplifierModifierRequest -= OnAmplifierModifierRequest;
         targets.Remove(target);
     }
 

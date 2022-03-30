@@ -6,10 +6,12 @@ using UnityEngine.Events;
 
 abstract public class Structure : Unit, IClickable
 {
-    protected static StructureBuilt OnStructurePlaced;
+    protected static StructureEvent OnStructurePlaced;
+    public event Action<Structure> AmplifierModifierRequest;
 
     public float cost;
     private TargetStateManager methodManager;
+    private float amplifierEffect = 0;
     private float range = 0;
     public float Range
     {
@@ -31,6 +33,8 @@ abstract public class Structure : Unit, IClickable
             UpdateCollider(range);
         }
     }
+    public float AmplifierEffect { get => amplifierEffect; set => amplifierEffect = value; }
+
     protected virtual void Start()
     {
         methodManager = GetComponent<TargetStateManager>();
@@ -39,7 +43,7 @@ abstract public class Structure : Unit, IClickable
     protected virtual void Awake()
     {
         if (OnStructurePlaced == null)
-            OnStructurePlaced = new StructureBuilt();
+            OnStructurePlaced = new StructureEvent();
         UpdateCollider(range);
     }
     public void InvokeBuiltStructure()
@@ -51,5 +55,10 @@ abstract public class Structure : Unit, IClickable
     public void SetMethod(TargetMethod method)
     {
         methodManager.ChangeMethod(method);
+    }
+    protected void RequestAmplifierModifier(Structure structure)
+    {
+        amplifierEffect = 0;
+        AmplifierModifierRequest?.Invoke(structure);
     }
 }
