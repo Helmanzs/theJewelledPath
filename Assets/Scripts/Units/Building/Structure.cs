@@ -53,8 +53,5 @@ abstract public class Structure : Unit, IClickable
     {
         methodManager.ChangeMethod(method);
     }
-    protected virtual void RequestAmplifierModifier(IAmplifiable ampl)
-    {
-        //AmplifierModifierRequest?.Invoke(ampl);
-    }
+    
 }

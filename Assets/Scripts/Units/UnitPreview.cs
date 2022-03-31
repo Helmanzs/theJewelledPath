@@ -10,7 +10,7 @@ public class UnitPreview : Unit
     private Renderer renderer;
     private void Start()
     {
-        this.renderer = GetComponent<Renderer>();
+        this.renderer = GetComponentInChildren<Renderer>();
         this.previewMaterial = new Material(transparent);
         UpdateMaterial();
     }

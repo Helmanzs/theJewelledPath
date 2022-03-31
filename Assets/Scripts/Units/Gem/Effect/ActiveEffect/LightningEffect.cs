@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[Serializable]
 public class LightningEffect : ActiveEffect
 {
     public override void Use(Enemy target, float value)
@@ -36,6 +36,13 @@ public class LightningEffect : ActiveEffect
             }
         }
         return bestTarget;
+    }
+    public override void Use(List<Enemy> targets, float value)
+    {
+        foreach (Enemy enemy in targets)
+        {
+            Use(enemy, value);
+        }
     }
 
 }

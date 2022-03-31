@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class StructureBuildingManagement<T> : BuildingManagement<T> where T : MonoBehaviour
 {
+    LayerMask mask;
     public void AddStructure(Structure structure)
     {
         if (Global.Instance.Mana - (int)structure.cost >= 0)
@@ -24,9 +25,15 @@ public class StructureBuildingManagement<T> : BuildingManagement<T> where T : Mo
 
     protected override void PreviewUnit()
     {
-        if (selector.GetObject(1 << 7, "EmptyBuildingSpot") != null)
+        mask = 1 << 7;
+        if (Unit is Trap)
         {
-            T previewedSpot = selector.GetObject(1 << 7, "EmptyBuildingSpot");
+            mask = 1 << 6;
+        }
+
+        if (selector.GetObject(mask, "EmptyBuildingSpot") != null)
+        {
+            T previewedSpot = selector.GetObject(mask, "EmptyBuildingSpot");
             TileChecker spot = previewedSpot as TileChecker;
             if (spot.Structure == null)
             {

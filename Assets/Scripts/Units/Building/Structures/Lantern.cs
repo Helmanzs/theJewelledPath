@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
+public class Lantern : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
 {
     public event Action<IAmplifiable> AmplifierModifierRequest;
 
@@ -45,6 +45,7 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
     public override void InsertGem(Gem gem)
     {
         Gem.AddGem(gem, 0.5f);
+        UpdateCollider(Gem.Range);
     }
 
     public void RemoveTarget(Enemy target)
@@ -56,7 +57,7 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
     {
         if (nextTimeCall < Time.time)
         {
-            nextTimeCall = Time.time + 0.5f;
+            nextTimeCall = Time.time + (2 / (1 + Gem.AttackSpeed / 100));
             Gem.Effects.ForEach(effect => effect.Item1.Use(Targets, effect.Item2));
             Targets.ForEach(target => target.ApplyDamage(Gem.Damage));
             Targets.RemoveAll(target => { return target == null; });
@@ -70,6 +71,6 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
 
     protected override void UpdateCollider(float range)
     {
-        return;
+        sphereCollider.radius = range / 2;
     }
 }

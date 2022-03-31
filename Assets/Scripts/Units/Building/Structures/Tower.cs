@@ -18,6 +18,7 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
     private TargetStateManager targetStateManager = null;
 
     private float nextTimeCall = 0;
+    private float amplifierNumberEffect;
 
     public Enemy Target
     {
@@ -49,6 +50,7 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
     }
 
     public List<Amplifier> Amplifiers { get => amplifiers; set => amplifiers = value; }
+    public float AmplifierNumberEffect { get => amplifierNumberEffect; set => amplifierNumberEffect = value; }
 
     protected override void Awake()
     {

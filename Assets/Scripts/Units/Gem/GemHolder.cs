@@ -42,6 +42,7 @@ public class GemHolder : MonoBehaviour
             rend.material.color = color;
         }
     }
+
     public void AddGem(Gem gem, float initMulti)
     {
         this.Damage += gem.damage;
@@ -72,10 +73,9 @@ public class GemHolder : MonoBehaviour
         {
             Tuple<Effect, float> effect = Effects[i];
             Tuple<Effect, float> ampEffect = ampEffects.Find(eff => eff.GetType() == effect.GetType());
-            if (effect != null)
+            if (ampEffect != null)
             {
                 Effects[i] = Tuple.Create(effect.Item1, effect.Item2 - ampEffect.Item2);
-                ampEffects.Remove(ampEffect);
             }
         }
     }
@@ -84,22 +84,27 @@ public class GemHolder : MonoBehaviour
     {
         if (Effects.Count == 0)
         {
-            ampEffects.ForEach(ampEffect => effects.Add(ampEffect));
+            ampEffects.ForEach(ampEffect => Effects.Add(ampEffect));
             return;
         }
 
 
-        for (int i = Effects.Count - 1; i >= 0; i--)
+        for (int i = ampEffects.Count - 1; i >= 0; i--)
         {
-            Tuple<Effect, float> effect = Effects[i];
-            Tuple<Effect, float> ampEffect = ampEffects.Find(eff => eff.GetType() == effect.GetType());
+            Tuple<Effect, float> ampEffect = ampEffects[i];
+            Tuple<Effect, float> effect = Effects.Find(eff => eff.GetType() == ampEffect.GetType());
             if (effect != null)
             {
                 Effects[i] = Tuple.Create(effect.Item1, effect.Item2 + ampEffect.Item2);
-                ampEffects.Remove(ampEffect);
+            }
+            else
+            {
+                Effects.Add(Tuple.Create(ampEffect.Item1, ampEffect.Item2));
             }
         }
-        ampEffects.ForEach(ampEffect => effects.Add(ampEffect));
+
+        // ampEffects.ForEach(ampEffect => Effects.Add(ampEffect));
+        DisplayEffects();
 
     }
 
@@ -121,7 +126,7 @@ public class GemHolder : MonoBehaviour
             }
         }
 
-        Effects.Add(Tuple.Create(effect, 0.35f));
+        Effects.Add(Tuple.Create(effect, initMulti));
         RecalculateEffects(Effects, initMulti);
     }
     private void RecalculateEffects(List<Tuple<Effect, float>> effects, float initMulti)
@@ -145,5 +150,10 @@ public class GemHolder : MonoBehaviour
         AttackSpeed = 0;
         Color = Color.white;
         Effects.Clear();
+    }
+
+    public void DisplayEffects()
+    {
+        Effects.ForEach(effect => Debug.Log($"{effect.Item1} - {effect.Item2}"));
     }
 }

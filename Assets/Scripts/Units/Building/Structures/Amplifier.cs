@@ -8,7 +8,7 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
     private List<IAmplifiable> targets = new List<IAmplifiable>();
     private List<IAmplifiable> possibleTargets = new List<IAmplifiable>();
     private float nextTimeCall = 0;
-
+    private float modEffect = 0.2f;
     public List<IAmplifiable> Targets { get => targets; set => targets = value; }
     public List<IAmplifiable> PossibleTargets { get => possibleTargets; set => possibleTargets = value; }
 
@@ -35,7 +35,8 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
     {
         if (structure.Amplifiers.Contains(this)) return;
 
-        structure.AmplifierEffect.AddGem(Gem, 0);
+        //structure.AmplifierEffect.AddGem(Gem, 0);
+        structure.AmplifierNumberEffect += modEffect * Gem.Damage;
         structure.Amplifiers.Add(this);
 
     }
@@ -61,11 +62,14 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
     }
     public override void InsertGem(Gem gem)
     {
+        //Targets.ForEach(target => target.AmplifierEffect.RemoveGem(Gem, 0.2f));
+        Targets.ForEach(target => target.AmplifierNumberEffect -= modEffect * Gem.Damage);
         Gem.AddGem(gem, 0.2f);
         UpdateCollider(Gem.Range);
-        Targets.ForEach(target => target.AmplifierEffect.RemoveGem(Gem, 0));
         Targets.ForEach(target => target.Amplifiers.Remove(this));
+        Targets.Clear();
         Global.Instance.gemBuildings.ForEach(building => building.InvokeBuiltStructure());
+        //Gem.DisplayEffects();
 
     }
     protected override void RemoveGem(GemHolder gem)
