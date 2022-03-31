@@ -18,11 +18,6 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
         base.Start();
     }
 
-    private void AddModifier(Unit unit)
-    {
-        Debug.Log(unit, unit);
-    }
-
     private void FindTarget(Unit foundTarget)
     {
         if (foundTarget is Amplifier) return;
@@ -32,23 +27,24 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
         {
             IAmplifiable ampl = foundTarget as IAmplifiable;
             ampl.AmplifierModifierRequest += OnAmplifierModifierRequest;
-            ampl.Dirty = true;
             possibleTargets.Add(ampl);
         }
     }
 
     private void OnAmplifierModifierRequest(IAmplifiable structure)
     {
-        structure.AmplifierEffect.AddGem(Gem, 0);
-    }
+        if (structure.Amplifiers.Contains(this)) return;
 
+        structure.AmplifierEffect.AddGem(Gem, 0);
+        structure.Amplifiers.Add(this);
+
+    }
     private void FixedUpdate()
     {
         Act();
     }
     public override void EnableGem()
     {
-        possibleTargets.ForEach(target => target.Dirty = true);
         base.EnableGem();
     }
     public override void Click(Vector3 mousePos)
@@ -67,8 +63,8 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
     {
         Gem.AddGem(gem, 0.2f);
         UpdateCollider(Gem.Range);
-        possibleTargets.ForEach(target => target.Dirty = true);
-        possibleTargets.Clear();
+        Targets.ForEach(target => target.AmplifierEffect.RemoveGem(Gem, 0));
+        Targets.ForEach(target => target.Amplifiers.Remove(this));
         Global.Instance.gemBuildings.ForEach(building => building.InvokeBuiltStructure());
 
     }

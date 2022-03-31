@@ -57,23 +57,50 @@ public class GemHolder : MonoBehaviour
         this.AttackSpeed += gem.attackSpeed;
         SumEffects(gem.effects);
     }
-
-    private void SumEffects(List<Tuple<Effect, float>> ampEffects)
+    public void RemoveGem(GemHolder gem, float initMulti)
     {
-        print("kek");
+        this.Damage -= gem.damage;
+        this.Range -= gem.range;
+        this.AttackSpeed -= gem.attackSpeed;
+        DifferEffects(gem.effects);
+
+    }
+
+    private void DifferEffects(List<Tuple<Effect, float>> ampEffects)
+    {
         for (int i = Effects.Count - 1; i >= 0; i--)
         {
             Tuple<Effect, float> effect = Effects[i];
-            Tuple<Effect, float> ampEffect = ampEffects.Find(ampEf => ampEf.GetType() == effect.GetType());
-            if (ampEffect != null)
+            Tuple<Effect, float> ampEffect = ampEffects.Find(eff => eff.GetType() == effect.GetType());
+            if (effect != null)
             {
-                Effects[i] = Tuple.Create(effect.Item1, effect.Item2 + ampEffect.Item2);
-            }
-            else
-            {
-                Effects.Add(Tuple.Create(ampEffect.Item1, ampEffect.Item2));
+                Effects[i] = Tuple.Create(effect.Item1, effect.Item2 - ampEffect.Item2);
+                ampEffects.Remove(ampEffect);
             }
         }
+    }
+
+    private void SumEffects(List<Tuple<Effect, float>> ampEffects)
+    {
+        if (Effects.Count == 0)
+        {
+            ampEffects.ForEach(ampEffect => effects.Add(ampEffect));
+            return;
+        }
+
+
+        for (int i = Effects.Count - 1; i >= 0; i--)
+        {
+            Tuple<Effect, float> effect = Effects[i];
+            Tuple<Effect, float> ampEffect = ampEffects.Find(eff => eff.GetType() == effect.GetType());
+            if (effect != null)
+            {
+                Effects[i] = Tuple.Create(effect.Item1, effect.Item2 + ampEffect.Item2);
+                ampEffects.Remove(ampEffect);
+            }
+        }
+        ampEffects.ForEach(ampEffect => effects.Add(ampEffect));
+
     }
 
     private void AddEffect(Effect effect, float initMulti)

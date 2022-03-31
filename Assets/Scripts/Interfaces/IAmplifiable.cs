@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 public interface IAmplifiable
 {
     public event Action<IAmplifiable> AmplifierModifierRequest;
-    public bool Dirty { get; set; }
     public GemHolder AmplifierEffect { get; set; }
+    public List<Amplifier> Amplifiers { get; set; }
 
 }

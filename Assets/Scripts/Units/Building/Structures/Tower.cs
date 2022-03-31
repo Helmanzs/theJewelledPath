@@ -10,15 +10,14 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
 
     private Enemy target = null;
     private List<Enemy> possibleTargets = new List<Enemy>();
-    private bool dirty = false;
     private GemHolder amplifierEffect;
+    private List<Amplifier> amplifiers = new List<Amplifier>();
 
     private LineRenderer lineRendererComponent = null;
     private DrawLine drawLineComponent = null;
     private TargetStateManager targetStateManager = null;
 
     private float nextTimeCall = 0;
-
 
     public Enemy Target
     {
@@ -40,7 +39,6 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
         }
     }
     public List<Enemy> PossibleTargets { get => possibleTargets; set => possibleTargets = value; }
-    public bool Dirty { get => dirty; set => dirty = value; }
     public GemHolder AmplifierEffect
     {
         get => amplifierEffect;
@@ -49,6 +47,8 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
             amplifierEffect = value;
         }
     }
+
+    public List<Amplifier> Amplifiers { get => amplifiers; set => amplifiers = value; }
 
     protected override void Awake()
     {
@@ -62,6 +62,8 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
 
     private void FixedUpdate()
     {
+        AmplifierModifierRequest?.Invoke(this);
+
         if (Target != null)
         {
             DrawLine();
@@ -81,7 +83,6 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
         if (nextTimeCall < Time.time)
         {
             nextTimeCall = Time.time + (2 / (1 + Gem.AttackSpeed / 100));
-            RequestAmplifierModifier(this);
             Gem.Effects.ForEach(effect => effect.Item1.Use(Target, effect.Item2));
             Target.ApplyDamage(Gem.Damage);
         }
