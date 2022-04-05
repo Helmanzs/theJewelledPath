@@ -38,6 +38,8 @@ public class UIPanel : SceneSingleton<UIPanel>
     }
     public void OpenPanel(UnitStatDataHolder data)
     {
+        //if (data.Structure.GetType().IsGenericType && data.Structure.GetType().GetGenericTypeDefinition() == typeof(ISingleTargetStructure<>)) { }
+
         ClickManager.CallCloseAllPanels();
         Panel.gameObject.SetActive(true);
         currentStructure = data.Structure;

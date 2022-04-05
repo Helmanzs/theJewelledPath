@@ -62,10 +62,8 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
         base.Awake();
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
-        AmplifierModifierRequest?.Invoke(this);
-
         if (Target != null)
         {
             DrawLine();

@@ -50,7 +50,9 @@ public class StructureBuildingManagement<T> : BuildingManagement<T> where T : Mo
     {
         if (place != default(T))
         {
+            if (place.tag == "BuildingSpot") return;
             TileChecker spot = place as TileChecker;
+            spot.tag = "BuildingSpot";
             spot.Structure = Unit as Structure;
             Global.Instance.Mana -= (int)spot.Structure.cost;
             Unit.transform.position = spot.transform.position;

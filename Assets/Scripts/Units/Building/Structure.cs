@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 abstract public class Structure : Unit, IClickable
 {
+
     protected static StructureEvent OnStructurePlaced;
 
     public float cost;
@@ -43,6 +44,12 @@ abstract public class Structure : Unit, IClickable
             OnStructurePlaced = new StructureEvent();
         UpdateCollider(range);
     }
+    protected virtual void FixedUpdate()
+    {
+        // AmplifierModifierRequest?.Invoke(this);
+        Act();
+    }
+    protected abstract void Act();
     public void InvokeBuiltStructure()
     {
         OnStructurePlaced?.Invoke(this);
@@ -53,5 +60,5 @@ abstract public class Structure : Unit, IClickable
     {
         methodManager.ChangeMethod(method);
     }
-    
+
 }

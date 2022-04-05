@@ -23,7 +23,7 @@ public class GameBoard : MonoBehaviour
         //init grid
         grid = new GameObject[gridSize, gridSize];
 
-        //set groud dimensions
+        //set ground dimensions
         this.transform.localScale = new Vector3(2 * gridSize, 1, 2 * gridSize);
         this.transform.position = new Vector3(gridSize, 0, gridSize);
 
@@ -67,7 +67,7 @@ public class GameBoard : MonoBehaviour
                     Global.Instance.endTile = endTile;
                     grid[i, j] = endTile;
                 }
-                if ((i == 2 && j <= 29) || (i == 29 && j <= 29))
+                if ((i == 2 && j != 0 && j <= 29) || (i == 29 && j != 0 && j <= 29))
                 {
                     grid[i, j] = GeneratePathTile(i, j);
                 }

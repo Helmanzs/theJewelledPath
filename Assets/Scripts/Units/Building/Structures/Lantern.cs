@@ -26,12 +26,6 @@ public class Lantern : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
     public float AmplifierNumberEffect { get => amplifierNumberEffect; set => amplifierNumberEffect = value; }
     public List<Amplifier> Amplifiers { get => amplifiers; set => amplifiers = value; }
 
-    private void FixedUpdate()
-    {
-        if (targets.Count != 0)
-            Act();
-    }
-
     public void AddTarget(Enemy target)
     {
         Targets.Add(target);
@@ -55,12 +49,19 @@ public class Lantern : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
 
     protected override void Act()
     {
+        if (targets.Count == 0) return;
+
         if (nextTimeCall < Time.time)
         {
-            nextTimeCall = Time.time + (2 / (1 + Gem.AttackSpeed / 100));
+            nextTimeCall = Time.time + 2f;//(2 / (1 + Gem.AttackSpeed / 100));
             Gem.Effects.ForEach(effect => effect.Item1.Use(Targets, effect.Item2));
             Targets.ForEach(target => target.ApplyDamage(Gem.Damage));
-            Targets.RemoveAll(target => { return target == null; });
+            for (int i = targets.Count - 1; i >= 0; i--)
+            {
+                Enemy target = targets[i];
+                if (target == null || target.HP <= 0)
+                    targets.Remove(target);
+            }
         }
     }
 

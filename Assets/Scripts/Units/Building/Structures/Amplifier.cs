@@ -35,14 +35,10 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
     {
         if (structure.Amplifiers.Contains(this)) return;
 
-        //structure.AmplifierEffect.AddGem(Gem, 0);
+        structure.AmplifierEffect.AddGem(Gem, 0);
         structure.AmplifierNumberEffect += modEffect * Gem.Damage;
         structure.Amplifiers.Add(this);
 
-    }
-    private void FixedUpdate()
-    {
-        Act();
     }
     public override void EnableGem()
     {

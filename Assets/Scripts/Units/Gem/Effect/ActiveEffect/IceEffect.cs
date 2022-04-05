@@ -7,7 +7,19 @@ public class IceEffect : ActiveEffect
 {
     public override void Use(Enemy target, float value)
     {
-        target.Speed = target.DefaultSpeed * value;
+        if (target.TryGetComponent(out Chill chillComponent))
+        {
+            chillComponent.RefreshDuration(5);
+            if (chillComponent.Multiplier < value)
+                chillComponent.Multiplier = value;
+        }
+        else
+        {
+            chillComponent = target.gameObject.AddComponent<Chill>();
+            chillComponent.Multiplier = value;
+            chillComponent.RefreshDuration(5);
+        }
+
     }
     public override void Use(List<Enemy> targets, float value)
     {

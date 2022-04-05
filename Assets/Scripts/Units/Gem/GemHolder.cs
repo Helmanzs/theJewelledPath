@@ -69,42 +69,12 @@ public class GemHolder : MonoBehaviour
 
     private void DifferEffects(List<Tuple<Effect, float>> ampEffects)
     {
-        for (int i = Effects.Count - 1; i >= 0; i--)
-        {
-            Tuple<Effect, float> effect = Effects[i];
-            Tuple<Effect, float> ampEffect = ampEffects.Find(eff => eff.GetType() == effect.GetType());
-            if (ampEffect != null)
-            {
-                Effects[i] = Tuple.Create(effect.Item1, effect.Item2 - ampEffect.Item2);
-            }
-        }
+
     }
 
     private void SumEffects(List<Tuple<Effect, float>> ampEffects)
     {
-        if (Effects.Count == 0)
-        {
-            ampEffects.ForEach(ampEffect => Effects.Add(ampEffect));
-            return;
-        }
 
-
-        for (int i = ampEffects.Count - 1; i >= 0; i--)
-        {
-            Tuple<Effect, float> ampEffect = ampEffects[i];
-            Tuple<Effect, float> effect = Effects.Find(eff => eff.GetType() == ampEffect.GetType());
-            if (effect != null)
-            {
-                Effects[i] = Tuple.Create(effect.Item1, effect.Item2 + ampEffect.Item2);
-            }
-            else
-            {
-                Effects.Add(Tuple.Create(ampEffect.Item1, ampEffect.Item2));
-            }
-        }
-
-        // ampEffects.ForEach(ampEffect => Effects.Add(ampEffect));
-        DisplayEffects();
 
     }
 

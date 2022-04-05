@@ -26,12 +26,6 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
     public float AmplifierNumberEffect { get => amplifierNumberEffect; set => amplifierNumberEffect = value; }
     public List<Amplifier> Amplifiers { get => amplifiers; set => amplifiers = value; }
 
-    private void FixedUpdate()
-    {
-        if (targets.Count != 0)
-            Act();
-    }
-
     public void AddTarget(Enemy target)
     {
         Targets.Add(target);

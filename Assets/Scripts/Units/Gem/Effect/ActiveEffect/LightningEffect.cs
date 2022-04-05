@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [Serializable]
 public class LightningEffect : ActiveEffect
 {
     public override void Use(Enemy target, float value)
     {
         int chainDepth = (int)Math.Round(value, MidpointRounding.AwayFromZero);
+        if (chainDepth == 0) chainDepth = 10;
         ApplyLightning(target, chainDepth, value);
     }
 

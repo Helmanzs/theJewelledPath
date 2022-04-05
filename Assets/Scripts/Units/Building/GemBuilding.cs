@@ -16,7 +16,6 @@ abstract public class GemBuilding : Structure
     {
         Gem.gameObject.SetActive(true);
     }
-    protected abstract void Act();
     public abstract void InsertGem(Gem gem);
     protected abstract void RemoveGem(GemHolder gem);
     public virtual void AddTarget<T>(T unit)
