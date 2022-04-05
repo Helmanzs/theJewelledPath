@@ -7,9 +7,20 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject loadMenu;
+    public GameObject startGameButton;
+    public GameObject createGameButton;
+    public GameObject loadButton;
+    private void Awake()
+    {
+        if (!SaveSystem.CheckIfFolderExists)
+        {
+            startGameButton.SetActive(false);
+            createGameButton.SetActive(true);
+        }
+    }
     public void Play()
     {
-        SceneManager.LoadScene(1);
+        SceneLoader.Instance.LoadScene("PreGame");
     }
     public void ShowLoadGamePanel()
     {

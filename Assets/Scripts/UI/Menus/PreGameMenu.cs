@@ -7,11 +7,11 @@ public class PreGameMenu : MonoBehaviour
 {
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneLoader.Instance.LoadScene("Menu");
     }
 
-    public void LoadLevel(int scene)
+    public void LoadLevel(string scene)
     {
-        SceneManager.LoadScene(scene);
+        SceneLoader.Instance.LoadScene(scene);
     }
 }

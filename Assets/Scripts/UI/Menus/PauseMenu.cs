@@ -36,8 +36,9 @@ public class PauseMenu : MonoBehaviour
     }
     public void Menu()
     {
-        SaveGame.SaveCurrentGame();
-        SceneManager.LoadScene(1);
+        Time.timeScale = 1f;
+        SaveSystem.SaveCurrentGame();
+        SceneLoader.Instance.LoadScene("PreGame");
 
     }
     public void Exit()

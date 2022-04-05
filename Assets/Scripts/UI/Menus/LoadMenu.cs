@@ -6,6 +6,7 @@ public class LoadMenu : MonoBehaviour
 {
     public void LoadPlayer(string fileName)
     {
+        PlayerPrefs.SetString("lastGame", fileName);
         print(fileName);
     }
 }

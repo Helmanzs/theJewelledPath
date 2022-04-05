@@ -8,6 +8,13 @@ public class DefeatMenu : MonoBehaviour
 {
     public static bool Defeated = false;
     public GameObject DefeatMenuUI;
+
+    private string currentScene;
+    private void Awake()
+    {
+        currentScene = SceneManager.GetActiveScene().name;
+    }
+
     void Update()
     {
         if (Global.Instance.Mana < 0)
@@ -25,11 +32,11 @@ public class DefeatMenu : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(currentScene);
     }
     public void Menu()
     {
-        SceneManager.LoadScene(1);
+        SceneLoader.Instance.LoadScene("PreGame");
 
     }
     public void Exit()

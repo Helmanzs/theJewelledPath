@@ -16,7 +16,7 @@ public class WinMenu : MonoBehaviour
 
     public void Menu()
     {
-        SceneManager.LoadScene(1);
+        SceneLoader.Instance.LoadScene("PreGame");
 
     }
     public void Exit()
