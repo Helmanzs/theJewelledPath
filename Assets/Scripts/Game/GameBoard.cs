@@ -12,6 +12,41 @@ public class GameBoard : MonoBehaviour
     public GameObject paths;
     public GameObject spots;
 
+    public Texture2D level;
+
+    private int white = 0;
+    private int green = 0;
+    private int red = 0;
+    public void GenerateLevel(Texture2D level)
+    {
+        Color color;
+        for (int i = 0; i < level.width; i++)
+        {
+            for (int j = 0; j < level.height; j++)
+            {
+                color = level.GetPixel(i, j);
+                if (color == Color.black)
+                    continue;
+
+                print(ColorUtility.ToHtmlStringRGBA(color));
+
+                if (color == Color.white)
+                {
+                    white++;
+                }
+                if (color == Color.red)
+                {
+                    red++;
+                }
+                if (color == Color.green)
+                {
+                    green++;
+                }
+            }
+        }
+        print($"white: {white}, red: {red}, green: {green}");
+    }
+
     //-------------------------------------
     private int gridSize = 32;
     private GameObject[,] grid;

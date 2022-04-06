@@ -44,8 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81cae7a78a58e464db06f0eede0009d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainMenu: MainMenu
+  GameMenu: GameMenu
   loadingScreen: {fileID: 1486301328931379629}
   canvasGroup: {fileID: 7726808479728925764}
+  slider: {fileID: 4158222440681511623}
 --- !u!1001 &4124550171070611569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107,10 +110,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5475763380345670997, guid: b03d724c79756ad4eaf1a00efbe84d16, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5910547731386416181, guid: b03d724c79756ad4eaf1a00efbe84d16, type: 3}
       propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445259351343228261, guid: b03d724c79756ad4eaf1a00efbe84d16, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445259351343228261, guid: b03d724c79756ad4eaf1a00efbe84d16, type: 3}
+      propertyPath: m_Color.g
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -131,3 +142,14 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 5910547731386416181, guid: b03d724c79756ad4eaf1a00efbe84d16, type: 3}
   m_PrefabInstance: {fileID: 4124550171070611569}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4158222440681511623 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 38739919108168374, guid: b03d724c79756ad4eaf1a00efbe84d16, type: 3}
+  m_PrefabInstance: {fileID: 4124550171070611569}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
