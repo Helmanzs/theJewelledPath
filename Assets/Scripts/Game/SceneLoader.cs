@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SceneLoader : GameSingleton<SceneLoader>
 {
+    public string MainMenu = "MainMenu";
+    public string GameMenu = "GameMenu";
+
     public GameObject loadingScreen;
     public CanvasGroup canvasGroup;
 

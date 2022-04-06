@@ -36,7 +36,7 @@ public class DefeatMenu : MonoBehaviour
     }
     public void Menu()
     {
-        SceneLoader.Instance.LoadScene("PreGame");
+        SceneLoader.Instance.LoadScene(SceneLoader.Instance.GameMenu);
 
     }
     public void Exit()

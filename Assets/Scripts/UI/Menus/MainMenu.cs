@@ -7,25 +7,37 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject loadMenu;
-    public GameObject startGameButton;
-    public GameObject createGameButton;
-    public GameObject loadButton;
+    public GameObject createSaveMenu;
+
+    public GameObject CreateGame;
+    public GameObject PlayGame;
     private void Awake()
     {
-        if (!SaveSystem.CheckIfFolderExists)
+
+        if (!SaveSystem.CheckIfFolderContainsFiles(new string[] { "save1", "save2", "save3" }))
         {
-            startGameButton.SetActive(false);
-            createGameButton.SetActive(true);
+            CreateGame.SetActive(true);
+            PlayGame.SetActive(false);
         }
+        else
+        {
+            SaveSystem.LoadPlayer(PlayerPrefs.GetString("lastGame"));
+        }
+
     }
     public void Play()
     {
-        SceneLoader.Instance.LoadScene("PreGame");
+        SceneLoader.Instance.LoadScene(SceneLoader.Instance.GameMenu);
     }
     public void ShowLoadGamePanel()
     {
         mainMenu.SetActive(!mainMenu.activeSelf);
         loadMenu.SetActive(!loadMenu.activeSelf);
+    }
+    public void ShowCreateSavePanel()
+    {
+        mainMenu.SetActive(!mainMenu.activeSelf);
+        createSaveMenu.SetActive(!createSaveMenu.activeSelf);
     }
     public void EndGame()
     {
