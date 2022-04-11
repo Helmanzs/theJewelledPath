@@ -7,20 +7,20 @@ using UnityEngine;
 public class Player : GameSingleton<Player>
 {
     public string saveName = "";
-    public int exp = 0;
-    public List<int> clearedLevels = new List<int>();
+    public int currency = 0;
+    public int clearedLevels = 0;
 
     public void Clear()
     {
         saveName = "";
-        exp = 0;
-        clearedLevels.Clear();
+        currency = 0;
+        clearedLevels = 0;
     }
 
     public void Load(PlayerData data)
     {
         this.saveName = data.saveName;
-        this.exp = data.exp;
-        this.clearedLevels = data.clearedLevels.ToList();
+        this.currency = data.currency;
+        this.clearedLevels = data.clearedLevels;
     }
 }

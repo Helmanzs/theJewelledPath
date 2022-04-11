@@ -7,13 +7,13 @@ using UnityEngine;
 public class PlayerData
 {
     public string saveName;
-    public int exp;
-    public int[] clearedLevels;
+    public int currency;
+    public int clearedLevels;
 
     public PlayerData(Player player)
     {
         this.saveName = player.saveName;
-        this.exp = player.exp;
-        this.clearedLevels = player.clearedLevels.ToArray();
+        this.currency = player.currency;
+        this.clearedLevels = player.clearedLevels;
     }
 }

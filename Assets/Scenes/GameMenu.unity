@@ -832,6 +832,17 @@ MonoBehaviour:
   Levels2: {fileID: 88287968}
   NextButton: {fileID: 754625075}
   PreviousButton: {fileID: 1354434166}
+  levels:
+  - {fileID: 1119661490}
+  - {fileID: 1232797456}
+  - {fileID: 1341485184}
+  - {fileID: 1867107361}
+  - {fileID: 859873210}
+  - {fileID: 942860311}
+  - {fileID: 1210499005}
+  - {fileID: 742167470}
+  - {fileID: 909759290}
+  - {fileID: 1562201242}
 --- !u!114 &701260615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,7 +982,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 742167471}
   m_OnClick:
     m_PersistentCalls:
@@ -985,7 +996,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: Level01
+          m_StringArgument: Level08
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &742167471
@@ -1371,7 +1382,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 859873211}
   m_OnClick:
     m_PersistentCalls:
@@ -1385,7 +1396,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: Level01
+          m_StringArgument: Level05
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &859873211
@@ -1722,7 +1733,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 909759291}
   m_OnClick:
     m_PersistentCalls:
@@ -1855,7 +1866,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 942860312}
   m_OnClick:
     m_PersistentCalls:
@@ -1869,7 +1880,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: Level01
+          m_StringArgument: Level06
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &942860312
@@ -2218,7 +2229,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1119661491}
   m_OnClick:
     m_PersistentCalls:
@@ -2351,7 +2362,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1210499006}
   m_OnClick:
     m_PersistentCalls:
@@ -2365,7 +2376,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: Level01
+          m_StringArgument: Level07
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1210499006
@@ -2484,7 +2495,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1232797457}
   m_OnClick:
     m_PersistentCalls:
@@ -2498,7 +2509,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: Level01
+          m_StringArgument: Level02
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1232797457
@@ -2657,7 +2668,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1341485185}
   m_OnClick:
     m_PersistentCalls:
@@ -2671,7 +2682,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: Level01
+          m_StringArgument: Level03
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1341485185
@@ -2923,7 +2934,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1562201243}
   m_OnClick:
     m_PersistentCalls:
@@ -2937,7 +2948,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: Level01
+          m_StringArgument: Level10
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1562201243
@@ -3496,7 +3507,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1867107362}
   m_OnClick:
     m_PersistentCalls:
@@ -3510,7 +3521,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: Level01
+          m_StringArgument: Level04
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1867107362

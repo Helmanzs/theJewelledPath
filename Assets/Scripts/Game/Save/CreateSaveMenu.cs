@@ -9,6 +9,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class CreateSaveMenu : MonoBehaviour
 {
     public GameObject UserWarningPrompt;
+    public GameObject ErrorBackground;
+    public TextMeshProUGUI ErrorText;
+    public Button OkError;
     public Button YesButton;
     public Button NoButton;
 
@@ -21,23 +24,57 @@ public class CreateSaveMenu : MonoBehaviour
 
     private string saveName;
     private bool overwrite = false;
+    private float cooldown;
 
     private void Awake()
+    {
+        overwrite = false;
+        CheckFiles();
+    }
+
+    private void OnEnable()
+    {
+        overwrite = false;
+        CheckFiles();
+    }
+    private void Update()
+    {
+        if (cooldown >= Time.time)
+        {
+            CheckFiles();
+            cooldown = Time.time + 1;
+
+        }
+    }
+
+    private void CheckFiles()
     {
         if (SaveSystem.CheckIfFileExists("save1"))
         {
             Save1Text.text = SaveSystem.LoadData("save1").saveName;
             Save1.interactable = true;
         }
+        else
+        {
+            Save1Text.text = "Empty Save";
+        }
         if (SaveSystem.CheckIfFileExists("save2"))
         {
             Save2Text.text = SaveSystem.LoadData("save2").saveName;
             Save2.interactable = true;
         }
+        else
+        {
+            Save2Text.text = "Empty Save";
+        }
         if (SaveSystem.CheckIfFileExists("save3"))
         {
             Save3Text.text = SaveSystem.LoadData("save3").saveName;
             Save3.interactable = true;
+        }
+        else
+        {
+            Save3Text.text = "Empty Save";
         }
     }
 
@@ -50,7 +87,7 @@ public class CreateSaveMenu : MonoBehaviour
     {
         if (saveName == "" || saveName == null)
         {
-            Debug.LogError("Name must not be empty!");
+            StartCoroutine(DisplayError("Fill out name before creating a save."));
             return;
         }
         StartCoroutine(CreateSaveGameCoroutine(fileName));
@@ -61,16 +98,21 @@ public class CreateSaveMenu : MonoBehaviour
 
         if (!SaveSystem.CheckIfFolderExists) SaveSystem.CreateSaveFolder();
 
+        overwrite = false;
         if (SaveSystem.CheckIfFileExists(fileName))
         {
             UserWarningPrompt.gameObject.SetActive(true);
-            yield return WaitForButtonPress();
+            yield return WaitForButtonPress(YesButton, NoButton);
             UserWarningPrompt.gameObject.SetActive(false);
             if (overwrite)
             {
                 Player.Instance.Clear();
                 Player.Instance.saveName = saveName;
                 SaveSystem.SavePlayer(fileName);
+            }
+            else
+            {
+                yield break;
             }
         }
         else
@@ -80,21 +122,39 @@ public class CreateSaveMenu : MonoBehaviour
             SaveSystem.SavePlayer(fileName);
         }
         PlayerPrefs.SetString("lastGame", fileName);
-        SceneLoader.Instance.LoadScene(SceneLoader.Instance.GameMenu);
         print(PlayerPrefs.GetString("lastGame"));
+        SceneLoader.Instance.LoadScene(SceneLoader.Instance.GameMenu);
     }
-    private IEnumerator WaitForButtonPress()
+
+    private IEnumerator DisplayError(string message)
+    {
+        ErrorBackground.gameObject.SetActive(true);
+        ErrorText.text = message;
+        yield return WaitForButtonPress(OkError);
+        ErrorBackground.gameObject.SetActive(false);
+    }
+
+    private IEnumerator WaitForButtonPress(Button b1, Button b2)
     {
         overwrite = false;
-        var waitForButton = new WaitForUIButtons(YesButton, NoButton);
+        var waitForButton = new WaitForUIButtons(b1, b2);
         yield return waitForButton.Reset();
-        if (waitForButton.PressedButton == YesButton)
+        if (waitForButton.PressedButton == b1)
         {
             overwrite = true;
         }
         else
         {
             overwrite = false;
+        }
+    }
+    private IEnumerator WaitForButtonPress(Button b1)
+    {
+        var waitForButton = new WaitForUIButtons(b1);
+        yield return waitForButton.Reset();
+        if (waitForButton.PressedButton == b1)
+        {
+            yield return null;
         }
     }
 }

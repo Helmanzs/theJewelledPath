@@ -62,17 +62,4 @@ public static class SaveSystem
     {
         Directory.CreateDirectory(Application.persistentDataPath + "/Saves");
     }
-
-    public static void CreateSaveFile(string fileName, string saveName)
-    {
-        /* PlayerData saveData = SaveSystem.CreateSaveDataObject();
-         saveData.saveName = saveName;
-
-         File.Delete(Application.persistentDataPath + $"/Saves/{fileName}.save");
-         FileStream file = File.Create(Application.persistentDataPath + $"/Saves/{fileName}.save");
-
-         BinaryFormatter bf = new BinaryFormatter();
-         bf.Serialize(file, saveData);
-         file.Close();*/
-    }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Extensions
 {
@@ -47,4 +48,6 @@ public static class Extensions
         rotatedTexture.Apply();
         return rotatedTexture;
     }
+
+
 }

@@ -36,6 +36,7 @@ public class GameBoard : MonoBehaviour
         gameTileWidth = transform.localScale.x / level.width;
         gameTileHeight = transform.localScale.z / level.height;
         GetComponent<Renderer>().material.mainTextureScale = new Vector2(level.width, level.height);
+
         Color color;
         for (int i = 0; i < level.width; i++)
         {
