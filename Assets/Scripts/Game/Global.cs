@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Global : SceneSingleton<Global>
 {
-    public List<GameObject> buildingSpots = new List<GameObject>();
+    public List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
     public List<Structure> buildings = new List<Structure>();
     public List<GemBuilding> gemBuildings = new List<GemBuilding>();
     public List<Enemy> enemies = new List<Enemy>();
@@ -20,6 +20,6 @@ public class Global : SceneSingleton<Global>
         }
     }
 
-    public GameObject endTile = null;
+    public EndTile endTile = null;
     public SpawnTile spawnTile = null;
 }

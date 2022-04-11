@@ -18,6 +18,7 @@ public class SceneLoader : GameSingleton<SceneLoader>
         slider.value = 0;
         StartCoroutine(StartLoad(sceneToLoad));
     }
+
     IEnumerator StartLoad(string sceneToLoad)
     {
         loadingScreen.SetActive(true);

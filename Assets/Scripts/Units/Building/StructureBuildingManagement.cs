@@ -34,7 +34,7 @@ public class StructureBuildingManagement<T> : BuildingManagement<T> where T : Mo
         if (selector.GetObject(mask, "EmptyBuildingSpot") != null)
         {
             T previewedSpot = selector.GetObject(mask, "EmptyBuildingSpot");
-            TileChecker spot = previewedSpot as TileChecker;
+            BuildingSpot spot = previewedSpot as BuildingSpot;
             if (spot.Structure == null)
             {
                 if (spot != lastPlace)
@@ -51,7 +51,7 @@ public class StructureBuildingManagement<T> : BuildingManagement<T> where T : Mo
         if (place != default(T))
         {
             if (place.tag == "BuildingSpot") return;
-            TileChecker spot = place as TileChecker;
+            BuildingSpot spot = place as BuildingSpot;
             spot.tag = "BuildingSpot";
             spot.Structure = Unit as Structure;
             Global.Instance.Mana -= (int)spot.Structure.cost;
@@ -78,7 +78,7 @@ public class StructureBuildingManagement<T> : BuildingManagement<T> where T : Mo
 
     protected override void ShowcaseUnit(T place)
     {
-        TileChecker spot = place as TileChecker;
+        BuildingSpot spot = place as BuildingSpot;
         UnitPreview.gameObject.SetActive(true);
         UnitPreview.transform.SetParent(spot.transform);
         UnitPreview.transform.localPosition = new Vector3(0, 0, 0);
