@@ -1,18 +1,14 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using System.Globalization;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Numerics;
 using UnityEngine;
-using UnityEngine.UI;
 
 public static class Extensions
 {
     public static float GetDistanceToUnit(this Unit unit1, Unit unit2)
     {
-        return Vector3.Distance(unit1.transform.position, unit2.transform.position);
+        return UnityEngine.Vector3.Distance(unit1.transform.position, unit2.transform.position);
     }
 
     public static T RandomElement<T>(this IEnumerable<T> list)
@@ -22,7 +18,7 @@ public static class Extensions
 
     public static T RandomElement<T>(this T[] array)
     {
-        return array[UnityEngine.Random.Range(0, array.Length - 1)];
+        return array[Random.Range(0, array.Length - 1)];
     }
     public static Texture2D RotateTexture(this Texture2D originalTexture, bool clockwise)
     {
@@ -49,5 +45,61 @@ public static class Extensions
         return rotatedTexture;
     }
 
+    public static string ToKMB(this BigInteger num)
+    {
+        if (num > 999999999999999999 || num < -999999999999999999)
+        {
+            return num.ToString("0,,,,,,.0##Qi", CultureInfo.InvariantCulture);
+        }
+        else
+        if (num > 999999999999999 || num < -999999999999999)
+        {
+            return num.ToString("0,,,,,.0##Qa", CultureInfo.InvariantCulture);
+        }
+        else
+        if (num > 999999999999 || num < -999999999999)
+        {
+            return num.ToString("0,,,,.0##T", CultureInfo.InvariantCulture);
+        }
+        else
+        if (num > 999999999 || num < -999999999)
+        {
+            return num.ToString("0,,,.0##B", CultureInfo.InvariantCulture);
+        }
+        else
+        if (num > 999999 || num < -999999)
+        {
+            return num.ToString("0,,.0#M", CultureInfo.InvariantCulture);
+        }
+        else
+        if (num > 999 || num < -999)
+        {
+            return num.ToString("0,.0K", CultureInfo.InvariantCulture);
+        }
+        else
+        {
+            return num.ToString(CultureInfo.InvariantCulture);
+        }
+    }
+    public static string ToKMB(this int num)
+    {
+        return ((BigInteger)num).ToKMB();
+    }
+    public static string ToKMB(this float num)
+    {
+        return ((BigInteger)num).ToKMB();
+    }
+    public static string ToKMB(this double num)
+    {
+        return ((BigInteger)num).ToKMB();
+    }
+    public static string ToKMB(this long num)
+    {
+        return ((BigInteger)num).ToKMB();
+    }
+    public static string ToKMB(this ulong num)
+    {
+        return ((BigInteger)num).ToKMB();
+    }
 
 }

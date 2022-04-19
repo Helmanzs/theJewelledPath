@@ -6,13 +6,19 @@ public class EndTile : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-
         if (other.CompareTag("Enemy"))
         {
-            Global.Instance.enemies.Remove(other.gameObject.GetComponent<Enemy>());
-            Destroy(other.gameObject);
-            Global.Instance.Mana -= 1000;
-
+            var enemy = other.GetComponent<Enemy>();
+            Global.Instance.enemies.Remove(enemy);
+            if (enemy is Boss)
+            {
+                Global.Instance.Mana = -1;
+            }
+            else
+            {
+                Global.Instance.Mana -= 1000;
+            }
+            Destroy(enemy.gameObject);
         }
     }
 }

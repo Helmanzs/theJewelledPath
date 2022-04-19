@@ -2578,7 +2578,6 @@ MonoBehaviour:
   imageCooldown: {fileID: 625759078}
   textCooldown: {fileID: 625759077}
   cooldownTime: 10
-  slowAmount: 1000
 --- !u!1 &627552731
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,6 +2696,14 @@ PrefabInstance:
     - target: {fileID: 592055069141567471, guid: 4d41abdaf90425c43b583fce698e08c3, type: 3}
       propertyPath: m_Name
       value: WaveTimerText
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200273345178462994, guid: 4d41abdaf90425c43b583fce698e08c3, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200273345178462994, guid: 4d41abdaf90425c43b583fce698e08c3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15.806999
       objectReference: {fileID: 0}
     - target: {fileID: 1772388353713346077, guid: 4d41abdaf90425c43b583fce698e08c3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6110,7 +6117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1200273345185989220, guid: d0a9b2f407dbbdc46bd44e39c540c60f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 17.512413
+      value: 17.512411
       objectReference: {fileID: 0}
     - target: {fileID: 1200273345185989220, guid: d0a9b2f407dbbdc46bd44e39c540c60f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6850,6 +6857,7 @@ GameObject:
   - component: {fileID: 2050015686}
   - component: {fileID: 2050015685}
   - component: {fileID: 2050015684}
+  - component: {fileID: 2050015691}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -7060,6 +7068,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2050015691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050015683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea6cd5552e9ed547b3650783bdab389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hammer: {fileID: 1077154296457033902, guid: c1d1d574941a9444a8bb29c8fb830f4f, type: 3}
 --- !u!1 &2054410021
 GameObject:
   m_ObjectHideFlags: 0

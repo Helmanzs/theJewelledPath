@@ -10,13 +10,15 @@ public class GameMenu : MonoBehaviour
     public TextMeshProUGUI PlayerName;
     public GameObject Levels1;
     public GameObject Levels2;
-    public GameObject NextButton;
-    public GameObject PreviousButton;
+    public Button NextButton;
+    public Button PreviousButton;
     public Button[] levels;
+    public GameObject gameMenu;
+    public GameObject InventoryMenu;
     private void Awake()
     {
         PlayerName.text = Player.Instance.saveName;
-        NextButton.SetActive(true);
+        NextButton.gameObject.SetActive(true);
         CheckClearedLevels();
 
     }
@@ -42,8 +44,8 @@ public class GameMenu : MonoBehaviour
     {
         Levels1.SetActive(false);
         Levels2.SetActive(true);
-        NextButton.SetActive(false);
-        PreviousButton.SetActive(true);
+        NextButton.gameObject.SetActive(false);
+        PreviousButton.gameObject.SetActive(true);
     }
 
     public void PreviousLevels()
@@ -51,7 +53,7 @@ public class GameMenu : MonoBehaviour
 
         Levels1.SetActive(true);
         Levels2.SetActive(false);
-        NextButton.SetActive(true);
-        PreviousButton.SetActive(false);
+        NextButton.gameObject.SetActive(true);
+        PreviousButton.gameObject.SetActive(false);
     }
 }

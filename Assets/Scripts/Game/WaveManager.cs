@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviour
     public TextMeshProUGUI NextWaveText;
     public WaveInfo[] waveInfos;
     public WinMenu winMenu;
+    public GameObject NextWaveInfoHolder;
 
     public Wave[] waves;
     private bool gameStarted = false;
@@ -22,7 +23,14 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if (!gameStarted) return;
+        UpdateNextWave();
+
+        if (!gameStarted)
+        {
+            UpdateFields(waves[currentWave + 1]);
+            return;
+        }
+
         if (countdown <= 0)
         {
             currentWave++;
@@ -32,6 +40,11 @@ public class WaveManager : MonoBehaviour
         else
         {
             countdown -= Time.deltaTime;
+        }
+        if (currentWave == waves.Length - 1)
+        {
+            NextWaveInfoHolder.SetActive(false);
+            WaveTimerText.gameObject.SetActive(false);
         }
         UpdateFields(waves[currentWave]);
 
@@ -49,8 +62,20 @@ public class WaveManager : MonoBehaviour
         }
         EnemyNumberText.text = $"Enemies: {Global.Instance.enemies.Count}";
         WaveTimerText.text = $"Until next wave: {Math.Floor(countdown)}";
-        waveInfos[0].enemyNameText.text = $"{wave.enemy.GetType()}";
-        waveInfos[0].enemyCountText.text = $"{wave.count}";
+
+    }
+    private void UpdateNextWave()
+    {
+        if (currentWave != waves.Length - 1)
+        {
+            waveInfos[0].enemyNameText.text = $"{waves[currentWave + 1].enemy.GetType()}";
+            waveInfos[0].enemyCountText.text = $"Count: {waves[currentWave + 1].count}";
+        }
+        else
+        {
+            waveInfos[0].enemyNameText.text = $"";
+            waveInfos[0].enemyCountText.text = $"";
+        }
     }
     public void StartSpawning()
     {

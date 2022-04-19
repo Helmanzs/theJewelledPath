@@ -8,6 +8,7 @@ public class CritEffect : ActiveEffect
 {
     public override void Use(Enemy target, float value)
     {
+        if (target == null) return;
 
         if (target.TryGetComponent(out Vulnerable vulnComponent))
         {

@@ -14,7 +14,8 @@ public class KillSpell : SpellCooldown
         for (int i = Global.Instance.enemies.Count - 1; i >= 0; i--)
         {
             Enemy enemy = Global.Instance.enemies[i];
-            enemy.Kill();
+            if (enemy is Boss) return;
+            enemy.ApplyDamage(enemy.HP / 2);
         }
     }
 

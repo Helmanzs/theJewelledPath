@@ -15,7 +15,7 @@ public class GemHolder : MonoBehaviour
     public float Damage
     {
         get => damage;
-        private set => damage = value;
+        set => damage = value;
     }
     public float Range
     {
@@ -25,7 +25,7 @@ public class GemHolder : MonoBehaviour
     public float AttackSpeed
     {
         get => attackSpeed;
-        private set => attackSpeed = value;
+        set => attackSpeed = value;
     }
     public List<Tuple<Effect, float>> Effects
     {

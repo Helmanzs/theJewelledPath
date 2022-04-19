@@ -1044,7 +1044,6 @@ MonoBehaviour:
   imageCooldown: {fileID: 414147790}
   textCooldown: {fileID: 414147789}
   cooldownTime: 10
-  slowAmount: 1000
 --- !u!1 &432571614
 GameObject:
   m_ObjectHideFlags: 0
@@ -2665,6 +2664,14 @@ PrefabInstance:
     - target: {fileID: 592055069141567471, guid: 4d41abdaf90425c43b583fce698e08c3, type: 3}
       propertyPath: m_Name
       value: WaveTimerText
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200273345178462994, guid: 4d41abdaf90425c43b583fce698e08c3, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200273345178462994, guid: 4d41abdaf90425c43b583fce698e08c3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15.806999
       objectReference: {fileID: 0}
     - target: {fileID: 1772388353713346077, guid: 4d41abdaf90425c43b583fce698e08c3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4984,7 +4991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1200273345185989220, guid: d0a9b2f407dbbdc46bd44e39c540c60f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 17.512413
+      value: 17.512411
       objectReference: {fileID: 0}
     - target: {fileID: 1200273345185989220, guid: d0a9b2f407dbbdc46bd44e39c540c60f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7085,6 +7092,7 @@ GameObject:
   - component: {fileID: 2106438589}
   - component: {fileID: 2106438588}
   - component: {fileID: 2106438587}
+  - component: {fileID: 2106438594}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -7218,7 +7226,7 @@ MonoBehaviour:
   spawnSpot: {fileID: -6109031722415557634, guid: e112c5299d09ffe42b26f07e22cfbb33, type: 3}
   paths: {fileID: 759299082}
   spots: {fileID: 1128797581}
-  level: {fileID: 2800000, guid: e415d338ea5d69e47a6a1df232ed768a, type: 3}
+  level: {fileID: 2800000, guid: d5e8821fe12b78548bae2ba3b8cb2474, type: 3}
 --- !u!65 &2106438590
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7295,6 +7303,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2106438594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106438586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea6cd5552e9ed547b3650783bdab389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hammer: {fileID: 1077154296457033902, guid: c1d1d574941a9444a8bb29c8fb830f4f, type: 3}
 --- !u!1 &2112667273
 GameObject:
   m_ObjectHideFlags: 0

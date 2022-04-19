@@ -8,6 +8,7 @@ public class FireEffect : ActiveEffect
 {
     public override void Use(Enemy target, float value)
     {
+        if (target == null) return;
         FireDamageOverTime fireDoT = target.gameObject.AddComponent<FireDamageOverTime>();
         fireDoT.Damage = 10 * value;
         fireDoT.ApplyEveryNSeconds = 1;

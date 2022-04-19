@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FreezeSpell : SpellCooldown
 {
-    public float slowAmount = 1000f;
     public override void UseSpell()
     {
         if (IsCooldown)
@@ -12,22 +11,13 @@ public class FreezeSpell : SpellCooldown
             return;
         }
         PutOnCooldown();
-        Global.Instance.enemies.ForEach(enemy => StartCoroutine("SlowEnemy", enemy));
+        Global.Instance.enemies.ForEach(enemy => SlowEnemy(enemy));
     }
-    public IEnumerator SlowEnemy(Enemy enemy)
+    public void SlowEnemy(Enemy enemy)
     {
-        float tempSpeed = 0;
-        if (enemy != null)
-        {
-            tempSpeed = enemy.Speed;
-            enemy.Speed -= slowAmount;
-        }
-        yield return new WaitForSeconds(5f);
-        if (enemy != null)
-        {
-            enemy.Speed = tempSpeed;
-        }
+        if (enemy is Boss) return;
+        Chill chillComponent = enemy.gameObject.AddComponent<Chill>();
+        chillComponent.Multiplier = 0.2f;
+        chillComponent.RefreshDuration(5);
     }
-
-
 }

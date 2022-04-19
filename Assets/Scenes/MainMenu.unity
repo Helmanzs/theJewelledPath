@@ -2957,8 +2957,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveName: 
-  currency: 0
   clearedLevels: 0
+  inventory: {fileID: 11400000, guid: 9a237a5ef4a4c744abbc1135b2e25f3b, type: 2}
 --- !u!4 &872817197
 Transform:
   m_ObjectHideFlags: 0

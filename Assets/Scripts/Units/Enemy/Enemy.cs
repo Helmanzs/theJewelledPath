@@ -10,11 +10,14 @@ public abstract class Enemy : Unit
     public event Action<float> UnitTakenDamage;
 
     [SerializeField] private Image enemySprite;
+    [SerializeField] private float hp = 50;
+    [SerializeField] private float damage = 100;
+    [SerializeField] private float speed = 10;
+    [SerializeField] private float reward = 500;
+    [SerializeField] private float defaultSpeed = 10;
+
+
     private NavMeshAgent agent;
-    private float hp = 50;
-    private float damage = 100;
-    private float speed = 10;
-    private float reward = 500;
 
     public float Speed
     {
@@ -25,7 +28,7 @@ public abstract class Enemy : Unit
             agent.speed = speed;
         }
     }
-    public float DefaultSpeed { get; private set; } = 10;
+    public float DefaultSpeed { get; protected set; }
 
     public float Reward
     {
@@ -84,16 +87,9 @@ public abstract class Enemy : Unit
         Global.Instance.enemies.Remove(this);
         Global.Instance.Mana += (int)Reward;
         Destroy(transform.gameObject);
-
     }
-
     public override string ToString()
     {
         return $"Damage: {Damage}, HP: {HP}, Speed: {Speed}, Reward: {Reward}, Type: {this.GetType()}";
-    }
-
-    public Enemy Interact()
-    {
-        return this;
     }
 }

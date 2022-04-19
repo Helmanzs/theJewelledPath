@@ -15,10 +15,7 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
 
     public List<Enemy> Targets
     {
-        get
-        {
-            return targets;
-        }
+        get => targets;
         set => targets = value;
     }
 
@@ -48,6 +45,8 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
 
     protected override void Act()
     {
+        if (Targets.Count <= 0) return; 
+
         if (nextTimeCall < Time.time)
         {
             nextTimeCall = Time.time + 0.5f;
