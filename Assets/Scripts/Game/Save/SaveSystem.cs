@@ -27,7 +27,6 @@ public static class SaveSystem
             CreateSaveFolder();
 
         BinaryFormatter formatter = new BinaryFormatter();
-        File.Delete(Application.persistentDataPath + $"/Saves/{fileName}.save");
         FileStream file = new FileStream(Application.persistentDataPath + $"/Saves/{fileName}.save", FileMode.Create);
         PlayerData data = new PlayerData(Player.Instance);
 
@@ -58,6 +57,7 @@ public static class SaveSystem
         file.Close();
         return data;
     }
+
     public static void CreateSaveFolder()
     {
         Directory.CreateDirectory(Application.persistentDataPath + "/Saves");

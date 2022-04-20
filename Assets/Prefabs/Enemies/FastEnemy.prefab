@@ -428,6 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1148d6734202b744dae12826a09d647f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStatistics: {fileID: 11400000, guid: 5adab4268af4baa4ea9778e9027d88ac, type: 2}
   previewUnit: {fileID: 0}
   hp: 30
   damage: 15

@@ -112,11 +112,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53f91a53ab59744ea4eaef31b951adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStatistics: {fileID: 11400000, guid: 5adab4268af4baa4ea9778e9027d88ac, type: 2}
   previewUnit: {fileID: 0}
   hp: 50
   damage: 30
   speed: 10
   reward: 500
+  defaultSpeed: 10
 --- !u!195 &1316227121825899294
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -67,6 +67,7 @@ public class StructureBuildingManagement<T> : BuildingManagement<T> where T : Mo
             {
                 Global.Instance.buildings.Add(Unit as Structure);
             }
+            GameStatisticsData.Instance.AddStructure(Unit as Structure);
             Unit = null;
             GameObject.Destroy(UnitPreview.gameObject);
             buildingMode = false;

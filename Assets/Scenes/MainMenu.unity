@@ -1237,7 +1237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &399545234
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2958,7 +2958,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveName: 
   clearedLevels: 0
-  inventory: {fileID: 11400000, guid: 9a237a5ef4a4c744abbc1135b2e25f3b, type: 2}
+  statisticsName: 
+  killedEnemies: 0
+  killedNormals: 0
+  killedTanks: 0
+  killedFasts: 0
+  killedBosses: 0
+  placedBuildings: 0
+  placedTowers: 0
+  placedAmplifiers: 0
+  placedTraps: 0
+  placedLanterns: 0
+  gemsInserted: 0
+  fireGemsInserted: 0
+  iceGemsInserted: 0
+  poisonGemsInserted: 0
+  lightningGemsInserted: 0
+  manaGemsInserted: 0
+  critGemsInserted: 0
 --- !u!4 &872817197
 Transform:
   m_ObjectHideFlags: 0

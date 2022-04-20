@@ -108,6 +108,7 @@ public class CreateSaveMenu : MonoBehaviour
             {
                 Player.Instance.Clear();
                 Player.Instance.saveName = saveName;
+                Player.Instance.fileName = fileName;
                 SaveSystem.SavePlayer(fileName);
             }
             else
@@ -119,6 +120,7 @@ public class CreateSaveMenu : MonoBehaviour
         {
             Player.Instance.Clear();
             Player.Instance.saveName = saveName;
+            Player.Instance.fileName = fileName;
             SaveSystem.SavePlayer(fileName);
         }
         PlayerPrefs.SetString("lastGame", fileName);

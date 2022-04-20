@@ -37,7 +37,8 @@ public class PauseMenu : MonoBehaviour
     public void Menu()
     {
         Time.timeScale = 1f;
-        //SaveSystem.SavePlayer(new PlayerData(Player.Instance));
+        Player.Instance.SumStatistics();
+        SaveSystem.SavePlayer(Player.Instance.fileName);
         SceneLoader.Instance.LoadScene(SceneLoader.Instance.GameMenu);
 
     }

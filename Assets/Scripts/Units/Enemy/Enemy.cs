@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -84,6 +85,7 @@ public abstract class Enemy : Unit
     }
     public void Kill()
     {
+        GameStatisticsData.Instance.AddEnemy(this);
         Global.Instance.enemies.Remove(this);
         Global.Instance.Mana += (int)Reward;
         Destroy(transform.gameObject);

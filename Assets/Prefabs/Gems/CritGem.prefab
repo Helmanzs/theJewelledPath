@@ -4888,6 +4888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb1977f2d8e8c44887c83f3fa094c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStatistics: {fileID: 11400000, guid: 5adab4268af4baa4ea9778e9027d88ac, type: 2}
   previewUnit: {fileID: 8128108436108995011, guid: 056bdbb859083594a8ed4df49e02e24e, type: 3}
   damage: 10
   range: 10

@@ -47,6 +47,7 @@ public class GemManagement<T> : BuildingManagement<T> where T : Component
             Global.Instance.Mana -= (int)gem.cost;
             GameObject.Destroy(Unit.gameObject);
             GameObject.Destroy(UnitPreview.gameObject);
+            GameStatisticsData.Instance.AddGem(gem);
             Unit = null;
             buildingMode = false;
         }

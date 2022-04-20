@@ -114,10 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a849aa3313c7c47a891e4fb19d5dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStatistics: {fileID: 11400000, guid: 5adab4268af4baa4ea9778e9027d88ac, type: 2}
   previewUnit: {fileID: 5512577985820444552, guid: eaa6ac026ad66ef499381a9f1019b49f, type: 3}
   cost: 100
   Gem: {fileID: 8046764737381632602}
-  amplifierEffect: {fileID: 2035776962827131749}
 --- !u!114 &3888013340752838862
 MonoBehaviour:
   m_ObjectHideFlags: 0

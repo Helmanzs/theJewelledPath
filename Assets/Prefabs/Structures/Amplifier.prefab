@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e31be32709af6549b172d1d70e0d029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStatistics: {fileID: 11400000, guid: 5adab4268af4baa4ea9778e9027d88ac, type: 2}
   previewUnit: {fileID: 8973822177248923842, guid: 1a90a37e195d5d549a2684e05692b51d, type: 3}
   cost: 75
   Gem: {fileID: 5986113365146721030}

@@ -14,7 +14,9 @@ public class GameMenu : MonoBehaviour
     public Button PreviousButton;
     public Button[] levels;
     public GameObject gameMenu;
-    public GameObject InventoryMenu;
+    public GameObject statisticsMenu;
+    public Button BackButton;
+    public Button statisticsButton;
     private void Awake()
     {
         PlayerName.text = Player.Instance.saveName;
@@ -55,5 +57,11 @@ public class GameMenu : MonoBehaviour
         Levels2.SetActive(false);
         NextButton.gameObject.SetActive(true);
         PreviousButton.gameObject.SetActive(false);
+    }
+
+    public void ShowStatistics()
+    {
+        gameMenu.SetActive(!gameMenu.activeSelf);
+        statisticsMenu.SetActive(!statisticsMenu.activeSelf);
     }
 }
