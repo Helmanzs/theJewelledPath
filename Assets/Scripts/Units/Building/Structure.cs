@@ -46,7 +46,6 @@ abstract public class Structure : Unit, IClickable
     }
     protected virtual void FixedUpdate()
     {
-        // AmplifierModifierRequest?.Invoke(this);
         Act();
     }
     protected abstract void Act();

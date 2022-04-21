@@ -7,6 +7,7 @@ abstract public class GemBuilding : Structure
 {
     public GemHolder Gem;
     protected SphereCollider sphereCollider;
+
     protected override void Awake()
     {
         sphereCollider = GetComponentInChildren<SphereCollider>();
@@ -40,5 +41,4 @@ abstract public class GemBuilding : Structure
             this.GetComponent<IAreaOfEffectStructure<T>>().RemoveTarget(unit);
         }
     }
-
 }

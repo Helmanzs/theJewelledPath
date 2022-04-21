@@ -107,7 +107,6 @@ public class WaveManager : MonoBehaviour
     {
         NextWaveText.gameObject.SetActive(false);
         waveInfos[0].gameObject.SetActive(false);
-        waveInfos[1].gameObject.SetActive(false);
         Time.timeScale = 0f;
         winMenu.GameWin();
     }

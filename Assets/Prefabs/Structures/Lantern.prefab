@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 6267276840481831647}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &5469696312482537001
 SphereCollider:
@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 5469696313112183502}
   - component: {fileID: 5469696313112183537}
   - component: {fileID: 5469696313112183536}
+  - component: {fileID: 3561941817706535676}
   m_Layer: 8
   m_Name: GemPlace
   m_TagString: Untagged
@@ -84,11 +85,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5469696313112183539}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.013000003}
+  m_LocalPosition: {x: 0, y: 0, z: 0.015290006}
   m_LocalScale: {x: 0.005, y: 0.005000001, z: 0.005000001}
   m_Children: []
   m_Father: {fileID: 6267276840481831647}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5469696313112183502
 MeshFilter:
@@ -151,6 +152,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c252b9031f4da24591bd9f600576498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireMulti: 0
+  iceMulti: 0
+  poisonMulti: 0
+  lightningMulti: 0
+  vulnerabilityMulti: 0
+  manaMulti: 0
+--- !u!95 &3561941817706535676
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5469696313112183539}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 732b279ac4ae3064598873fe634ae2dc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6751467278828822629
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,8 +207,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
-  - {fileID: 5469696313112183503}
   - {fileID: 5469696312482537003}
+  - {fileID: 5469696313112183503}
   m_Father: {fileID: 8535293417319111361}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -294,7 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b95b018b02d5a4785d0be0e3a2630e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStatistics: {fileID: 11400000, guid: 5adab4268af4baa4ea9778e9027d88ac, type: 2}
   previewUnit: {fileID: 7327859313505276574, guid: 433d777e60a901d438279b26f9995352, type: 3}
   cost: 100
   Gem: {fileID: 5469696313112183536}

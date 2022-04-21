@@ -111,7 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e31be32709af6549b172d1d70e0d029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStatistics: {fileID: 11400000, guid: 5adab4268af4baa4ea9778e9027d88ac, type: 2}
   previewUnit: {fileID: 8973822177248923842, guid: 1a90a37e195d5d549a2684e05692b51d, type: 3}
   cost: 75
   Gem: {fileID: 5986113365146721030}
@@ -126,7 +125,7 @@ GameObject:
   - component: {fileID: 6724793559791998116}
   - component: {fileID: 2500976254732755400}
   - component: {fileID: 673593458005326301}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: RangeCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3767225338380140352}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.76, z: 0}
+  m_LocalPosition: {x: 0, y: 2.18, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 6824993288418502628}
@@ -279,7 +278,7 @@ Animator:
   m_GameObject: {fileID: 3767225338380140352}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6c2c1683133a6dd469bd76eb44ea7bd0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d7f9ed5e319c2b46b88ac887c3ca3a2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -300,3 +299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c252b9031f4da24591bd9f600576498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireMulti: 0
+  iceMulti: 0
+  poisonMulti: 0
+  lightningMulti: 0
+  vulnerabilityMulti: 0
+  manaMulti: 0

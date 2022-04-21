@@ -10,6 +10,14 @@ public class GemHolder : MonoBehaviour
     private float attackSpeed = 0;
     private Color color = Color.white;
     private List<Tuple<Effect, float>> effects = new List<Tuple<Effect, float>>();
+
+    public float fireMulti = 0;
+    public float iceMulti = 0;
+    public float poisonMulti = 0;
+    public float lightningMulti = 0;
+    public float vulnerabilityMulti = 0;
+    public float manaMulti = 0;
+
     private Renderer rend = null;
 
     public float Damage
@@ -20,7 +28,18 @@ public class GemHolder : MonoBehaviour
     public float Range
     {
         get => range;
-        private set => range = value;
+        private set
+        {
+            range = 2;
+            if (value >= 2 && value <= 10)
+            {
+                range = value;
+            }
+            else
+            {
+                range = 10;
+            }
+        }
     }
     public float AttackSpeed
     {
@@ -32,6 +51,8 @@ public class GemHolder : MonoBehaviour
         get => effects;
         private set => effects = value;
     }
+
+
     public Color Color
     {
         get => color;
@@ -51,33 +72,71 @@ public class GemHolder : MonoBehaviour
         this.Color = gem.Color;
         AddEffect(gem.Effect, initMulti);
     }
-    public void AddGem(GemHolder gem, float initMulti)
+
+    public void AddAmplfierEffect(List<Tuple<Effect, float>> effects)
     {
-        this.Damage += gem.damage;
-        this.Range += gem.range;
-        this.AttackSpeed += gem.attackSpeed;
-        SumEffects(gem.effects);
-    }
-    public void RemoveGem(GemHolder gem, float initMulti)
-    {
-        this.Damage -= gem.damage;
-        this.Range -= gem.range;
-        this.AttackSpeed -= gem.attackSpeed;
-        DifferEffects(gem.effects);
+        foreach (Tuple<Effect, float> effect in effects)
+        {
 
-    }
-
-    private void DifferEffects(List<Tuple<Effect, float>> ampEffects)
-    {
-
-    }
-
-    private void SumEffects(List<Tuple<Effect, float>> ampEffects)
-    {
-
-
+            if (effect.Item1 is FireEffect)
+                fireMulti += effect.Item2;
+            if (effect.Item1 is IceEffect)
+                iceMulti += effect.Item2;
+            if (effect.Item1 is LightningEffect)
+                lightningMulti += effect.Item2;
+            if (effect.Item1 is PoisonEffect)
+                poisonMulti += effect.Item2;
+            if (effect.Item1 is ManaStealEffect)
+                manaMulti += effect.Item2;
+            if (effect.Item1 is CritEffect)
+                vulnerabilityMulti += effect.Item2;
+        }
     }
 
+    public void RemoveAmplfierEffect(List<Tuple<Effect, float>> effects)
+    {
+        foreach (Tuple<Effect, float> effect in effects)
+        {
+            if (effect.Item1 is FireEffect)
+                fireMulti -= effect.Item2;
+            if (effect.Item1 is IceEffect)
+                iceMulti -= effect.Item2;
+            if (effect.Item1 is LightningEffect)
+                lightningMulti -= effect.Item2;
+            if (effect.Item1 is PoisonEffect)
+                poisonMulti -= effect.Item2;
+            if (effect.Item1 is ManaStealEffect)
+                manaMulti -= effect.Item2;
+            if (effect.Item1 is CritEffect)
+                vulnerabilityMulti -= effect.Item2;
+        }
+    }
+
+    public void SumEffects(Effect effect, ref float value)
+    {
+        if (effect is FireEffect)
+            value += fireMulti;
+        else if (effect is IceEffect)
+            value += iceMulti;
+        else if (effect is LightningEffect)
+            value += lightningMulti;
+        else if (effect is PoisonEffect)
+            value += poisonMulti;
+        else if (effect is ManaStealEffect)
+            value += manaMulti;
+        else if (effect is CritEffect)
+            value += vulnerabilityMulti;
+    }
+
+    public void ClearAmplifierEffects()
+    {
+        fireMulti = 0;
+        iceMulti = 0;
+        poisonMulti = 0;
+        lightningMulti = 0;
+        vulnerabilityMulti = 0;
+        manaMulti = 0;
+    }
     private void AddEffect(Effect effect, float initMulti)
     {
         if (effects.Count == 0)

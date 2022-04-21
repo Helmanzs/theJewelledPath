@@ -10,7 +10,6 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
 
     private Enemy target = null;
     private List<Enemy> possibleTargets = new List<Enemy>();
-    private GemHolder amplifierEffect;
     private List<Amplifier> amplifiers = new List<Amplifier>();
 
     private LineRenderer lineRendererComponent = null;
@@ -18,7 +17,6 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
     private TargetStateManager targetStateManager = null;
 
     private float nextTimeCall = 0;
-    private float amplifierNumberEffect;
 
     public Enemy Target
     {
@@ -42,22 +40,16 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
     public List<Enemy> PossibleTargets { get => possibleTargets; set => possibleTargets = value; }
     public GemHolder AmplifierEffect
     {
-        get => amplifierEffect;
-        set
-        {
-            amplifierEffect = value;
-        }
+        get => Gem;
     }
 
     public List<Amplifier> Amplifiers { get => amplifiers; set => amplifiers = value; }
-    public float AmplifierNumberEffect { get => amplifierNumberEffect; set => amplifierNumberEffect = value; }
 
     protected override void Awake()
     {
         lineRendererComponent = GetComponent<LineRenderer>();
         drawLineComponent = GetComponent<DrawLine>();
         targetStateManager = GetComponent<TargetStateManager>();
-        amplifierEffect = GetComponent<GemHolder>();
 
         base.Awake();
     }
@@ -76,13 +68,20 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
     }
     public override void Click(Vector3 mousePos)
     {
-        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this, this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, mousePos));
+        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this, this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, Gem.Effects, mousePos));
     }
     protected override void Act()
     {
         if (nextTimeCall < Time.time)
         {
+            float multi = 0;
             nextTimeCall = Time.time + (2 / (1 + Gem.AttackSpeed / 100));
+            foreach (Tuple<Effect, float> effect in Gem.Effects)
+            {
+                Gem.SumEffects(effect.Item1, ref multi);
+                effect.Item1.Use(Target, multi);
+                multi = 0;
+            }
             Gem.Effects.ForEach(effect => effect.Item1.Use(Target, effect.Item2));
             Target.ApplyDamage(Gem.Damage);
         }
@@ -91,12 +90,13 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
     {
         Gem.AddGem(gem, 0.35f);
         UpdateCollider(Gem.Range);
+        RequestAmplifierModifiers();
+
     }
     protected override void RemoveGem(GemHolder gem)
     {
         Gem = null;
     }
-
     protected override void UpdateCollider(float range)
     {
         sphereCollider.radius = range / 2;
@@ -134,8 +134,10 @@ public class Tower : GemBuilding, ISingleTargetStructure<Enemy>, IAmplifiable
     {
         PossibleTargets.Add(target);
     }
-    protected void RequestAmplifierModifier()
+    public void RequestAmplifierModifiers()
     {
+        Gem.ClearAmplifierEffects();
+        Amplifiers.Clear();
         AmplifierModifierRequest?.Invoke(this);
     }
 }

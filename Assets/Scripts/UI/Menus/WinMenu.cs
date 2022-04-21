@@ -16,6 +16,9 @@ public class WinMenu : MonoBehaviour
 
     public void Menu()
     {
+        Player.Instance.SumStatistics();
+        Player.Instance.ClearedLevels++;
+        SaveSystem.SavePlayer(Player.Instance.fileName);
         SceneLoader.Instance.LoadScene(SceneLoader.Instance.GameMenu);
 
     }

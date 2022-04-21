@@ -6,9 +6,9 @@ public class LightningGem : Gem
 {
     void Awake()
     {
-        damage = 10;
-        range = 10;
-        attackSpeed = 100;
+        damage = 7;
+        range = 1;
+        attackSpeed = 150;
         Color = transform.GetComponent<Renderer>().material.color;
         Effect = new LightningEffect();
     }

@@ -6,9 +6,9 @@ public class PoisonGem : Gem
 {
     void Awake()
     {
-        damage = 10;
-        range = 10;
-        attackSpeed = 100;
+        damage = 9;
+        range = 1;
+        attackSpeed = 110;
         Color = transform.GetComponent<Renderer>().material.color;
         Effect = new PoisonEffect();
     }

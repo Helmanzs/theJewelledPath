@@ -8,8 +8,6 @@ public class Lantern : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
     public event Action<IAmplifiable> AmplifierModifierRequest;
 
     private List<Enemy> targets = new List<Enemy>();
-    private GemHolder amplifierEffect;
-    private float amplifierNumberEffect = 0;
     private List<Amplifier> amplifiers = new List<Amplifier>();
     private float nextTimeCall = 0;
 
@@ -22,9 +20,13 @@ public class Lantern : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
         set => targets = value;
     }
 
-    public GemHolder AmplifierEffect { get => amplifierEffect; set => amplifierEffect = value; }
-    public float AmplifierNumberEffect { get => amplifierNumberEffect; set => amplifierNumberEffect = value; }
-    public List<Amplifier> Amplifiers { get => amplifiers; set => amplifiers = value; }
+    public GemHolder AmplifierEffect => Gem;
+
+    public List<Amplifier> Amplifiers
+    {
+        get => amplifiers;
+        set => amplifiers = value;
+    }
 
     public void AddTarget(Enemy target)
     {
@@ -33,13 +35,15 @@ public class Lantern : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
 
     public override void Click(Vector3 mousePos)
     {
-        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this, this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, mousePos));
+        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this, this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, Gem.Effects, mousePos));
     }
 
     public override void InsertGem(Gem gem)
     {
         Gem.AddGem(gem, 0.5f);
         UpdateCollider(Gem.Range);
+        RequestAmplifierModifiers();
+
     }
 
     public void RemoveTarget(Enemy target)
@@ -53,7 +57,7 @@ public class Lantern : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
 
         if (nextTimeCall < Time.time)
         {
-            nextTimeCall = Time.time + 2f;//(2 / (1 + Gem.AttackSpeed / 100));
+            nextTimeCall = Time.time + 2f;
             Gem.Effects.ForEach(effect => effect.Item1.Use(Targets, effect.Item2));
             Targets.ForEach(target => target.ApplyDamage(Gem.Damage));
             for (int i = targets.Count - 1; i >= 0; i--)
@@ -73,5 +77,12 @@ public class Lantern : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
     protected override void UpdateCollider(float range)
     {
         sphereCollider.radius = range / 2;
+    }
+
+    public void RequestAmplifierModifiers()
+    {
+        Gem.ClearAmplifierEffects();
+        Amplifiers.Clear();
+        AmplifierModifierRequest?.Invoke(this);
     }
 }

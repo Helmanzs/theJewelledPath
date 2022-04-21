@@ -26,14 +26,16 @@ public class GameMenu : MonoBehaviour
     }
     private void CheckClearedLevels()
     {
-        levels[0].interactable = true;
-        for (int i = 0; i < Player.Instance.clearedLevels; i++)
+        //levels[0].interactable = true;
+        print(Player.Instance.ClearedLevels);
+        for (int i = 0; i < Player.Instance.ClearedLevels; i++)
         {
             levels[i].interactable = true;
         }
     }
     public void BackToMainMenu()
     {
+        SaveSystem.SavePlayer(Player.Instance.fileName);
         SceneLoader.Instance.LoadScene(SceneLoader.Instance.MainMenu);
     }
 

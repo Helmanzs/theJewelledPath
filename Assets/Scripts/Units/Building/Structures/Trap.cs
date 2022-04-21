@@ -8,8 +8,7 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
     public event Action<IAmplifiable> AmplifierModifierRequest;
 
     private List<Enemy> targets = new List<Enemy>();
-    private GemHolder amplifierEffect;
-    private float amplifierNumberEffect = 0;
+
     private List<Amplifier> amplifiers = new List<Amplifier>();
     private float nextTimeCall = 0;
 
@@ -19,9 +18,10 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
         set => targets = value;
     }
 
-    public GemHolder AmplifierEffect { get => amplifierEffect; set => amplifierEffect = value; }
-    public float AmplifierNumberEffect { get => amplifierNumberEffect; set => amplifierNumberEffect = value; }
+
     public List<Amplifier> Amplifiers { get => amplifiers; set => amplifiers = value; }
+
+    public GemHolder AmplifierEffect => Gem;
 
     public void AddTarget(Enemy target)
     {
@@ -30,12 +30,14 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
 
     public override void Click(Vector3 mousePos)
     {
-        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this, this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, mousePos));
+        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this, this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, Gem.Effects, mousePos));
     }
 
     public override void InsertGem(Gem gem)
     {
         Gem.AddGem(gem, 0.5f);
+        RequestAmplifierModifiers();
+
     }
 
     public void RemoveTarget(Enemy target)
@@ -45,7 +47,7 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
 
     protected override void Act()
     {
-        if (Targets.Count <= 0) return; 
+        if (Targets.Count <= 0) return;
 
         if (nextTimeCall < Time.time)
         {
@@ -64,5 +66,12 @@ public class Trap : GemBuilding, IAreaOfEffectStructure<Enemy>, IAmplifiable
     protected override void UpdateCollider(float range)
     {
         return;
+    }
+
+    public void RequestAmplifierModifiers()
+    {
+        Gem.ClearAmplifierEffects();
+        Amplifiers.Clear();
+        AmplifierModifierRequest?.Invoke(this);
     }
 }

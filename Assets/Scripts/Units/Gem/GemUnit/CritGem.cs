@@ -6,9 +6,9 @@ public class CritGem : Gem
 {
     void Awake()
     {
-        damage = 10;
-        range = 10;
-        attackSpeed = 100;
+        damage = 15;
+        range = 1;
+        attackSpeed = 80;
         Color = transform.GetComponent<Renderer>().material.color;
         Effect = new CritEffect();
     }

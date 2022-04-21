@@ -7,7 +7,7 @@ public class IceGem : Gem
     void Awake()
     {
         damage = 10;
-        range = 10;
+        range = 1;
         attackSpeed = 100;
         Color = transform.GetComponent<Renderer>().material.color;
         Effect = new IceEffect();

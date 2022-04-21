@@ -17,7 +17,7 @@ public class FreezeSpell : SpellCooldown
     {
         if (enemy is Boss) return;
         Chill chillComponent = enemy.gameObject.AddComponent<Chill>();
-        chillComponent.Multiplier = 0.2f;
+        chillComponent.Multiplier = 0.8f;
         chillComponent.RefreshDuration(5);
     }
 }

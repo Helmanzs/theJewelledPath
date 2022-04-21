@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 6472864293029831042}
   - component: {fileID: 6472864293029831044}
   - component: {fileID: 6472864293029831043}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: RangeCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86a092494773bb46b88db053e891405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStatistics: {fileID: 11400000, guid: 5adab4268af4baa4ea9778e9027d88ac, type: 2}
   previewUnit: {fileID: -8007944473679944589, guid: 21ae55a4e0c780d489e59b921c9daf49, type: 3}
   cost: 100
   Gem: {fileID: 6472864293096426535}
@@ -344,6 +343,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c252b9031f4da24591bd9f600576498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireMulti: 0
+  iceMulti: 0
+  poisonMulti: 0
+  lightningMulti: 0
+  vulnerabilityMulti: 0
+  manaMulti: 0
 --- !u!1 &6472864293773599025
 GameObject:
   m_ObjectHideFlags: 0

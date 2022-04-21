@@ -8,7 +8,6 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
     private List<IAmplifiable> targets = new List<IAmplifiable>();
     private List<IAmplifiable> possibleTargets = new List<IAmplifiable>();
     private float nextTimeCall = 0;
-    private float modEffect = 0.2f;
     public List<IAmplifiable> Targets { get => targets; set => targets = value; }
     public List<IAmplifiable> PossibleTargets { get => possibleTargets; set => possibleTargets = value; }
 
@@ -20,8 +19,7 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
 
     private void FindTarget(Unit foundTarget)
     {
-        if (foundTarget is Amplifier) return;
-        if (sphereCollider.radius == 0) return;
+        if (foundTarget is Amplifier || sphereCollider.radius == 0) return;
 
         if (foundTarget.GetDistanceToUnit(this) < 2 * sphereCollider.radius && foundTarget is IAmplifiable)
         {
@@ -34,10 +32,8 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
     private void OnAmplifierModifierRequest(IAmplifiable structure)
     {
         if (structure.Amplifiers.Contains(this)) return;
-
-        structure.AmplifierEffect.AddGem(Gem, 0);
-        structure.AmplifierNumberEffect += modEffect * Gem.Damage;
         structure.Amplifiers.Add(this);
+        structure.AmplifierEffect.AddAmplfierEffect(Gem.Effects);
 
     }
     public override void EnableGem()
@@ -46,7 +42,7 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
     }
     public override void Click(Vector3 mousePos)
     {
-        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this, this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, mousePos));
+        UIPanel.Instance.OpenPanel(new UnitStatDataHolder(this, this.GetType().Name, Gem.Damage, Gem.Range, Gem.AttackSpeed, Gem.Effects, mousePos));
     }
     protected override void Act()
     {
@@ -58,15 +54,16 @@ public class Amplifier : GemBuilding, IAreaOfEffectStructure<IAmplifiable>
     }
     public override void InsertGem(Gem gem)
     {
-        //Targets.ForEach(target => target.AmplifierEffect.RemoveGem(Gem, 0.2f));
-        Targets.ForEach(target => target.AmplifierNumberEffect -= modEffect * Gem.Damage);
         Gem.AddGem(gem, 0.2f);
         UpdateCollider(Gem.Range);
-        Targets.ForEach(target => target.Amplifiers.Remove(this));
         Targets.Clear();
+        for (int i = targets.Count - 1; i > 0; i--)
+        {
+            IAmplifiable target = targets[i];
+            RemoveTarget(target);
+        }
         Global.Instance.gemBuildings.ForEach(building => building.InvokeBuiltStructure());
-        //Gem.DisplayEffects();
-
+        Targets.ForEach(target => target.RequestAmplifierModifiers());
     }
     protected override void RemoveGem(GemHolder gem)
     {

@@ -36,7 +36,7 @@ public class PlayerData
     public PlayerData(Player player)
     {
         this.saveName = player.saveName;
-        this.clearedLevels = player.clearedLevels;
+        this.clearedLevels = player.ClearedLevels;
 
         this.killedTanks = player.killedTanks;
         this.killedEnemies = player.killedEnemies;

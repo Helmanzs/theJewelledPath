@@ -61,6 +61,13 @@ public class GemManagement<T> : BuildingManagement<T> where T : Component
         GemBuilding spot = place as GemBuilding;
         UnitPreview.gameObject.SetActive(true);
         UnitPreview.transform.SetParent(spot.transform);
-        UnitPreview.transform.localPosition = new Vector3(0, 0, 0);
+        UnitPreview.transform.localScale = spot.Gem.transform.localScale * 2f;
+        Vector3 gemPlace = spot.Gem.transform.localPosition;
+        if (spot is Lantern)
+        {
+            gemPlace.y += 2f;
+            UnitPreview.transform.localScale = new Vector3(1, 1, 1);
+        }
+        UnitPreview.transform.localPosition = gemPlace;
     }
 }

@@ -6,8 +6,7 @@ using UnityEngine;
 public interface IAmplifiable
 {
     public event Action<IAmplifiable> AmplifierModifierRequest;
-    public GemHolder AmplifierEffect { get; set; }
-    public float AmplifierNumberEffect { get; set; }
+    public GemHolder AmplifierEffect { get; }
     public List<Amplifier> Amplifiers { get; set; }
-
+    public void RequestAmplifierModifiers();
 }

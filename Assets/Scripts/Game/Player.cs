@@ -8,7 +8,7 @@ using UnityEngine;
 public class Player : GameSingleton<Player>
 {
     public string saveName = "";
-    public int clearedLevels = 0;
+    [SerializeField] private int clearedLevels = 0;
     public string statisticsName = "";
     public string fileName = "";
 
@@ -32,6 +32,20 @@ public class Player : GameSingleton<Player>
     public int iceGemsInserted = 0;
     public int poisonGemsInserted = 0;
     public int lightningGemsInserted = 0;
+    public int manaGemsInserted = 0;
+    public int critGemsInserted = 0;
+
+    public int ClearedLevels
+    {
+        get => clearedLevels; set
+        {
+            clearedLevels = value;
+            if (clearedLevels > 9)
+            {
+                clearedLevels = 9;
+            }
+        }
+    }
 
     public void SumStatistics()
     {
@@ -56,13 +70,11 @@ public class Player : GameSingleton<Player>
         this.critGemsInserted += GameStatisticsData.Instance.CritGemsInserted;
     }
 
-    public int manaGemsInserted = 0;
-    public int critGemsInserted = 0;
 
     public void Clear()
     {
         saveName = "";
-        clearedLevels = 0;
+        ClearedLevels = 0;
 
         killedBosses = 0;
         killedTanks = 0;
@@ -87,7 +99,7 @@ public class Player : GameSingleton<Player>
     public void Load(PlayerData data)
     {
         this.saveName = data.saveName;
-        this.clearedLevels = data.clearedLevels;
+        this.ClearedLevels = data.clearedLevels;
 
         this.killedTanks = data.killedTanks;
         this.killedEnemies = data.killedEnemies;

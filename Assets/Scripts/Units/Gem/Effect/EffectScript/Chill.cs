@@ -28,7 +28,8 @@ public class Chill : MonoBehaviour
     {
         InvokeRepeating("DecreaseDuration", 1f, 1f);
         host = GetComponent<Enemy>();
-        host.Speed = host.DefaultSpeed * Multiplier;
+        float slowdown = 1 - multiplier <= 0 ? 0 : 1 - multiplier;
+        host.Speed = host.DefaultSpeed * slowdown;
     }
 
     private void DecreaseDuration()

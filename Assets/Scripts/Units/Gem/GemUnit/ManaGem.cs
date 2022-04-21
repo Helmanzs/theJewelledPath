@@ -6,9 +6,9 @@ public class ManaGem : Gem
 {
     void Awake()
     {
-        damage = 10;
-        range = 10;
-        attackSpeed = 100;
+        damage = 20;
+        range = 1;
+        attackSpeed = 50;
         Color = transform.GetComponent<Renderer>().material.color;
         Effect = new ManaStealEffect();
     }

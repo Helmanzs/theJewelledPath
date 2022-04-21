@@ -32,10 +32,14 @@ public class DefeatMenu : MonoBehaviour
 
     public void Restart()
     {
+        Player.Instance.SumStatistics();
+        SaveSystem.SavePlayer(Player.Instance.fileName);
         SceneManager.LoadScene(currentScene);
     }
     public void Menu()
     {
+        Player.Instance.SumStatistics();
+        SaveSystem.SavePlayer(Player.Instance.fileName);
         SceneLoader.Instance.LoadScene(SceneLoader.Instance.GameMenu);
 
     }

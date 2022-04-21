@@ -15,14 +15,10 @@ public class Selector<T>
         {
             if (hitInfo.transform.gameObject.tag == tag)
             {
-                Debug.DrawRay(Camera.main.transform.position, hitInfo.transform.position, Color.red, 60f);
-
                 return hitInfo.transform.GetComponent<T>();
             }
             else
             {
-                Debug.DrawRay(Camera.main.transform.position, hitInfo.transform.position, Color.red, 60f);
-
                 return default(T);
             }
         }
